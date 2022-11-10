@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class NguoiDung {
-    private int maNguoiDung;
+    private String maNguoiDung;
     private String hoVaTen;
     private byte[] hinhAnh;
     private Date ngaySinh;
@@ -18,7 +18,7 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(int maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
+    public NguoiDung(String maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
         this.maNguoiDung = maNguoiDung;
         this.hoVaTen = hoVaTen;
         this.hinhAnh = hinhAnh;
@@ -29,11 +29,11 @@ public class NguoiDung {
         this.matKhau = matKhau;
     }
 
-    public int getMaNguoiDung() {
+    public String getMaNguoiDung() {
         return maNguoiDung;
     }
 
-    public void setMaNguoiDung(int maNguoiDung) {
+    public void setMaNguoiDung(String maNguoiDung) {
         this.maNguoiDung = maNguoiDung;
     }
 
