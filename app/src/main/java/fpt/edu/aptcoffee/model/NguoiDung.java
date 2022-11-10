@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class NguoiDung {
-    private int maNguoiDung;
+    private String maNguoiDung;
     private String hoVaTen;
     private byte[] hinhAnh;
     private Date ngaySinh;
@@ -15,10 +15,7 @@ public class NguoiDung {
     private String gioiTinh;
     private String matKhau;
 
-    public NguoiDung() {
-    }
-
-    public NguoiDung(int maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
+    public NguoiDung(String maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
         this.maNguoiDung = maNguoiDung;
         this.hoVaTen = hoVaTen;
         this.hinhAnh = hinhAnh;
@@ -29,11 +26,14 @@ public class NguoiDung {
         this.matKhau = matKhau;
     }
 
-    public int getMaNguoiDung() {
+    public NguoiDung() {
+    }
+
+    public String getMaNguoiDung() {
         return maNguoiDung;
     }
 
-    public void setMaNguoiDung(int maNguoiDung) {
+    public void setMaNguoiDung(String maNguoiDung) {
         this.maNguoiDung = maNguoiDung;
     }
 
@@ -97,7 +97,7 @@ public class NguoiDung {
     @Override
     public String toString() {
         return "NguoiDung{" +
-                "maNguoiDung=" + maNguoiDung +
+                "maNguoiDung='" + maNguoiDung + '\'' +
                 ", hoVaTen='" + hoVaTen + '\'' +
                 ", hinhAnh=" + Arrays.toString(hinhAnh) +
                 ", ngaySinh=" + ngaySinh +
