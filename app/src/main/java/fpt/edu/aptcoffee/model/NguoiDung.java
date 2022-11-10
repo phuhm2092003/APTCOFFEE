@@ -15,6 +15,12 @@ public class NguoiDung {
     private String gioiTinh;
     private String matKhau;
 
+<<<<<<< HEAD
+=======
+    public NguoiDung() {
+    }
+
+>>>>>>> 2a558c7ea226262047c3f4959410747191a0bd73
     public NguoiDung(String maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
         this.maNguoiDung = maNguoiDung;
         this.hoVaTen = hoVaTen;
@@ -26,9 +32,12 @@ public class NguoiDung {
         this.matKhau = matKhau;
     }
 
+<<<<<<< HEAD
     public NguoiDung() {
     }
 
+=======
+>>>>>>> 2a558c7ea226262047c3f4959410747191a0bd73
     public String getMaNguoiDung() {
         return maNguoiDung;
     }
