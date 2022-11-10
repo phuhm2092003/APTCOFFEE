@@ -7,7 +7,7 @@ import java.util.Date;
 public class HoaDon {
     private int maHoaDon;
     private int maBan;
-    private int maNguoiDung;
+    private String maNguoiDung;
     private Date gioVao;
     private Date gioRa;
     private int trangThai;
@@ -15,7 +15,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int maBan, int maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
+    public HoaDon(int maBan, String maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
         this.maBan = maBan;
         this.maNguoiDung = maNguoiDung;
         this.gioVao = gioVao;
@@ -23,7 +23,7 @@ public class HoaDon {
         this.trangThai = trangThai;
     }
 
-    public HoaDon(int maHoaDon, int maBan, int maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
+    public HoaDon(int maHoaDon, int maBan, String maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
         this.maHoaDon = maHoaDon;
         this.maBan = maBan;
         this.maNguoiDung = maNguoiDung;
@@ -48,11 +48,11 @@ public class HoaDon {
         this.maBan = maBan;
     }
 
-    public int getMaNguoiDung() {
+    public String getMaNguoiDung() {
         return maNguoiDung;
     }
 
-    public void setMaNguoiDung(int maNguoiDung) {
+    public void setMaNguoiDung(String maNguoiDung) {
         this.maNguoiDung = maNguoiDung;
     }
 

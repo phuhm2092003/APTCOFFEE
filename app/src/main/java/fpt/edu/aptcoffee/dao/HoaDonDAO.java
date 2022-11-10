@@ -35,7 +35,7 @@ public class HoaDonDAO {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(cursor.getInt(cursor.getColumnIndex("maHoaDon")));
                 hoaDon.setMaBan(cursor.getInt(cursor.getColumnIndex("maBan")));
-                hoaDon.setMaNguoiDung(cursor.getInt(cursor.getColumnIndex("maNguoiDung")));
+                hoaDon.setMaNguoiDung(cursor.getString(cursor.getColumnIndex("maNguoiDung")));
                 try {
                     hoaDon.setGioVao(XDate.toDateTime(cursor.getString(cursor.getColumnIndex("gioVao"))));
                     hoaDon.setGioRa(XDate.toDateTime(cursor.getString(cursor.getColumnIndex("gioRa"))));
