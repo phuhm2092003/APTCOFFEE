@@ -12,18 +12,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.database.CoffeeDB;
+import fpt.edu.aptcoffee.helper.XDate;
 import fpt.edu.aptcoffee.model.NguoiDung;
 
 public class NguoiDungDAO {
     CoffeeDB coffeeDB;
+    XDate xDate;
 
     public NguoiDungDAO(Context context) {
         this.coffeeDB = new CoffeeDB(context);
     }
-
-    @SuppressLint("SimpleDateFormat")
-
-    SimpleDateFormat spf = new SimpleDateFormat("dd-MM-yyy");
 
     @SuppressLint("Range")
     public ArrayList<NguoiDung> get(String sql, String... choose) {
@@ -38,7 +36,7 @@ public class NguoiDungDAO {
                 nguoiDung.setHoVaTen(cursor.getString(cursor.getColumnIndex("hoVaTen")));
                 nguoiDung.setHinhAnh(cursor.getBlob(cursor.getColumnIndex("hinhAnh")));
                 try {
-                    nguoiDung.setNgaySinh(spf.parse(cursor.getString(cursor.getColumnIndex("ngaySinh"))));
+                    nguoiDung.setNgaySinh(XDate.toDate(cursor.getString(cursor.getColumnIndex("ngaySinh"))));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -67,7 +65,7 @@ public class NguoiDungDAO {
         values.put("maNguoiDung", nguoiDung.getMaNguoiDung());
         values.put("hoVaTen", nguoiDung.getHoVaTen());
         values.put("hinhAnh", nguoiDung.getHinhAnh());
-        values.put("ngaySinh", String.valueOf(nguoiDung.getNgaySinh()));
+        values.put("ngaySinh", XDate.toStringDate(nguoiDung.getNgaySinh()));
         values.put("email", nguoiDung.getEmail());
         values.put("chucVu", nguoiDung.getChucVu());
         values.put("gioiTinh", nguoiDung.getGioiTinh());
@@ -82,7 +80,7 @@ public class NguoiDungDAO {
         ContentValues values = new ContentValues();
         values.put("hoVaTen", nguoiDung.getHoVaTen());
         values.put("hinhAnh", nguoiDung.getHinhAnh());
-        values.put("ngaySinh", String.valueOf(nguoiDung.getNgaySinh()));
+        values.put("ngaySinh", XDate.toStringDate(nguoiDung.getNgaySinh()));
         values.put("email", nguoiDung.getEmail());
         values.put("chucVu", nguoiDung.getChucVu());
         values.put("gioiTinh", nguoiDung.getGioiTinh());
