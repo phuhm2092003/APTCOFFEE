@@ -15,9 +15,12 @@ public class HangHoa {
     public HangHoa() {
     }
 
-    public HangHoa(String tenHangHoa, byte[] hinhAnh) {
+    public HangHoa(String tenHangHoa, byte[] hinhAnh, int giaTien, int maLoai, int trangThai) {
         this.tenHangHoa = tenHangHoa;
         this.hinhAnh = hinhAnh;
+        this.giaTien = giaTien;
+        this.maLoai = maLoai;
+        this.trangThai = trangThai;
     }
 
     public HangHoa(int maHangHoa, String tenHangHoa, byte[] hinhAnh, int giaTien, int maLoai, int trangThai) {

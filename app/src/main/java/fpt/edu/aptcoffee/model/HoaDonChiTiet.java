@@ -15,7 +15,10 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String ghiChu, Date ngayXuatHoaDon) {
+    public HoaDonChiTiet(int maHoaDon, int maHangHoa, int giaTien, String ghiChu, Date ngayXuatHoaDon) {
+        this.maHoaDon = maHoaDon;
+        this.maHangHoa = maHangHoa;
+        this.giaTien = giaTien;
         this.ghiChu = ghiChu;
         this.ngayXuatHoaDon = ngayXuatHoaDon;
     }

@@ -18,16 +18,6 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
-        this.hoVaTen = hoVaTen;
-        this.hinhAnh = hinhAnh;
-        this.ngaySinh = ngaySinh;
-        this.email = email;
-        this.chucVu = chucVu;
-        this.gioiTinh = gioiTinh;
-        this.matKhau = matKhau;
-    }
-
     public NguoiDung(int maNguoiDung, String hoVaTen, byte[] hinhAnh, Date ngaySinh, String email, String chucVu, String gioiTinh, String matKhau) {
         this.maNguoiDung = maNguoiDung;
         this.hoVaTen = hoVaTen;

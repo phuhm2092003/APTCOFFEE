@@ -9,6 +9,10 @@ public class Ban {
     public Ban() {
     }
 
+    public Ban(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public Ban(int maBan, int trangThai) {
         this.maBan = maBan;
         this.trangThai = trangThai;
