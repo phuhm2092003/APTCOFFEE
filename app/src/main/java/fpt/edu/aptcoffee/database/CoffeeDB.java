@@ -31,7 +31,8 @@ public class CoffeeDB extends SQLiteOpenHelper {
             "maBan INTEGER REFERENCES BAN(maBan)," +
             "maNguoiDung TEXT REFERENCES NGUOIDUNG(maNguoiDung)," +
             "gioVao DATE NOT NULL," +
-            "gioRa DATE NOT NULL)";
+            "gioRa DATE NOT NULL,"+
+            "trangThai INTEGER NOT NULL)";
 
     public static final String TABLE_HANGHOA = "CREATE TABLE HANGHOA(" +
             "maHangHoa INTEGER PRIMARY KEY AUTOINCREMENT," +

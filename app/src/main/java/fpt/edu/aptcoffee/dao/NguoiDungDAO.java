@@ -8,11 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.database.CoffeeDB;
-import fpt.edu.aptcoffee.helper.XDate;
+import fpt.edu.aptcoffee.utils.XDate;
 import fpt.edu.aptcoffee.model.NguoiDung;
 
 public class NguoiDungDAO {

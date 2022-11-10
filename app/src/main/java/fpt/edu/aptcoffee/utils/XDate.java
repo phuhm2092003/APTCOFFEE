@@ -1,4 +1,4 @@
-package fpt.edu.aptcoffee.helper;
+package fpt.edu.aptcoffee.utils;
 
 import android.annotation.SuppressLint;
 

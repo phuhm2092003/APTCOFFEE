@@ -10,23 +10,26 @@ public class HoaDon {
     private int maNguoiDung;
     private Date gioVao;
     private Date gioRa;
+    private int trangThai;
 
     public HoaDon() {
     }
 
-    public HoaDon(int maBan, int maNguoiDung, Date gioVao, Date gioRa) {
+    public HoaDon(int maBan, int maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
         this.maBan = maBan;
         this.maNguoiDung = maNguoiDung;
         this.gioVao = gioVao;
         this.gioRa = gioRa;
+        this.trangThai = trangThai;
     }
 
-    public HoaDon(int maHoaDon, int maBan, int maNguoiDung, Date gioVao, Date gioRa) {
+    public HoaDon(int maHoaDon, int maBan, int maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
         this.maHoaDon = maHoaDon;
         this.maBan = maBan;
         this.maNguoiDung = maNguoiDung;
         this.gioVao = gioVao;
         this.gioRa = gioRa;
+        this.trangThai = trangThai;
     }
 
     public int getMaHoaDon() {
@@ -69,6 +72,14 @@ public class HoaDon {
         this.gioRa = gioRa;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -78,6 +89,7 @@ public class HoaDon {
                 ", maNguoiDung=" + maNguoiDung +
                 ", gioVao=" + gioVao +
                 ", gioRa=" + gioRa +
+                ", trangThai=" + trangThai +
                 '}';
     }
 }

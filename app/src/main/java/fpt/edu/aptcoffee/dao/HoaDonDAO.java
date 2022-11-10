@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.database.CoffeeDB;
-import fpt.edu.aptcoffee.helper.XDate;
+import fpt.edu.aptcoffee.utils.XDate;
 import fpt.edu.aptcoffee.model.HoaDon;
 
 public class HoaDonDAO {
@@ -42,6 +42,7 @@ public class HoaDonDAO {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                hoaDon.setTrangThai(cursor.getInt(cursor.getColumnIndex("trangThai")));
                 list.add(hoaDon);
                 Log.i("TAG", hoaDon.toString());
             } while (cursor.moveToNext());
@@ -62,6 +63,7 @@ public class HoaDonDAO {
         values.put("maNguoiDung", hoaDon.getMaNguoiDung());
         values.put("gioVao", XDate.toStringDateTime(hoaDon.getGioVao()));
         values.put("gioRa", XDate.toStringDateTime(hoaDon.getGioRa()));
+        values.put("trangThai", hoaDon.getTrangThai());
         long check = sqLiteDatabase.insert("HOADON", null, values);
 
         return check != -1;
@@ -74,6 +76,7 @@ public class HoaDonDAO {
         values.put("maNguoiDung", hoaDon.getMaNguoiDung());
         values.put("gioVao", XDate.toStringDateTime(hoaDon.getGioVao()));
         values.put("gioRa", XDate.toStringDateTime(hoaDon.getGioRa()));
+        values.put("trangThai", hoaDon.getTrangThai());
         int check = sqLiteDatabase.update("HOADON", values, "maHoaDon=?", new String[]{String.valueOf(hoaDon.getMaHoaDon())});
 
         return check > 0;
