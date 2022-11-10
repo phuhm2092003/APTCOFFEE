@@ -8,6 +8,7 @@ public class HoaDonChiTiet {
     private int maHDCT;
     private int maHoaDon;
     private int maHangHoa;
+    private int soLuong;
     private int giaTien;
     private String ghiChu;
     private Date ngayXuatHoaDon;
@@ -15,18 +16,20 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHoaDon, int maHangHoa, int giaTien, String ghiChu, Date ngayXuatHoaDon) {
+    public HoaDonChiTiet(int maHoaDon, int maHangHoa, int soLuong, int giaTien, String ghiChu, Date ngayXuatHoaDon) {
         this.maHoaDon = maHoaDon;
         this.maHangHoa = maHangHoa;
+        this.soLuong = soLuong;
         this.giaTien = giaTien;
         this.ghiChu = ghiChu;
         this.ngayXuatHoaDon = ngayXuatHoaDon;
     }
 
-    public HoaDonChiTiet(int maHDCT, int maHoaDon, int maHangHoa, int giaTien, String ghiChu, Date ngayXuatHoaDon) {
+    public HoaDonChiTiet(int maHDCT, int maHoaDon, int maHangHoa, int soLuong, int giaTien, String ghiChu, Date ngayXuatHoaDon) {
         this.maHDCT = maHDCT;
         this.maHoaDon = maHoaDon;
         this.maHangHoa = maHangHoa;
+        this.soLuong = soLuong;
         this.giaTien = giaTien;
         this.ghiChu = ghiChu;
         this.ngayXuatHoaDon = ngayXuatHoaDon;
@@ -54,6 +57,14 @@ public class HoaDonChiTiet {
 
     public void setMaHangHoa(int maHangHoa) {
         this.maHangHoa = maHangHoa;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public int getGiaTien() {
