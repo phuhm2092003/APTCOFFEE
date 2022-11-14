@@ -5,21 +5,38 @@
       <map>
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/bgr_btn_brow1_rd5.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/bgr_btn_brow_rd5.xml" value="0.1865" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/custom_indicator.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_back_home.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_date_line_24.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_doanhthu.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_email_line_24.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_hoadon.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_logo.xml" value="0.18" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_notification.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_password_fill_24.xml" value="0.2905" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_password_line_24.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_ban_40.xml" value="0.202" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_ban_50.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_hoadon.xml" value="0.202" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_loai.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_nv.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_quan_ly_thuc_uong.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_search_24.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_sign_in_fb.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_sign_in_gg.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_use_fill_24.xml" value="0.2905" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_user_line_24.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_user_line_edit_24.xml" value="0.231" />
-        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_main.xml" value="0.18819655521783182" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_sign_up.xml" value="0.3625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_splash.xml" value="0.21614583333333334" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_meseeger.xml" value="0.3625" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_search.xml" value="0.3625" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_setting.xml" value="0.3625" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/layout_item_iange_show.xml" value="0.3625" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/menu/menu_main.xml" value="0.3614583333333333" />
       </map>
     </option>
   </component>
