@@ -19,4 +19,6 @@
     <string name="ho_va_ten">Họ và tên</string>
     <string name="ngay_sinh">Ngày sinh</string>
     <string name="email">Email</string>
+    <string name="gioi_thieu">Giới thiệu</string>
+    <string name="danh_muc">Danh mục</string>
 </resources>

@@ -5,4 +5,13 @@
         <item name="android:statusBarColor">@color/WhitePrimary</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
+    <!--  Theme Status Bar Gray -->
+    <style name="AppStatusBarGray" parent="Theme.APTCOFFEE">
+        <item name="android:statusBarColor">@color/GrayPrimary</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

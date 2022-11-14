@@ -174,7 +174,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/ivSgnInFB"
+                        android:id="@+id/ivSignInFB"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -182,7 +182,7 @@
                         tools:ignore="ContentDescription" />
 
                     <ImageView
-                        android:id="@+id/ivSgnInGG"
+                        android:id="@+id/ivSignInGG"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
