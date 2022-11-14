@@ -3,14 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<!--<<<<<<< HEAD-->
-<!--        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_logo.xml" value="0.2825" />-->
-<!--        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_main.xml" value="0.23505434782608695" />-->
-<!--        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_sign_in.xml" value="0.3625" />-->
-<!--        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_splash.xml" value="0.3625" />-->
-<!--=======-->
-<!--        <entry key="..\:/Du An 1/APTCOFFEE/app/src/main/res/layout/activity_main.xml" value="0.1265625" />-->
-<!--&gt;>>>>>> 1d9af82dac2b7e0b32c4546d9d3ba724a640f68c-->
+        <entry key="..\:/TaiNguyenHocTap/MOB201_ADR-NC/APTCOFFEE0/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>
