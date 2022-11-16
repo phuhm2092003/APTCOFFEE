@@ -8,6 +8,7 @@
     tools:context=".ui.SignInActivity">
 
     <ScrollView
+        android:scrollbars="none"
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"

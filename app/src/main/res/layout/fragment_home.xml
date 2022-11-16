@@ -8,6 +8,7 @@
     tools:context=".fragment.HomeFragment">
 
     <ScrollView
+        android:scrollbars="none"
         android:id="@+id/scrollView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
