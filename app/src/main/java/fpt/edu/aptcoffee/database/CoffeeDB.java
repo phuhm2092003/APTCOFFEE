@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.utils.ImageToByte;
+import fpt.edu.aptcoffee.utils.XDate;
 
 public class CoffeeDB extends SQLiteOpenHelper {
     public static final String DB_NAME = "APTCoffee";
@@ -72,6 +73,17 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLE_HANGHOA);
         // TẠO TABLE HÓA ĐƠN CHI TIẾT
         sqLiteDatabase.execSQL(TABLE_HOADONCHITIET);
+
+        String insertBan = "INSERT INTO BAN(trangThai) VALUES(?)";
+        for (int i = 0; i < 12 ; i++){
+            sqLiteDatabase.execSQL(insertBan, new Object[]{0});
+        }
+        String insertNguoiDung = "INSERT INTO NGUOIDUNG(maNguoiDung, hoVaTen, hinhAnh, ngaySinh, email, chucVu, gioiTinh, matKhau) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ADMIN", "ADMIN", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "admin@gmail.com", "Admin", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND1", "Nguyễn Viết Tín", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "tinthq@gmail.com", "NhanVien", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND2", "Trần Hồ Quốc An", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "anthq@gmail.com", "NhanVien", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND3", "Hồ Minh Phú", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "phuhm@gmail.com", "NhanVien", "Nam", 1212});
+
     }
 
     @Override
