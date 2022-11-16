@@ -8,6 +8,7 @@
     tools:context=".ui.SignUpActivity">
 
     <ScrollView
+        android:scrollbars="none"
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"

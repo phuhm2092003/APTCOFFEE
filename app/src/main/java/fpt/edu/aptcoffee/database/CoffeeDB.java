@@ -4,9 +4,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.utils.ImageToByte;
+
 public class CoffeeDB extends SQLiteOpenHelper {
     public static final String DB_NAME = "APTCoffee";
     public static final int DB_VERSION = 1;
+    public Context context;
     public static final String TABLE_BAN = "CREATE TABLE BAN(" +
             "maBan INTEGER PRIMARY KEY AUTOINCREMENT," +
             "trangThai INTEGER NOT NULL)";
@@ -23,13 +27,12 @@ public class CoffeeDB extends SQLiteOpenHelper {
 
     public static final String TABLE_LOAIHANG = "CREATE TABLE LOAIHANG(" +
             "maLoai INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "hinhAnh BLOB ," +
+            "hinhAnh BLOB," +
             "tenLoai TEXT NOT NULL)";
 
     public static final String TABLE_HOADON = "CREATE TABLE HOADON(" +
             "maHoaDon INTEGER PRIMARY KEY AUTOINCREMENT," +
             "maBan INTEGER REFERENCES BAN(maBan)," +
-            "maNguoiDung TEXT REFERENCES NGUOIDUNG(maNguoiDung)," +
             "gioVao DATE NOT NULL," +
             "gioRa DATE NOT NULL,"+
             "trangThai INTEGER NOT NULL)";
@@ -52,6 +55,7 @@ public class CoffeeDB extends SQLiteOpenHelper {
 
     public CoffeeDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        this.context = context;
     }
 
     @Override
