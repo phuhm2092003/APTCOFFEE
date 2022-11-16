@@ -3,14 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
         <entry key="..\:/TaiNguyenHocTap/MOB201_ADR-NC/APTCOFFEE0/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-=======
-<<<<<<< HEAD
         <entry key="..\:/Du An 1/APTCOFFEE/app/src/main/res/layout/activity_sign_in.xml" value="0.18614130434782608" />
         <entry key="..\:/Du An 1/APTCOFFEE/app/src/main/res/layout/activity_sign_up.xml" value="0.17572463768115942" />
         <entry key="..\:/Du An 1/APTCOFFEE/app/src/main/res/layout/activity_splash.xml" value="0.17572463768115942" />
-=======
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/bgr_btn_brow1_rd5.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/bgr_btn_brow_rd5.xml" value="0.1865" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/custom_indicator.xml" value="0.231" />
@@ -45,8 +41,6 @@
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_setting.xml" value="0.3625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/layout_item_iange_show.xml" value="0.3625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/menu/menu_main.xml" value="0.3614583333333333" />
->>>>>>> 92d41a7c832d3515bdd4a543bcdda5c9676d62ae
->>>>>>> 1aa0088463246a7dbf7018b915be76d3ccfc50c8
       </map>
     </option>
   </component>
