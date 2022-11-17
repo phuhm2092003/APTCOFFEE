@@ -71,15 +71,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getInfoNguoiDung() {
-        // Lấy mã người dùng
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        // Lấy người dùng theo mã mã người dùng
         NguoiDung nguoiDung = nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
-        // Tạo Bitmap từ mảng Byte[] HinhAnh
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
-        // Gán dữ liệu cho View
+
         tvTenNguoiDung.setText(nguoiDung.getHoVaTen());
         tvChucVu.setText(nguoiDung.getChucVu());
         civHinhAnh.setImageBitmap(bitmap);
@@ -91,6 +88,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("MA_NGUOIDUNG", maNguoiDung);
         startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+    }
+
+    private void openSignInActivity() {
+        startActivity(new Intent(getContext(), SignInActivity.class));
+        ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -133,12 +135,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-    private void openSignInActivity() {
-        startActivity(new Intent(getContext(), SignInActivity.class));
-        ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
-    }
-
 
     private void showDialogDanhGia() {
         // Tạo view mới từ package layout
@@ -184,6 +180,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 MyToast.successful(getContext(), "Đã đánh giá " + ratingBar.getRating() + " sao");
+                dialog.dismiss();
             }
         });
         dialog.show();
