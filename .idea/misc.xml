@@ -31,10 +31,13 @@
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_use_fill_24.xml" value="0.2905" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_user_line_24.xml" value="0.231" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/drawable/ic_user_line_edit_24.xml" value="0.231" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_loai_thuc_uong.xml" value="0.1875" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_quan_ly_ban.xml" value="0.2015625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_sign_up.xml" value="0.3625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_splash.xml" value="0.21614583333333334" />
+        <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/activity_thuc_uong.xml" value="0.2015625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_meseeger.xml" value="0.3625" />
         <entry key="..\:/PRO1121_Project1/APTCOFFEE/app/src/main/res/layout/fragment_search.xml" value="0.3625" />

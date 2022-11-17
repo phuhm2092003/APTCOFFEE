@@ -14,17 +14,35 @@
         android:theme="@style/Theme.APTCOFFEE"
         tools:targetApi="31">
         <activity
-            android:theme="@style/AppStatusBarWhite"
-            android:name=".ui.SignUpActivity"
+            android:name=".ui.HoaDonActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.DoanhThuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.NhanVienActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ThucUongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LoaiThucUongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.QuanLyBanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SignUpActivity"
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
         <activity
             android:name=".ui.SignInActivity"
             android:exported="false"
             android:theme="@style/AppStatusBarWhite" />
         <activity
-            android:theme="@style/AppStatusBarGray"
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppStatusBarGray" />
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"

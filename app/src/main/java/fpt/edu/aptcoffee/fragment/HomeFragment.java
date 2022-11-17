@@ -1,6 +1,7 @@
 package fpt.edu.aptcoffee.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -24,6 +25,12 @@ import fpt.edu.aptcoffee.adapter.PhotoAdapter;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
 import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.model.Photo;
+import fpt.edu.aptcoffee.ui.DoanhThuActivity;
+import fpt.edu.aptcoffee.ui.HoaDonActivity;
+import fpt.edu.aptcoffee.ui.LoaiThucUongActivity;
+import fpt.edu.aptcoffee.ui.NhanVienActivity;
+import fpt.edu.aptcoffee.ui.QuanLyBanActivity;
+import fpt.edu.aptcoffee.ui.ThucUongActivity;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -108,22 +115,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cardBan:
-                // chuyển quan màng hình quản lý bàn
+                startActivity(new Intent(getContext(), QuanLyBanActivity.class));
                 break;
             case R.id.cardLoaiThucUong:
-                // chuyển quan màng hình quản lý loại
+                startActivity(new Intent(getContext(), LoaiThucUongActivity.class));
                 break;
             case R.id.cardThucUong:
-                // chuyển quan màng hình quản lý thức uống
+                startActivity(new Intent(getContext(), ThucUongActivity.class));
                 break;
             case R.id.cardNhanVien:
-                // chuyển quan màng hình quản lý nhân viên
+                startActivity(new Intent(getContext(), NhanVienActivity.class));
                 break;
             case R.id.cardHoaDon:
-                // chuyển quan màng hình quản lý hoá đơn
+                startActivity(new Intent(getContext(), HoaDonActivity.class));
                 break;
             case R.id.cardDoanhThu:
-                // chuyển quan màng hình quản lý doanh thu
+                startActivity(new Intent(getContext(), DoanhThuActivity.class));
                 break;
         }
     }
