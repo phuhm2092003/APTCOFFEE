@@ -92,6 +92,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
