@@ -108,7 +108,7 @@
                         android:drawableStart="@drawable/ic_password_fill_24"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
-                        android:hint="Mật khẩu cũ"
+                        android:hint="Mật khẩu mới"
                         android:inputType="textPersonName"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp"
@@ -130,7 +130,7 @@
                         android:drawableStart="@drawable/ic_password_fill_24"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
-                        android:hint="Mật khẩu cũ"
+                        android:hint="Mật khẩu mới"
                         android:inputType="textPersonName"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp"
@@ -139,7 +139,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"

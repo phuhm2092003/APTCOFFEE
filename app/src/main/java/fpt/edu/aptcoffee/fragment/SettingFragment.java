@@ -76,7 +76,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void onpenDoiMatKhauAcitvity() {
-        startActivity(new Intent(getContext(), DoiMatKhauActivity.class));
+        Intent intent = new Intent(getContext(), DoiMatKhauActivity.class);
+        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
+        intent.putExtra("MA_NGUOIDUNG", maNguoiDung);
+        startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
 
