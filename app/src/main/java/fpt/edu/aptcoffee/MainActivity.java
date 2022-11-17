@@ -75,4 +75,11 @@ public class MainActivity extends AppCompatActivity {
     public String getKeyUser() {
         return keyUser;
     }
+
+    @Override
+    public void onBackPressed() {
+        // Open fragment Home
+        vp2Main.setCurrentItem(0, false);
+        bnvMain.setSelectedItemId(R.id.menu_home);
+    }
 }

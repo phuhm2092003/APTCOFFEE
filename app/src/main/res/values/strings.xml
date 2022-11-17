@@ -21,4 +21,6 @@
     <string name="email">Email</string>
     <string name="gioi_thieu">Giới thiệu</string>
     <string name="danh_muc">Danh mục</string>
+    <string name="cap_nhat">Cập nhật</string>
+    <string name="doi_ml">Đổi mật khẩu</string>
 </resources>

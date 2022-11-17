@@ -133,4 +133,9 @@ public class SignInActivity extends AppCompatActivity {
         super.onStop();
         unregisterReceiver(myBroadcastReceiver);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

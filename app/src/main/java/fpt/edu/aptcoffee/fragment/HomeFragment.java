@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mainActivity = ((MainActivity)getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
 
-        loadInfoNguoiDung(view);
+        getInfoNguoiDung(view);
         return view;
     }
 
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    private void loadInfoNguoiDung(View view) {
+    private void getInfoNguoiDung(View view) {
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
         NguoiDung nguoiDung = nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
