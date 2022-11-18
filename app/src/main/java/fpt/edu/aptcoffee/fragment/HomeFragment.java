@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         initOnClickCard();
         loadSlideImage();
 
-        mainActivity = ((MainActivity)getActivity());
+        mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
 
-        getInfoNguoiDung(view);
+        getInfoNguoiDung();
         return view;
     }
 
@@ -99,14 +100,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    private void getInfoNguoiDung(View view) {
+    private void getInfoNguoiDung() {
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
         NguoiDung nguoiDung = nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
 
-        tvHi.setText("Hello, "+nguoiDung.getHoVaTen());
+        tvHi.setText("Hello, " + nguoiDung.getHoVaTen());
         civHinhAnh.setImageBitmap(bitmap);
     }
 
@@ -133,5 +134,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), DoanhThuActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Cập nhật lại thông tin người dùng
+        getInfoNguoiDung();
     }
 }

@@ -78,7 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:boxStrokeColor="@color/BrowPrimary"
-                    app:hintTextColor="@color/BrowPrimary">
+                    app:hintTextColor="@color/BrowPrimary"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
                         android:hint="Mật khẩu cũ"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
@@ -100,7 +101,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     app:boxStrokeColor="@color/BrowPrimary"
-                    app:hintTextColor="@color/BrowPrimary">
+                    app:hintTextColor="@color/BrowPrimary"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -109,7 +111,7 @@
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
                         android:hint="Mật khẩu mới"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
@@ -122,7 +124,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     app:boxStrokeColor="@color/BrowPrimary"
-                    app:hintTextColor="@color/BrowPrimary">
+                    app:hintTextColor="@color/BrowPrimary"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -131,7 +134,7 @@
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
                         android:hint="Mật khẩu mới"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />

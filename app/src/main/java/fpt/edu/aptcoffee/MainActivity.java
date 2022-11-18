@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerMainAdapter adapter = new ViewPagerMainAdapter(this);
         vp2Main = findViewById(R.id.viewPager2Main);
         vp2Main.setUserInputEnabled(false);
+        vp2Main.setOffscreenPageLimit(3);
         vp2Main.setAdapter(adapter);
     }
 

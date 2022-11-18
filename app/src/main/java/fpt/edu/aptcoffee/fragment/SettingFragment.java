@@ -1,16 +1,22 @@
 package fpt.edu.aptcoffee.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,7 +27,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -30,11 +38,17 @@ import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
 import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.ui.DoiMatKhauActivity;
+import fpt.edu.aptcoffee.ui.LienHeActivity;
 import fpt.edu.aptcoffee.ui.SignInActivity;
+import fpt.edu.aptcoffee.ui.ThietLapTaiKhoanActivity;
+import fpt.edu.aptcoffee.utils.ImageToByte;
 import fpt.edu.aptcoffee.utils.MyToast;
 import pl.droidsonroids.gif.GifImageView;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
+
+    public static final int PICK_IMAGE = 1;
+    public static final String MA_NGUOIDUNG = "MA_NGUOIDUNG";
     TextView tvDanhGia, tvLienHe, tvThietLapTaiKhoan, tvDoiMatKhuau, tvDangXuat, tvTenNguoiDung, tvChucVu, tvEmail;
     MainActivity mainActivity;
     NguoiDungDAO nguoiDungDAO;
@@ -47,14 +61,27 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         initView(view);
         initOnClick();
+
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
+
         getInfoNguoiDung();
+
         ivDoiHinhAnh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Đổi ảnh đại diện
-                MyToast.successful(getContext(), "Doi hinh anh");
+                if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    // cấp quyền cho ứng dụng
+                    ActivityCompat.requestPermissions(requireActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            1);
+                } else {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                }
             }
         });
         return view;
@@ -82,8 +109,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getInfoNguoiDung() {
-        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        NguoiDung nguoiDung = nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
+        NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
@@ -94,10 +120,29 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         civHinhAnh.setImageBitmap(bitmap);
     }
 
-    private void onpenDoiMatKhauAcitvity() {
+    private NguoiDung getNguoiDung() {
+        //Lấy objcet người dùng
+        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
+        return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
+    }
+
+    private void openLienHeActivity() {
+        startActivity(new Intent(getContext(), LienHeActivity.class));
+        ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+    }
+
+    private void openTLTKActivity() {
+        Intent intent = new Intent(getContext(), ThietLapTaiKhoanActivity.class);
+        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
+        intent.putExtra(MA_NGUOIDUNG, maNguoiDung);
+        startActivity(intent);
+        ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+    }
+
+    private void openDoiMatKhauAcitvity() {
         Intent intent = new Intent(getContext(), DoiMatKhauActivity.class);
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        intent.putExtra("MA_NGUOIDUNG", maNguoiDung);
+        intent.putExtra(MA_NGUOIDUNG, maNguoiDung);
         startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
@@ -105,6 +150,18 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private void openSignInActivity() {
         startActivity(new Intent(getContext(), SignInActivity.class));
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
+    }
+
+    private void updateImage() {
+        // Cập nhật ảnh đại diện
+        NguoiDung nguoiDung = getNguoiDung();
+        nguoiDung.setHinhAnh(ImageToByte.circleImageViewToByte(getContext(), civHinhAnh));
+        if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
+            MyToast.successful(getContext(), "Lưu thành công");
+            getInfoNguoiDung();
+        } else {
+            MyToast.error(getContext(), "Lỗi");
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -115,21 +172,21 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 showDialogDanhGia();
                 break;
             case R.id.tvLienHe:
-                MyToast.successful(getContext(), "Liên hệ");
+                openLienHeActivity();
                 break;
             case R.id.tvThietLapTaiKhoan:
-                MyToast.successful(getContext(), "Thiết lập tài khoản");
+                openTLTKActivity();
                 break;
             case R.id.tvDoiMatKhau:
-                onpenDoiMatKhauAcitvity();
+                openDoiMatKhauAcitvity();
                 break;
             case R.id.tvDangXuat:
-                logoutSytem();
+                logOutSytem();
                 break;
         }
     }
 
-    private void logoutSytem() {
+    private void logOutSytem() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Bạn có muốn đăng xuất?");
         builder.setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
@@ -196,5 +253,21 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                InputStream stream = requireContext().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                civHinhAnh.setImageBitmap(bitmap);
+                updateImage();
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
     }
 }
