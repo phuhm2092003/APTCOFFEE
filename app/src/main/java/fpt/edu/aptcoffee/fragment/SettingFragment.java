@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -34,10 +35,11 @@ import fpt.edu.aptcoffee.utils.MyToast;
 import pl.droidsonroids.gif.GifImageView;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
-    TextView tvDanhGia, tvLienHe, tvThietLapTaiKhoan, tvDoiMatKhuau, tvDangXuat, tvTenNguoiDung, tvChucVu;
+    TextView tvDanhGia, tvLienHe, tvThietLapTaiKhoan, tvDoiMatKhuau, tvDangXuat, tvTenNguoiDung, tvChucVu, tvEmail;
     MainActivity mainActivity;
     NguoiDungDAO nguoiDungDAO;
     CircleImageView civHinhAnh;
+    ImageView ivDoiHinhAnh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +50,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
         getInfoNguoiDung();
+        ivDoiHinhAnh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Đổi ảnh đại diện
+                MyToast.successful(getContext(), "Doi hinh anh");
+            }
+        });
         return view;
     }
 
@@ -68,6 +77,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         civHinhAnh = view.findViewById(R.id.civHinhAnh);
         tvTenNguoiDung = view.findViewById(R.id.tvTenNguoiDung);
         tvChucVu = view.findViewById(R.id.tvChucVu);
+        tvEmail = view.findViewById(R.id.tvEmail);
+        ivDoiHinhAnh = view.findViewById(R.id.ivDoiHinhAnh);
     }
 
     private void getInfoNguoiDung() {
@@ -79,6 +90,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
         tvTenNguoiDung.setText(nguoiDung.getHoVaTen());
         tvChucVu.setText(nguoiDung.getChucVu());
+        tvEmail.setText(nguoiDung.getEmail());
         civHinhAnh.setImageBitmap(bitmap);
     }
 
