@@ -22,18 +22,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/viewBgr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_bgr_fragment_setting_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="36dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="@id/viewBgr"
+                app:layout_constraintStart_toStartOf="@id/viewBgr"
+                app:layout_constraintTop_toTopOf="@id/viewBgr">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="130dp"
@@ -114,7 +123,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearLayout">
+                app:layout_constraintTop_toBottomOf="@id/viewBgr">
 
                 <LinearLayout
                     android:layout_width="match_parent"

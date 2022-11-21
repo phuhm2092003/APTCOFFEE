@@ -270,4 +270,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getInfoNguoiDung();
+    }
 }

@@ -19,6 +19,7 @@ import java.util.Objects;
 import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
+import fpt.edu.aptcoffee.fragment.SettingFragment;
 import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.utils.MyToast;
 
@@ -70,7 +71,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
 
     private String getMaNguoiDung() {
         Intent intent = getIntent();
-        return intent.getStringExtra("MA_NGUOIDUNG");
+        return intent.getStringExtra(SettingFragment.MA_NGUOIDUNG);
     }
 
     private void updatePasword() {
