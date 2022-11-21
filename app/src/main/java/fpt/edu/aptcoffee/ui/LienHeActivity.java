@@ -1,6 +1,7 @@
 package fpt.edu.aptcoffee.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -19,7 +20,7 @@ import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.utils.MyToast;
 
 public class LienHeActivity extends AppCompatActivity {
-
+    Toolbar toolbar;
     TextView tvLienHePhu, tvLienHeAn, tvLienHeTin;
     public static  final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 101;
 
@@ -28,13 +29,20 @@ public class LienHeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lien_he);
         initView();
-
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         callAndSendEmail(tvLienHePhu, "0775098507", "phuhm@gmail.com");
         callAndSendEmail(tvLienHeAn, "0359115805", "anthq@gmail.com");
         callAndSendEmail(tvLienHeTin, "0364474090", "tinnv@gmail.com");
     }
 
     private void initView() {
+        toolbar = findViewById(R.id.toolbar);
         tvLienHePhu = findViewById(R.id.tvLienHePhu);
         tvLienHeAn = findViewById(R.id.tvLienHeAn);
         tvLienHeTin = findViewById(R.id.tvLienHeTin);
@@ -99,5 +107,11 @@ public class LienHeActivity extends AppCompatActivity {
         } catch (ActivityNotFoundException e) {
             Log.e("helloAndroid", "Call failed", e);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 }

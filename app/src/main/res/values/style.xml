@@ -36,4 +36,8 @@
         <item name="colorControlNormal">@color/Gray1Primary</item>
         <item name="colorControlActivated">@color/YellowPrimary</item>
     </style>
+    <style name="fontToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

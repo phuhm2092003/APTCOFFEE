@@ -51,8 +51,6 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         nguoiDungDAO = new NguoiDungDAO(this);
         getInfoNguoiDung();
         initOnclickIv();
-
-
     }
 
 
