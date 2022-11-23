@@ -84,6 +84,12 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND2", "Trần Hồ Quốc An", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "anthq@gmail.com", "NhanVien", "Nam", 1212});
         sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND3", "Hồ Minh Phú", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "phuhm@gmail.com", "NhanVien", "Nam", 1212});
 
+        String insertLoaiHang = "INSERT INTO LOAIHANG(hinhAnh, tenLoai) VALUES(?, ?)";
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_caphe), "Cà phê"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_nuocep), "Nước ép"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_soda), "Soda"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_trasua), "Trà sữa"});
+
     }
 
     @Override

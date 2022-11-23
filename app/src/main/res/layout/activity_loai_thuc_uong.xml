@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoaiThucUongActivity">
+    tools:context=".ui.LoaiThucUongActivity"
+    android:background="@color/GrayPrimary">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_loai"
@@ -22,11 +23,12 @@
         app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:scrollbars="none"
         android:id="@+id/recyclerViewLoai"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

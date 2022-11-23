@@ -2,6 +2,8 @@ package fpt.edu.aptcoffee.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,25 +12,40 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.adapter.LoaiHangAdapter;
+import fpt.edu.aptcoffee.dao.LoaiHangDAO;
 import fpt.edu.aptcoffee.model.LoaiHang;
+import fpt.edu.aptcoffee.utils.MyToast;
 
 public class LoaiThucUongActivity extends AppCompatActivity {
+
+    RecyclerView recyclerViewLoai;
     Toolbar toolbar;
+    LoaiHangDAO loaiHangDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loai_thuc_uong);
         initToolBar();
+        loaiHangDAO  = new LoaiHangDAO(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recyclerViewLoai.setLayoutManager(linearLayoutManager);
+        LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(loaiHangDAO.getAll());
+        recyclerViewLoai.setAdapter(loaiHangAdapter);
     }
 
     private void initToolBar() {
+        recyclerViewLoai = findViewById(R.id.recyclerViewLoai);
         toolbar = findViewById(R.id.toolbar_loai);
         setSupportActionBar(toolbar);
     }
