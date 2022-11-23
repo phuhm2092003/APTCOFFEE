@@ -78,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hồ Minh Phú"
-                            android:textColor="#333"
+                            android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="phuhm@gmail.com"
-                            android:textColor="#333"
+                            android:textColor="@color/RedPrimary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Trần Hồ Quốc An"
-                            android:textColor="#333"
+                            android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="anthq@gmail.com"
-                            android:textColor="#333"
+                            android:textColor="@color/RedPrimary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -236,7 +236,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nguyễn Viết Tín"
-                            android:textColor="#333"
+                            android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -246,7 +246,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="tinnv@gmail.com"
-                            android:textColor="#333"
+                            android:textColor="@color/RedPrimary"
                             android:textSize="16sp" />
 
                         <TextView
