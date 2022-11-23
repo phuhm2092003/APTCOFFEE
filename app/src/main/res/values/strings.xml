@@ -24,4 +24,5 @@
     <string name="cap_nhat">Cập nhật</string>
     <string name="doi_ml">Đổi mật khẩu</string>
     <string name="thontintaikhoan">Thông tin tài khoản</string>
+    <string name="hoac_dang_nhap">Hoặc đăng nhập</string>
 </resources>

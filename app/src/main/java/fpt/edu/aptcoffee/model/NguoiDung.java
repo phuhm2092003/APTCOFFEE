@@ -14,6 +14,10 @@ public class NguoiDung {
     private String chucVu;
     private String gioiTinh;
     private String matKhau;
+    public static final String GENDER_MALE = "Nam";
+    public static final String GENDER_FEMALE = "Nu";
+    public static final String POSITION_ADMIN = "Admin";
+    public static final String POSITION_STAFF = "NhanVien";
 
     public NguoiDung(String maNguoiDung, String hoVaTen, String email, String chucVu, String gioiTinh, String matKhau) {
         this.maNguoiDung = maNguoiDung;

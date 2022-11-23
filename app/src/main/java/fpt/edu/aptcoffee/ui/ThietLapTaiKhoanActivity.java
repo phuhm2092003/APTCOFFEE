@@ -118,7 +118,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         tvMaNguoiDung.setText(nguoiDung.getMaNguoiDung());
         tvTenNguoiDung.setText(nguoiDung.getHoVaTen());
         tvNgaySinh.setText(XDate.toStringDate(nguoiDung.getNgaySinh()));
-        if (nguoiDung.getGioiTinh().equals("Nu")) {
+        if (nguoiDung.getGioiTinh().equals(NguoiDung.GENDER_FEMALE)) {
             tvGioiTinh.setText("Nữ");
         } else {
             tvGioiTinh.setText("Nam");
@@ -224,7 +224,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditNgaySinh() {
-        // cập nhật ngày sinh người dùng
+        // Cập nhật ngày sinh người dùng
         NguoiDung nguoiDung = getObjectNguoiDung();
         // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_ngay_sinh, null);
@@ -298,7 +298,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditGioiTinh() {
-        // Cập nhật tên người dùng
+        // Cập nhật giới người dùng
         NguoiDung nguoiDung = getObjectNguoiDung();
         // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_gioi_tinh_nd, null);
@@ -306,7 +306,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         RadioGroup radioGroup = viewDialog.findViewById(R.id.grGender);
         RadioButton rdNam = viewDialog.findViewById(R.id.rbNam);
         RadioButton rdNu = viewDialog.findViewById(R.id.rbNu);
-        if (nguoiDung.getGioiTinh().equals("Nam")) {
+        if (nguoiDung.getGioiTinh().equals(NguoiDung.GENDER_MALE)) {
             rdNam.setChecked(true);
         } else {
             rdNu.setChecked(true);
@@ -337,9 +337,9 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
             public void onClick(View view) {
                 int rbCheck = radioGroup.getCheckedRadioButtonId();
                 if (rbCheck == R.id.rbNam) {
-                    nguoiDung.setGioiTinh("Nam");
+                    nguoiDung.setGioiTinh(NguoiDung.GENDER_MALE);
                 } else {
-                    nguoiDung.setGioiTinh("Nu");
+                    nguoiDung.setGioiTinh(NguoiDung.GENDER_FEMALE);
                 }
                 if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
                     MyToast.successful(ThietLapTaiKhoanActivity.this, "Cập nhật thành công");
@@ -352,7 +352,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditChucVu() {
-        // Cập nhật tên người dùng
+        // Cập nhật chức vụ
         NguoiDung nguoiDung = getObjectNguoiDung();
         // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_chuc_vu, null);
@@ -360,7 +360,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         RadioGroup radioGroup = viewDialog.findViewById(R.id.grChucVu);
         RadioButton rdAdmin = viewDialog.findViewById(R.id.rbAdmin);
         RadioButton rdNhanVien = viewDialog.findViewById(R.id.rbNhanVien);
-        if (nguoiDung.getChucVu().equals("Admin")) {
+        if (nguoiDung.getChucVu().equals(NguoiDung.POSITION_ADMIN)) {
             rdAdmin.setChecked(true);
         } else {
             rdNhanVien.setChecked(true);
@@ -391,9 +391,9 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
             public void onClick(View view) {
                 int rbCheck = radioGroup.getCheckedRadioButtonId();
                 if (rbCheck == R.id.rbAdmin) {
-                    nguoiDung.setChucVu("Admin");
+                    nguoiDung.setChucVu(NguoiDung.POSITION_ADMIN);
                 } else {
-                    nguoiDung.setChucVu("NhanVien");
+                    nguoiDung.setChucVu(NguoiDung.POSITION_STAFF);
                 }
                 if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
                     MyToast.successful(ThietLapTaiKhoanActivity.this, "Cập nhật thành công");

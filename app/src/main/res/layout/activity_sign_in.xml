@@ -155,7 +155,7 @@
                         android:alpha="0.7"
                         android:fontFamily="@font/inter_regular"
                         android:gravity="center"
-                        android:text="@string/qun_mat_khau"
+                        android:text="@string/hoac_dang_nhap"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="14sp" />
 
@@ -217,7 +217,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvRegister"
+            android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

@@ -28,7 +28,7 @@ public class SignInActivity extends AppCompatActivity {
     public static final String KEY_USER = "maNguoiDung";
     TextInputLayout tilUserName, tilPassword;
     Button btnSignIn;
-    TextView tvRegister;
+    TextView tvSignUp;
     NguoiDungDAO nguoiDungDAO;
     IntentFilter intentFilter;
 
@@ -48,11 +48,10 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-                overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+                openSignUpActivity();
             }
         });
     }
@@ -61,7 +60,7 @@ public class SignInActivity extends AppCompatActivity {
         tilUserName = findViewById(R.id.tilUserName);
         tilPassword = findViewById(R.id.tilPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
-        tvRegister = findViewById(R.id.tvRegister);
+        tvSignUp = findViewById(R.id.tvSignUp);
     }
 
     private void initIntentFilter() {
@@ -70,8 +69,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getText(TextInputLayout tilUserName) {
-        return Objects.requireNonNull(tilUserName.getEditText()).getText().toString().trim();
+    private String getText(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
 
     private void signInSystem() {
@@ -102,6 +101,11 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         intent.putExtra(KEY_USER, username);
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+    }
+
+    private void openSignUpActivity() {
+        startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
         overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
 

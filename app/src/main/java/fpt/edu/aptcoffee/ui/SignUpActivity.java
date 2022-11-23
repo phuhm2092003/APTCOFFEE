@@ -3,6 +3,7 @@ package fpt.edu.aptcoffee.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
@@ -26,12 +28,13 @@ import fpt.edu.aptcoffee.utils.ImageToByte;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String MATCHES_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     ImageView ivBack;
     TextInputLayout tilMaNguoiDung, tilHoVaTen, tilNgaySinh, tilEmail, tilMatKhau;
-    RadioGroup rdgGender, rdgPermission;
-    Button btnRegister;
+    TextInputEditText tieNgaySinh;
+    RadioGroup rdgGender, rdgPosition;
+    Button btnSignUp;
     TextView tvSignIn;
     NguoiDungDAO nguoiDungDAO;
 
@@ -41,37 +44,10 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         initView();
         nguoiDungDAO = new NguoiDungDAO(this);
-
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        tvSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        Objects.requireNonNull(tilNgaySinh.getEditText()).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // show dialog chọn ngày
-                showDateDialog();
-            }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // đắng ký tài khoản
-                signUp();
-            }
-        });
-
+        ivBack.setOnClickListener(this);
+        tvSignIn.setOnClickListener(this);
+        tieNgaySinh.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
     }
 
     private void initView() {
@@ -81,9 +57,10 @@ public class SignUpActivity extends AppCompatActivity {
         tilNgaySinh = findViewById(R.id.tilNgaySinh);
         tilEmail = findViewById(R.id.tilEmail);
         tilMatKhau = findViewById(R.id.tilMatKhau);
+        tieNgaySinh = findViewById(R.id.tieNgaySinh);
         rdgGender = findViewById(R.id.rdgGender);
-        rdgPermission = findViewById(R.id.rdgPermission);
-        btnRegister = findViewById(R.id.btnRegister);
+        rdgPosition = findViewById(R.id.rdgPosition);
+        btnSignUp = findViewById(R.id.btnSignUp);
         tvSignIn = findViewById(R.id.tvSignIn);
     }
 
@@ -94,15 +71,15 @@ public class SignUpActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         DatePickerDialog datePickerDialog = new DatePickerDialog(SignUpActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                calendar.set(i, i1, i2);
+            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                calendar.set(y, m, d);
                 Objects.requireNonNull(tilNgaySinh.getEditText()).setText(XDate.toStringDate(calendar.getTime()));
             }
         }, year, month, date);
         datePickerDialog.show();
     }
 
-    private void signUp() {
+    private void signUpAccount() {
         String maNguoiDung = getText(tilMaNguoiDung);
         String hoTen = getText(tilHoVaTen);
         String ngaySinhh = getText(tilNgaySinh);
@@ -117,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (!email.matches(MATCHES_EMAIL)) {
                     MyToast.error(SignUpActivity.this, "Nhập email sai định dạng");
                 } else {
-                    registerNguoiDung();
+                    registerAccount();
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -127,35 +104,22 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void registerNguoiDung() throws ParseException {
+    private void registerAccount() throws ParseException {
         String maNguoiDung = getText(tilMaNguoiDung);
         String hoVaTen = getText(tilHoVaTen);
         String ngaySinh = getText(tilNgaySinh);
         String email = getText(tilEmail);
         String matKhau = getText(tilMatKhau);
-
+        // Tạo người dùng mới
         NguoiDung nguoiDung = new NguoiDung();
         nguoiDung.setMaNguoiDung(maNguoiDung);
         nguoiDung.setHoVaTen(hoVaTen);
-        nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
         nguoiDung.setHinhAnh(ImageToByte.drawableToByte(SignUpActivity.this, R.drawable.avatar_user_md));
+        nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
         nguoiDung.setEmail(email);
+        nguoiDung.setChucVu(getPostion());
+        nguoiDung.setGioiTinh(getGender());
         nguoiDung.setMatKhau(matKhau);
-
-        // giới tính
-        int checkGender = rdgGender.getCheckedRadioButtonId();
-        if (checkGender == R.id.rdNam) {
-            nguoiDung.setGioiTinh("Nam");
-        } else {
-            nguoiDung.setGioiTinh("Nu");
-        }
-        // quyền
-        int checkPermission = rdgPermission.getCheckedRadioButtonId();
-        if (checkPermission == R.id.rdAdmin) {
-            nguoiDung.setChucVu("Admin");
-        } else {
-            nguoiDung.setChucVu("NhanVien");
-        }
 
         if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
             MyToast.successful(SignUpActivity.this, "Đăng ký thành công");
@@ -163,6 +127,22 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             MyToast.error(SignUpActivity.this, "Tên đăng nhập tồn tại");
         }
+    }
+
+    private String getGender() {
+        // Giới tính
+        if (rdgGender.getCheckedRadioButtonId() == R.id.rdNam) {
+            return NguoiDung.GENDER_MALE;
+        }
+        return NguoiDung.GENDER_FEMALE;
+    }
+
+    private String getPostion() {
+        // Chức vụ
+        if (rdgPosition.getCheckedRadioButtonId() == R.id.rdAdmin) {
+            return NguoiDung.POSITION_ADMIN;
+        }
+        return NguoiDung.POSITION_STAFF;
     }
 
     private void clearText() {
@@ -174,7 +154,30 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getText(TextInputLayout tilMaNguoiDung) {
-        return Objects.requireNonNull(tilMaNguoiDung.getEditText()).getText().toString();
+    private String getText(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString();
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ivBack:
+            case R.id.tvSignIn:
+                onBackPressed();
+                break;
+            case R.id.tieNgaySinh:
+                showDateDialog();
+                break;
+            case R.id.btnSignUp:
+                signUpAccount();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 }

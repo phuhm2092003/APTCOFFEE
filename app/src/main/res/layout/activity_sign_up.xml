@@ -128,6 +128,7 @@
                     app:hintTextColor="@color/BrowPrimary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tieNgaySinh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_date_line_24"
@@ -242,7 +243,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/rdgPermission"
+                        android:id="@+id/rdgPosition"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -272,7 +273,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnRegister"
+                    android:id="@+id/btnSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
