@@ -106,9 +106,9 @@ public class DoiMatKhauActivity extends AppCompatActivity {
                     MyToast.successful(DoiMatKhauActivity.this, "Đổi mật khẩu thành công");
                     clearText();
                     // Khai báo buider
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DoiMatKhauActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DoiMatKhauActivity.this, R.style.AlertDialogTheme);
                     // Gán thống báo
-                    builder.setMessage("Quay lại màng hình đăng nhập.");
+                    builder.setMessage("Quay lại màng hình đăng nhập?");
                     // Sự kiện đồng ý chuyển quan màng hình Đăng nhập
                     builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                         @Override
