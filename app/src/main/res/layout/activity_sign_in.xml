@@ -83,6 +83,7 @@
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"
                         android:hint="@string/ten_dang_nhap"
+                        android:text="ADMIN"
                         android:inputType="textPersonName"
                         android:textColor="@color/BlackPrimary"
                         android:textSize="16sp" />
@@ -101,6 +102,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="1212"
                         android:drawableStart="@drawable/ic_password_fill_24"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/inter_regular"

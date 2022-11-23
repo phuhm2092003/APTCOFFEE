@@ -31,21 +31,31 @@ public class LoaiThucUongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loai_thuc_uong);
         initToolBar();
+        initView();
         loaiHangDAO  = new LoaiHangDAO(this);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+
+        loadData();
+    }
+
+    private void loadData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerViewLoai.setLayoutManager(linearLayoutManager);
         LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(loaiHangDAO.getAll());
         recyclerViewLoai.setAdapter(loaiHangAdapter);
     }
 
-    private void initToolBar() {
+    private void initView() {
         recyclerViewLoai = findViewById(R.id.recyclerViewLoai);
+    }
+
+    private void initToolBar() {
         toolbar = findViewById(R.id.toolbar_loai);
         setSupportActionBar(toolbar);
     }
