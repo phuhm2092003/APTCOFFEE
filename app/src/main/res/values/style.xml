@@ -40,4 +40,10 @@
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorAccent">@color/Brow1Primary</item>
+
+        <!-- No need to override 'datePickerStyle' -->
+        <!-- <item name="android:datePickerStyle">@style/MyDatePickerStyle</item> -->
+    </style>
 </resources>
