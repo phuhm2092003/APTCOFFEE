@@ -60,7 +60,9 @@ public class SuaLoaiActivity extends AppCompatActivity implements View.OnClickLi
     private void fillData() {
         // Set data lên activity
         LoaiHang loaiHang = getLoaiHang();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(loaiHang.getHinhAnh(), 0, loaiHang.getHinhAnh().length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(loaiHang.getHinhAnh(),
+                0,
+                loaiHang.getHinhAnh().length);
         ivHinhAnh.setImageBitmap(bitmap);
         Objects.requireNonNull(tilMaLoai.getEditText()).setText(String.valueOf(loaiHang.getMaLoai()));
         Objects.requireNonNull(tilTenLoai.getEditText()).setText(loaiHang.getTenLoai());
