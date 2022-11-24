@@ -4,7 +4,7 @@
     package="fpt.edu.aptcoffee">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +17,17 @@
         android:theme="@style/Theme.APTCOFFEE"
         tools:targetApi="31">
         <activity
+            android:theme="@style/AppStatusBarWhite"
+            android:name=".ui.SuaLoaiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ThemLoaiActivity"
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
+        <activity
             android:name=".ui.ThietLapTaiKhoanActivity"
             android:exported="false"
-            android:theme="@style/AppStatusBarGray"/>
+            android:theme="@style/AppStatusBarGray" />
         <activity
             android:name=".ui.LienHeActivity"
             android:exported="false" />

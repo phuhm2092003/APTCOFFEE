@@ -14,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.interfaces.ItemOnClick;
 import fpt.edu.aptcoffee.model.LoaiHang;
 
-public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHangViewHolder>{
+public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHangViewHolder> {
 
     ArrayList<LoaiHang> list;
+    ItemOnClick itemOnClick;
 
-    public LoaiHangAdapter(ArrayList<LoaiHang> list) {
+    public LoaiHangAdapter(ArrayList<LoaiHang> list, ItemOnClick itemOnClick) {
         this.list = list;
+        this.itemOnClick = itemOnClick;
     }
 
     @NonNull
@@ -34,12 +37,18 @@ public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHa
     @Override
     public void onBindViewHolder(@NonNull LoaiHangViewHolder holder, int position) {
 
-        LoaiHang  loaiHang = list.get(position);
+        LoaiHang loaiHang = list.get(position);
 
-        if (loaiHang == null){
+        if (loaiHang == null) {
             return;
         }
         holder.tvTenLoaiHang.setText(loaiHang.getTenLoai());
+        holder.tvTenLoaiHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemOnClick.itemOclick(view, loaiHang);
+            }
+        });
         // Get bitmap từ mảng Byte[]
         Bitmap bitmap = BitmapFactory.decodeByteArray(loaiHang.getHinhAnh(),
                 0,
@@ -49,7 +58,7 @@ public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHa
 
     @Override
     public int getItemCount() {
-        if(list == null){
+        if (list == null) {
             return 0;
         }
         return list.size();
@@ -58,6 +67,7 @@ public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHa
     public static class LoaiHangViewHolder extends RecyclerView.ViewHolder {
         ImageView ivHinhAnh;
         TextView tvTenLoaiHang;
+
         public LoaiHangViewHolder(@NonNull View itemView) {
             super(itemView);
             ivHinhAnh = itemView.findViewById(R.id.ivHinhAnh);
