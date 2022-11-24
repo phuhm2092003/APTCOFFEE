@@ -102,6 +102,11 @@ public class NguoiDungDAO {
 
         return list.get(0);
     }
+    public ArrayList<NguoiDung> getAllPositionNhanVien() {
+        String sqlGetMaNguoiDung = "SELECT * FROM NGUOIDUNG WHERE chucVu=?";
+
+        return get(sqlGetMaNguoiDung, NguoiDung.POSITION_STAFF);
+    }
 
     public boolean checkLogin(String tenDangNhap, String matKhau) {
         String sqlCheckLogin = "SELECT * FROM NGUOIDUNG WHERE maNguoiDung=? AND matKhau=?";

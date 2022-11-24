@@ -9,9 +9,6 @@ public class LoaiHang {
     private byte[] hinhAnh;
     private String tenLoai;
 
-    public LoaiHang(int sample_data_loai_hang_caphe, String cà_phê) {
-    }
-
     public LoaiHang() {
         this.hinhAnh = hinhAnh;
         this.tenLoai = tenLoai;
