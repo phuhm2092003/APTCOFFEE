@@ -44,6 +44,15 @@ public class NhanVienActivity extends AppCompatActivity {
 
     }
 
+    private void initView() {
+        recyclerViewNhanVien = findViewById(R.id.recyclerViewNhanVien);
+    }
+
+    private void initToolBar() {
+        toolBar = findViewById(R.id.toolbarNhanVien);
+        setSupportActionBar(toolBar);
+    }
+
     private void loadData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NhanVienActivity.this, RecyclerView.VERTICAL, false);
         recyclerViewNhanVien.setLayoutManager(linearLayoutManager);
@@ -78,6 +87,7 @@ public class NhanVienActivity extends AppCompatActivity {
     }
 
     private void deleteNhanVien(NguoiDung nguoiDung) {
+        // Xoá nhân viên
         AlertDialog.Builder builder = new AlertDialog.Builder(NhanVienActivity.this, R.style.AlertDialogTheme);
         builder.setMessage("Xóa nhân viên " + nguoiDung.getHoVaTen() + "?");
         builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
@@ -98,15 +108,6 @@ public class NhanVienActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    private void initView() {
-        recyclerViewNhanVien = findViewById(R.id.recyclerViewNhanVien);
-    }
-
-    private void initToolBar() {
-        toolBar = findViewById(R.id.toolbarNhanVien);
-        setSupportActionBar(toolBar);
     }
 
     @Override

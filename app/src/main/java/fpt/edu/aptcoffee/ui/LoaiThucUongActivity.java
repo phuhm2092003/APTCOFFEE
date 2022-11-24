@@ -100,7 +100,7 @@ public class LoaiThucUongActivity extends AppCompatActivity {
     private void deleteLoaiHang(LoaiHang loaiHang) {
         // Xoá loại hàng
         AlertDialog.Builder builder = new AlertDialog.Builder(LoaiThucUongActivity.this, R.style.AlertDialogTheme);
-        builder.setMessage("Bạn có muốn xoá loại " + loaiHang.getTenLoai());
+        builder.setMessage("Bạn có muốn xoá loại " + loaiHang.getTenLoai()+"?");
         builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
