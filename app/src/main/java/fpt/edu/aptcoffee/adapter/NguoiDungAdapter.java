@@ -15,13 +15,16 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.interfaces.ItemNguoiDungOnClick;
 import fpt.edu.aptcoffee.model.NguoiDung;
 
 public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.NguoiDungViewHodel>{
     ArrayList<NguoiDung> list;
+    ItemNguoiDungOnClick itemNguoiDungOnClick;
 
-    public NguoiDungAdapter(ArrayList<NguoiDung> list) {
+    public NguoiDungAdapter(ArrayList<NguoiDung> list, ItemNguoiDungOnClick itemNguoiDungOnClick) {
         this.list = list;
+        this.itemNguoiDungOnClick = itemNguoiDungOnClick;
     }
 
     @NonNull
@@ -44,6 +47,12 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.Nguo
                 0,
                 nguoiDung.getHinhAnh().length);
         holder.ivHinhAnh.setImageBitmap(bitmap);
+        holder.ivMenuMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemNguoiDungOnClick.itemOclick(view, nguoiDung);
+            }
+        });
     }
 
     @Override

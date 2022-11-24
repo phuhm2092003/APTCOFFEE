@@ -1,17 +1,25 @@
 package fpt.edu.aptcoffee.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.adapter.NguoiDungAdapter;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
+import fpt.edu.aptcoffee.interfaces.ItemNguoiDungOnClick;
+import fpt.edu.aptcoffee.model.NguoiDung;
+import fpt.edu.aptcoffee.utils.MyToast;
 
 public class NhanVienActivity extends AppCompatActivity {
     Toolbar toolBar;
@@ -32,11 +40,64 @@ public class NhanVienActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        loadData();
+
+    }
+
+    private void loadData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NhanVienActivity.this, RecyclerView.VERTICAL, false);
         recyclerViewNhanVien.setLayoutManager(linearLayoutManager);
-        NguoiDungAdapter nguoiDungAdapter = new NguoiDungAdapter(nguoiDungDAO.getAllPositionNhanVien());
-        recyclerViewNhanVien.setAdapter(nguoiDungAdapter);
+        NguoiDungAdapter nguoiDungAdapter = new NguoiDungAdapter(nguoiDungDAO.getAllPositionNhanVien(), new ItemNguoiDungOnClick() {
+            @Override
+            public void itemOclick(View view, NguoiDung nguoiDung) {
+                PopupMenu popup = new PopupMenu(NhanVienActivity.this, view);
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_more, popup.getMenu());
 
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @SuppressLint("NonConstantResourceId")
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_update:
+                                MyToast.successful(NhanVienActivity.this, "Cập nhập thành công");
+                                break;
+                            case R.id.menu_delete:
+                                deleteNhanVien(nguoiDung);
+                                break;
+                        }
+
+                        return true;
+                    }
+                });
+
+                popup.show();
+
+            }
+        });
+        recyclerViewNhanVien.setAdapter(nguoiDungAdapter);
+    }
+
+    private void deleteNhanVien(NguoiDung nguoiDung) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(NhanVienActivity.this, R.style.AlertDialogTheme);
+        builder.setMessage("Xóa nhân viên " + nguoiDung.getHoVaTen() + "?");
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (nguoiDungDAO.deleteNguoiDung(nguoiDung.getMaNguoiDung())) {
+                    MyToast.successful(NhanVienActivity.this, "Xóa thành công");
+                } else {
+                    MyToast.error(NhanVienActivity.this, "Xóa không thành công");
+                }
+                loadData();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void initView() {
