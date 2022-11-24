@@ -1,5 +1,6 @@
 package fpt.edu.aptcoffee.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.utils.MyToast;
 
 public class NhanVienActivity extends AppCompatActivity {
+    public static final String MA_NGUOI_DUNG = "maNguoiDung";
     Toolbar toolBar;
     RecyclerView recyclerViewNhanVien;
     NguoiDungDAO nguoiDungDAO;
@@ -61,17 +64,21 @@ public class NhanVienActivity extends AppCompatActivity {
             public void itemOclick(View view, NguoiDung nguoiDung) {
                 PopupMenu popup = new PopupMenu(NhanVienActivity.this, view);
                 popup.getMenuInflater()
-                        .inflate(R.menu.menu_more, popup.getMenu());
+                        .inflate(R.menu.menu_more_nhan_vien, popup.getMenu());
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @SuppressLint("NonConstantResourceId")
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_update:
-                                MyToast.successful(NhanVienActivity.this, "Cập nhập thành công");
+                                Intent intent = new Intent(NhanVienActivity.this, CapNhatNhanVienActivity.class);
+                                intent.putExtra(MA_NGUOI_DUNG, nguoiDung.getMaNguoiDung());
+                                startActivity(intent);
                                 break;
                             case R.id.menu_delete:
                                 deleteNhanVien(nguoiDung);
+                                break;
+                            case R.id.menu_chitet:
                                 break;
                         }
 
@@ -120,5 +127,20 @@ public class NhanVienActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_add){
+            startActivity(new Intent(NhanVienActivity.this, ThemThanhVienActivity.class));
+            overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 }

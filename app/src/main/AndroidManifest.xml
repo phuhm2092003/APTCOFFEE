@@ -17,9 +17,17 @@
         android:theme="@style/Theme.APTCOFFEE"
         tools:targetApi="31">
         <activity
-            android:theme="@style/AppStatusBarWhite"
+            android:name=".ui.CapNhatNhanVienActivity"
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite"/>
+        <activity
+            android:name=".ui.ThemThanhVienActivity"
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
+        <activity
             android:name=".ui.SuaLoaiActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
         <activity
             android:name=".ui.ThemLoaiActivity"
             android:exported="false"

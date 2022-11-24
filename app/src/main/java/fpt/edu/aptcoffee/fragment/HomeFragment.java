@@ -32,6 +32,7 @@ import fpt.edu.aptcoffee.ui.LoaiThucUongActivity;
 import fpt.edu.aptcoffee.ui.NhanVienActivity;
 import fpt.edu.aptcoffee.ui.QuanLyBanActivity;
 import fpt.edu.aptcoffee.ui.ThucUongActivity;
+import fpt.edu.aptcoffee.utils.MyToast;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -101,14 +102,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private void getInfoNguoiDung() {
-        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        NguoiDung nguoiDung = nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
+        NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
 
         tvHi.setText("Hello, " + nguoiDung.getHoVaTen());
         civHinhAnh.setImageBitmap(bitmap);
+    }
+
+    private NguoiDung getNguoiDung() {
+        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
+        return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -125,7 +130,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), ThucUongActivity.class));
                 break;
             case R.id.cardNhanVien:
-                startActivity(new Intent(getContext(), NhanVienActivity.class));
+                NguoiDung nguoiDung = getNguoiDung();
+                if(nguoiDung.getChucVu().equals(NguoiDung.POSITION_ADMIN)){
+                    startActivity(new Intent(getContext(), NhanVienActivity.class));
+                }else {
+                    MyToast.error(getContext(), "Chức năng dành cho Admin");
+                }
+
                 break;
             case R.id.cardHoaDon:
                 startActivity(new Intent(getContext(), HoaDonActivity.class));
