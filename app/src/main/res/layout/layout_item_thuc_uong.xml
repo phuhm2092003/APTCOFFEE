@@ -47,7 +47,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="20000VND"
                 android:textColor="@color/RedPrimary"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 

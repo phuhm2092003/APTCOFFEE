@@ -15,9 +15,9 @@ import fpt.edu.aptcoffee.model.LoaiHang;
 
 public class SpinnerAdapterLoaiHang extends BaseAdapter {
     Context context;
-    ArrayList<LoaiHang> list;
+    ArrayList<String> list;
 
-    public SpinnerAdapterLoaiHang(Context context, ArrayList<LoaiHang> list) {
+    public SpinnerAdapterLoaiHang(Context context, ArrayList<String> list) {
         this.context = context;
         this.list = list;
     }
@@ -49,7 +49,7 @@ public class SpinnerAdapterLoaiHang extends BaseAdapter {
         }else {
             viewOfItem = (ViewOfItem) view.getTag();
         }
-        viewOfItem.tvTenLoai.setText(list.get(i).getTenLoai());
+        viewOfItem.tvTenLoai.setText(list.get(i));
         return view;
     }
 

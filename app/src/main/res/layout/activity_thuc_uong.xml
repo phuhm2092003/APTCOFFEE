@@ -32,37 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarThuUong" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarThuUong">
-
-        <RadioButton
-            android:id="@+id/rdAll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/BrowPrimary"
-            android:checked="true"
-            android:text="Tất cả"
-            tools:ignore="HardcodedText" />
-
-        <RadioButton
-            android:buttonTint="@color/BrowPrimary"
-            android:id="@+id/rdFill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Lọc"
-            tools:ignore="HardcodedText" />
-
-    </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewThucUong"

@@ -12,6 +12,6 @@
         android:layout_weight="1"
         android:fontFamily="@font/inter_regular"
         android:text="TextView"
-        android:textColor="@color/BlackPrimary"
+        android:textColor="#A4A4A4"
         android:textSize="16sp" />
 </LinearLayout>

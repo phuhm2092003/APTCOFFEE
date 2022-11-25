@@ -87,4 +87,9 @@ public class HangHoaDAO {
 
         return list.get(0);
     }
+    public ArrayList<HangHoa> getByMaLoai(String maLoaiHang) {
+        String sqlGetByMaHangHoa = "SELECT * FROM HANGHOA WHERE maloai=?";
+
+        return get(sqlGetByMaHangHoa, maLoaiHang);
+    }
 }

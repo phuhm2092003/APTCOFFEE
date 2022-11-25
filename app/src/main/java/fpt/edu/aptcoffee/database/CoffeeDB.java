@@ -90,6 +90,26 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_soda), "Soda"});
         sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_trasua), "Trà sữa"});
 
+        String insertHangHoa ="INSERT INTO HANGHOA(tenHangHoa, hinhAnh, giaTien, maLoai, trangThai) VALUES(?, ?, ?, ?, ?)";
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê máy", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfmay), 15000, 1, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê phin", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfphin), 12000, 1, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê sài gòn", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfsaigon), 20000, 1, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê bọt biển", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfbotbien), 25000, 1, 0});
+
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Nước ép cam", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_epcam), 27000, 2, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Nước ép dứa", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_epdua), 25000, 2, 0});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Nước ép ổi", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_epoi), 23000, 2, 0});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Chanh đá", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_chanhda), 20000, 2, 1});
+
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Soda bạc hà", ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_soda_bacha), 33000, 3, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Soda việt quất", ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_soda_vietquat), 35000, 3, 0});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Soda trái cây", ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_soda_traicay), 35000, 3, 1});
+
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Trà sữa khoai môn", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_trasuamon), 23000, 4, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Trà sữa thái xanh", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_trasuathaixanh), 24000, 4, 1});
+        sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Trà sữa truyền thống", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_trasuatruyenthong), 25000, 4, 1});
+
+
     }
 
     @Override
