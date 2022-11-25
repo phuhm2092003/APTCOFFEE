@@ -25,7 +25,7 @@
             android:exported="false"
             android:theme="@style/AppStatusBarWhite" />
         <activity
-            android:name=".ui.ThemThanhVienActivity"
+            android:name=".ui.ThemNhanVienActivity"
             android:exported="false"
             android:theme="@style/AppStatusBarWhite" />
         <activity

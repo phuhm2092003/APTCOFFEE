@@ -145,7 +145,7 @@ public class NhanVienActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_add) {
-            startActivity(new Intent(NhanVienActivity.this, ThemThanhVienActivity.class));
+            startActivity(new Intent(NhanVienActivity.this, ThemNhanVienActivity.class));
             overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
         }
         return super.onOptionsItemSelected(item);

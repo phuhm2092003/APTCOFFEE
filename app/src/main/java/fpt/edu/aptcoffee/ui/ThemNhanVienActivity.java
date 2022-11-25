@@ -27,7 +27,7 @@ import fpt.edu.aptcoffee.utils.ImageToByte;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 
-public class ThemThanhVienActivity extends AppCompatActivity implements View.OnClickListener {
+public class ThemNhanVienActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView ivBack;
     TextInputLayout tilMaNguoiDung, tilHoVaTen, tilNgaySinh, tilEmail, tilMatKhau;
     TextInputEditText tieNgaySinh;
@@ -82,18 +82,18 @@ public class ThemThanhVienActivity extends AppCompatActivity implements View.OnC
         String email = getText(tilEmail);
         String matKhau = getText(tilMatKhau);
         if (maNguoiDung.isEmpty() || hoVaTen.isEmpty() || ngaySinh.isEmpty() || email.isEmpty() || matKhau.isEmpty()) {
-            MyToast.error(ThemThanhVienActivity.this, "Vui lòng nhập đầy đủ thông tin");
+            MyToast.error(ThemNhanVienActivity.this, "Vui lòng nhập đầy đủ thông tin");
         } else {
             try {
                 Date date = XDate.toDate(ngaySinh);
                 if (!email.matches(MATCHES_EMAIL)) {
-                    MyToast.error(ThemThanhVienActivity.this, "Nhập email sai định dạng");
+                    MyToast.error(ThemNhanVienActivity.this, "Nhập email sai định dạng");
                 } else {
                     addStaff(maNguoiDung, hoVaTen, ngaySinh, email, matKhau);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
-                MyToast.error(ThemThanhVienActivity.this, "Nhập ngày sinh sai định dạng");
+                MyToast.error(ThemNhanVienActivity.this, "Nhập ngày sinh sai định dạng");
             }
         }
     }
@@ -103,17 +103,17 @@ public class ThemThanhVienActivity extends AppCompatActivity implements View.OnC
         NguoiDung nguoiDung = new NguoiDung();
         nguoiDung.setMaNguoiDung(maNguoiDung);
         nguoiDung.setHoVaTen(hoVaTen);
-        nguoiDung.setHinhAnh(ImageToByte.drawableToByte(ThemThanhVienActivity.this, R.drawable.avatar_user_md));
+        nguoiDung.setHinhAnh(ImageToByte.drawableToByte(ThemNhanVienActivity.this, R.drawable.avatar_user_md));
         nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
         nguoiDung.setEmail(email);
         nguoiDung.setChucVu(NguoiDung.POSITION_STAFF);
         nguoiDung.setGioiTinh(getGender());
         nguoiDung.setMatKhau(matKhau);
         if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
-            MyToast.successful(ThemThanhVienActivity.this, "Thêm thành công");
+            MyToast.successful(ThemNhanVienActivity.this, "Thêm thành công");
             clearText();
         } else {
-            MyToast.error(ThemThanhVienActivity.this, "Tên đăng nhập tồn tại");
+            MyToast.error(ThemNhanVienActivity.this, "Tên đăng nhập tồn tại");
         }
     }
 
@@ -136,7 +136,7 @@ public class ThemThanhVienActivity extends AppCompatActivity implements View.OnC
         int day = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(ThemThanhVienActivity.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ThemNhanVienActivity.this,
                 R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
