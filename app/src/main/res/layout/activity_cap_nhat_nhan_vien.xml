@@ -125,6 +125,7 @@
                     app:hintTextColor="@color/BrowPrimary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:focusable="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_user_line_24"
@@ -132,7 +133,7 @@
                         android:fontFamily="@font/inter_regular"
                         android:hint="@string/ten_dang_nhap"
                         android:inputType="textPersonName"
-                        android:textColor="@color/BlackPrimary"
+                        android:textColor="#919191"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -270,7 +271,7 @@
                     android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/bgr_btn_brow1_rd5"
                     android:fontFamily="@font/inter_bold"
                     android:padding="16dp"
