@@ -155,7 +155,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -193,7 +193,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -231,7 +231,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -278,7 +278,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -316,7 +316,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -354,7 +354,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="3dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -378,10 +378,10 @@
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/inter_regular"
                                 android:text="Doanh thu"
+                                android:textAlignment="center"
                                 android:textColor="@color/BlackPrimary"
                                 android:textSize="14sp"
-                                tools:ignore="HardcodedText"
-                                android:textAlignment="center" />
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>

@@ -111,9 +111,18 @@ public class ThemThanhVienActivity extends AppCompatActivity implements View.OnC
         nguoiDung.setMatKhau(matKhau);
         if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
             MyToast.successful(ThemThanhVienActivity.this, "Thêm thành công");
+            clearText();
         } else {
-            MyToast.successful(ThemThanhVienActivity.this, "Tên đăng nhập tồn tại");
+            MyToast.error(ThemThanhVienActivity.this, "Tên đăng nhập tồn tại");
         }
+    }
+
+    private void clearText() {
+        Objects.requireNonNull(tilMaNguoiDung.getEditText()).setText("");
+        Objects.requireNonNull(tilHoVaTen.getEditText()).setText("");
+        Objects.requireNonNull(tilNgaySinh.getEditText()).setText("");
+        Objects.requireNonNull(tilEmail.getEditText()).setText("");
+        Objects.requireNonNull(tilMatKhau.getEditText()).setText("");
     }
 
     @NonNull

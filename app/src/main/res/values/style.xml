@@ -52,4 +52,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="TranslucentStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>

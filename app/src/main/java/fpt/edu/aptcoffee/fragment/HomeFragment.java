@@ -122,17 +122,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.cardBan:
                 startActivity(new Intent(getContext(), QuanLyBanActivity.class));
+                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardLoaiThucUong:
                 startActivity(new Intent(getContext(), LoaiThucUongActivity.class));
+                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardThucUong:
                 startActivity(new Intent(getContext(), ThucUongActivity.class));
+                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardNhanVien:
                 NguoiDung nguoiDung = getNguoiDung();
                 if(nguoiDung.getChucVu().equals(NguoiDung.POSITION_ADMIN)){
                     startActivity(new Intent(getContext(), NhanVienActivity.class));
+                    (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 }else {
                     MyToast.error(getContext(), "Chức năng dành cho Admin");
                 }
@@ -140,9 +144,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.cardHoaDon:
                 startActivity(new Intent(getContext(), HoaDonActivity.class));
+                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardDoanhThu:
                 startActivity(new Intent(getContext(), DoanhThuActivity.class));
+                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
         }
     }

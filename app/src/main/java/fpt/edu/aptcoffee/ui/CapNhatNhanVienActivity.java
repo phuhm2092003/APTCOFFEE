@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -38,9 +39,10 @@ import fpt.edu.aptcoffee.utils.ImageToByte;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 
-public class CapNhatNhanVienActivity extends AppCompatActivity {
+public class CapNhatNhanVienActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int PICK_IMAGE = 1;
+    public static final String MATCHES_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     NguoiDungDAO nguoiDungDAO;
     ImageView ivBack, pickHinhAnh;
     CircleImageView civHinhAnh;
@@ -49,8 +51,6 @@ public class CapNhatNhanVienActivity extends AppCompatActivity {
     RadioGroup rdgGender;
     RadioButton rdNam, rdNu;
     Button btnUpdate;
-    public static final String MATCHES_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,126 +58,11 @@ public class CapNhatNhanVienActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cap_nhat_nhan_vien);
         initView();
         nguoiDungDAO = new NguoiDungDAO(this);
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                update();
-            }
-        });
-        pickHinhAnh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickImage();
-            }
-        });
-        tieNgaySinh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    showDateTimePicker();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        ivBack.setOnClickListener(this);
+        tieNgaySinh.setOnClickListener(this);
+        pickHinhAnh.setOnClickListener(this);
+        btnUpdate.setOnClickListener(this);
         fillData();
-    }
-
-    private void update() {
-
-        String maNguoiDung = getText(tilMaNguoiDung);
-        String hoVaTen = getText(tilHoVaTen);
-        String ngaySinh = getText(tilNgaySinh);
-        String email = getText(tilEmail);
-        String matKhau = getText(tilMatKhau);
-        if (maNguoiDung.isEmpty() || hoVaTen.isEmpty() || ngaySinh.isEmpty() || email.isEmpty() || matKhau.isEmpty()) {
-            MyToast.error(CapNhatNhanVienActivity.this, "Vui lòng nhập đầy đủ thông tin");
-        } else {
-            try {
-                Date date = XDate.toDate(ngaySinh);
-                if (!email.matches(MATCHES_EMAIL)) {
-                    MyToast.error(CapNhatNhanVienActivity.this, "Nhập email sai định dạng");
-                } else {
-                    // Thêm nhân viên
-                    NguoiDung nguoiDung = getObjectNguoiDung();
-                    nguoiDung.setMaNguoiDung(maNguoiDung);
-                    nguoiDung.setHoVaTen(hoVaTen);
-                    nguoiDung.setHinhAnh(ImageToByte.circleImageViewToByte(CapNhatNhanVienActivity.this, civHinhAnh));
-                    nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
-                    nguoiDung.setEmail(email);
-                    nguoiDung.setChucVu(NguoiDung.POSITION_STAFF);
-                    nguoiDung.setGioiTinh(getGender());
-                    nguoiDung.setMatKhau(matKhau);
-                    if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
-                        MyToast.successful(CapNhatNhanVienActivity.this, "Cập nhật thành công");
-                    } else {
-                        MyToast.successful(CapNhatNhanVienActivity.this, "Cập nhật không thành công");
-                    }
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-                MyToast.error(CapNhatNhanVienActivity.this, "Nhập ngày sinh sai định dạng");
-            }
-        }
-
-    }
-
-    private void showDateTimePicker() throws ParseException {
-        String dateNgaySinh = tilNgaySinh.getEditText().getText().toString();
-        Objects.requireNonNull(tilNgaySinh.getEditText()).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                try {
-                    calendar.setTime(XDate.toDate(dateNgaySinh));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                int date = calendar.get(Calendar.DATE);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(CapNhatNhanVienActivity.this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        calendar.set(i, i1, i2);
-                        setText(tilNgaySinh, XDate.toStringDate(calendar.getTime()));
-                    }
-                }, year, month, date);
-                datePickerDialog.show();
-            }
-        });
-    }
-
-    private void fillData() {
-        NguoiDung nguoiDung = getObjectNguoiDung();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(), 0, nguoiDung.getHinhAnh().length);
-        civHinhAnh.setImageBitmap(bitmap);
-        setText(tilMaNguoiDung, String.valueOf(nguoiDung.getMaNguoiDung()));
-        setText(tilHoVaTen, nguoiDung.getHoVaTen());
-        setText(tilNgaySinh, XDate.toStringDate(nguoiDung.getNgaySinh()));
-        if (nguoiDung.getGioiTinh().equals(NguoiDung.GENDER_MALE)) {
-            rdNam.setChecked(true);
-        } else {
-            rdNu.setChecked(true);
-        }
-        setText(tilEmail, nguoiDung.getEmail());
-        setText(tilMatKhau, nguoiDung.getMatKhau());
-    }
-
-    private void setText(TextInputLayout til, String s) {
-        Objects.requireNonNull(til.getEditText()).setText(s);
-    }
-
-    private NguoiDung getObjectNguoiDung() {
-        Intent intent = getIntent();
-        String maNguoiDung = intent.getStringExtra(NhanVienActivity.MA_NGUOI_DUNG);
-        return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
     }
 
     private void initView() {
@@ -196,10 +81,109 @@ public class CapNhatNhanVienActivity extends AppCompatActivity {
         rdNu = findViewById(R.id.rdNu);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
+    private void fillData() {
+        NguoiDung nguoiDung = getObjectNguoiDung();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
+                0,
+                nguoiDung.getHinhAnh().length);
+        civHinhAnh.setImageBitmap(bitmap);
+        setText(tilMaNguoiDung, String.valueOf(nguoiDung.getMaNguoiDung()));
+        setText(tilHoVaTen, nguoiDung.getHoVaTen());
+        setText(tilNgaySinh, XDate.toStringDate(nguoiDung.getNgaySinh()));
+        if (nguoiDung.getGioiTinh().equals(NguoiDung.GENDER_MALE)) {
+            rdNam.setChecked(true);
+        } else {
+            rdNu.setChecked(true);
+        }
+        setText(tilEmail, nguoiDung.getEmail());
+        setText(tilMatKhau, nguoiDung.getMatKhau());
+    }
+
+    private NguoiDung getObjectNguoiDung() {
+        Intent intent = getIntent();
+        String maNguoiDung = intent.getStringExtra(NhanVienActivity.MA_NGUOI_DUNG);
+        return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
+    }
+
+    private void updateNhanVien() {
+        String maNguoiDung = getText(tilMaNguoiDung);
+        String hoVaTen = getText(tilHoVaTen);
+        String ngaySinh = getText(tilNgaySinh);
+        String email = getText(tilEmail);
+        String matKhau = getText(tilMatKhau);
+        if (maNguoiDung.isEmpty() || hoVaTen.isEmpty() || ngaySinh.isEmpty() || email.isEmpty() || matKhau.isEmpty()) {
+            MyToast.error(CapNhatNhanVienActivity.this, "Vui lòng nhập đầy đủ thông tin");
+        } else {
+            try {
+                Date date = XDate.toDate(ngaySinh);
+                if (!email.matches(MATCHES_EMAIL)) {
+                    MyToast.error(CapNhatNhanVienActivity.this, "Nhập email sai định dạng");
+                } else {
+                    // Cập nhật nhân viên
+                    update(maNguoiDung, hoVaTen, ngaySinh, email, matKhau);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                MyToast.error(CapNhatNhanVienActivity.this, "Nhập ngày sinh sai định dạng");
+            }
+        }
+
+    }
+
+    private void update(String maNguoiDung, String hoVaTen, String ngaySinh, String email, String matKhau) throws ParseException {
+        NguoiDung nguoiDung = getObjectNguoiDung();
+        nguoiDung.setMaNguoiDung(maNguoiDung);
+        nguoiDung.setHoVaTen(hoVaTen);
+        nguoiDung.setHinhAnh(ImageToByte.circleImageViewToByte(CapNhatNhanVienActivity.this, civHinhAnh));
+        nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
+        nguoiDung.setEmail(email);
+        nguoiDung.setChucVu(NguoiDung.POSITION_STAFF);
+        nguoiDung.setGioiTinh(getGender());
+        nguoiDung.setMatKhau(matKhau);
+        if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
+            MyToast.successful(CapNhatNhanVienActivity.this, "Cập nhật thành công");
+        } else {
+            MyToast.successful(CapNhatNhanVienActivity.this, "Cập nhật không thành công");
+        }
+    }
+
+    @NonNull
+    private String getText(TextInputLayout tilMaNguoiDung) {
+        return Objects.requireNonNull(tilMaNguoiDung.getEditText()).getText().toString().trim();
+    }
+
+    private void setText(TextInputLayout til, String s) {
+        Objects.requireNonNull(til.getEditText()).setText(s);
+    }
+
+    private String getGender() {
+        // Giới tính
+        if (rdgGender.getCheckedRadioButtonId() == R.id.rdNam) {
+            return NguoiDung.GENDER_MALE;
+        }
+        return NguoiDung.GENDER_FEMALE;
+    }
+
+    private void showDateTimePicker() throws ParseException {
+        NguoiDung nguoiDung = getObjectNguoiDung();
+        Objects.requireNonNull(tilNgaySinh.getEditText()).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(nguoiDung.getNgaySinh());
+                int date = calendar.get(Calendar.DATE);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CapNhatNhanVienActivity.this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        calendar.set(i, i1, i2);
+                        setText(tilNgaySinh, XDate.toStringDate(calendar.getTime()));
+                    }
+                }, year, month, date);
+                datePickerDialog.show();
+            }
+        });
     }
 
     private void pickImage() {
@@ -234,18 +218,32 @@ public class CapNhatNhanVienActivity extends AppCompatActivity {
         }
     }
 
-    @NonNull
-    private String getText(TextInputLayout tilMaNguoiDung) {
-        return Objects.requireNonNull(tilMaNguoiDung.getEditText()).getText().toString().trim();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 
-    private String getGender() {
-        // Giới tính
-        if (rdgGender.getCheckedRadioButtonId() == R.id.rdNam) {
-            return NguoiDung.GENDER_MALE;
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ivBack:
+                onBackPressed();
+                break;
+            case R.id.btnUpdate:
+                updateNhanVien();
+                break;
+            case R.id.tieNgaySinh:
+                try {
+                    showDateTimePicker();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.pickHinhAnh:
+                pickImage();
+                break;
         }
-        return NguoiDung.GENDER_FEMALE;
     }
-
-
 }
