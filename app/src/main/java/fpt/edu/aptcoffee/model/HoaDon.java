@@ -7,26 +7,25 @@ import java.util.Date;
 public class HoaDon {
     private int maHoaDon;
     private int maBan;
-    private String maNguoiDung;
     private Date gioVao;
     private Date gioRa;
     private int trangThai;
+    public static final int DA_THANH_TOAN = 1;
+    public static final int CHUA_THANH_TOAN = 0;
 
     public HoaDon() {
     }
 
-    public HoaDon(int maBan, String maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
+    public HoaDon(int maBan, Date gioVao, Date gioRa, int trangThai) {
         this.maBan = maBan;
-        this.maNguoiDung = maNguoiDung;
         this.gioVao = gioVao;
         this.gioRa = gioRa;
         this.trangThai = trangThai;
     }
 
-    public HoaDon(int maHoaDon, int maBan, String maNguoiDung, Date gioVao, Date gioRa, int trangThai) {
+    public HoaDon(int maHoaDon, int maBan, Date gioVao, Date gioRa, int trangThai) {
         this.maHoaDon = maHoaDon;
         this.maBan = maBan;
-        this.maNguoiDung = maNguoiDung;
         this.gioVao = gioVao;
         this.gioRa = gioRa;
         this.trangThai = trangThai;
@@ -48,13 +47,6 @@ public class HoaDon {
         this.maBan = maBan;
     }
 
-    public String getMaNguoiDung() {
-        return maNguoiDung;
-    }
-
-    public void setMaNguoiDung(String maNguoiDung) {
-        this.maNguoiDung = maNguoiDung;
-    }
 
     public Date getGioVao() {
         return gioVao;
@@ -86,7 +78,6 @@ public class HoaDon {
         return "HoaDon{" +
                 "maHoaDon=" + maHoaDon +
                 ", maBan=" + maBan +
-                ", maNguoiDung=" + maNguoiDung +
                 ", gioVao=" + gioVao +
                 ", gioRa=" + gioRa +
                 ", trangThai=" + trangThai +

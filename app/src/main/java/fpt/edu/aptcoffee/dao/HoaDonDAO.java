@@ -35,7 +35,6 @@ public class HoaDonDAO {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(cursor.getInt(cursor.getColumnIndex("maHoaDon")));
                 hoaDon.setMaBan(cursor.getInt(cursor.getColumnIndex("maBan")));
-                hoaDon.setMaNguoiDung(cursor.getString(cursor.getColumnIndex("maNguoiDung")));
                 try {
                     hoaDon.setGioVao(XDate.toDateTime(cursor.getString(cursor.getColumnIndex("gioVao"))));
                     hoaDon.setGioRa(XDate.toDateTime(cursor.getString(cursor.getColumnIndex("gioRa"))));
@@ -60,7 +59,6 @@ public class HoaDonDAO {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("maBan", hoaDon.getMaBan());
-        values.put("maNguoiDung", hoaDon.getMaNguoiDung());
         values.put("gioVao", XDate.toStringDateTime(hoaDon.getGioVao()));
         values.put("gioRa", XDate.toStringDateTime(hoaDon.getGioRa()));
         values.put("trangThai", hoaDon.getTrangThai());
@@ -73,7 +71,6 @@ public class HoaDonDAO {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("maBan", hoaDon.getMaHoaDon());
-        values.put("maNguoiDung", hoaDon.getMaNguoiDung());
         values.put("gioVao", XDate.toStringDateTime(hoaDon.getGioVao()));
         values.put("gioRa", XDate.toStringDateTime(hoaDon.getGioRa()));
         values.put("trangThai", hoaDon.getTrangThai());

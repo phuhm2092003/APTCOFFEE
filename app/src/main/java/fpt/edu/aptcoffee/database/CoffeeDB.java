@@ -109,6 +109,13 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Trà sữa thái xanh", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_trasuathaixanh), 24000, 4, 1});
         sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Trà sữa truyền thống", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_trasuatruyenthong), 25000, 4, 1});
 
+        String insertHoaDon = "INSERT INTO HOADON(maBan, gioVao, gioRa , trangThai) VALUES(?, ?, ?, ?)";
+        sqLiteDatabase.execSQL(insertHoaDon, new Object[]{1, "25-11-2022 07:25:44", "25-11-2022 08:45:44", 0});
+        sqLiteDatabase.execSQL(insertHoaDon, new Object[]{2, "27-11-2022 09:25:44", "25-11-2022 12:31:44", 1});
+
+        String insertHoaDonChiTiet = "INSERT INTO HOADONCHITIET(maHoaDon, maHangHoa, soLuong , giaTien, ghiChu, ngayXuatHoaDon) VALUES(?, ?, ?, ?, ?, ?)";
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "27-11-2022"});
+
 
     }
 
