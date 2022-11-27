@@ -68,14 +68,24 @@ public class LoaiHangDAO {
 
     public boolean deleteLoaiHang(String maLoai) {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
-        int check = sqLiteDatabase.delete("LOAIHANG", "maLoai=?", new String[]{maLoai});
 
+        @SuppressLint("Recycle") Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM HANGHOA WHERE maLoai=?", new String[]{maLoai});
+        if (cursor.getCount() != 0){
+            return false;
+        }
+        int check = sqLiteDatabase.delete("LOAIHANG", "maLoai=?", new String[]{maLoai});
         return check > 0;
     }
 
     public LoaiHang getByMaLoai(String maLoai){
         String sqlGetByMaLoai = "SELECT * FROM LOAIHANG WHERE maLoai=?";
         ArrayList<LoaiHang> list = get(sqlGetByMaLoai, maLoai);
+
+        return list.get(0);
+    }
+    public LoaiHang getbyTenLoai(String tenLoai){
+        String sqlGetByMaLoai = "SELECT * FROM LOAIHANG WHERE tenLoai=?";
+        ArrayList<LoaiHang> list = get(sqlGetByMaLoai, tenLoai);
 
         return list.get(0);
     }

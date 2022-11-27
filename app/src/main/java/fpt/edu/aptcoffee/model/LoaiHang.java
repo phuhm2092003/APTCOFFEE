@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class LoaiHang {
     private int maLoai;
     private byte[] hinhAnh;
-    private String tenLoai;
+    private String tenLoai; 
 
     public LoaiHang() {
         this.hinhAnh = hinhAnh;

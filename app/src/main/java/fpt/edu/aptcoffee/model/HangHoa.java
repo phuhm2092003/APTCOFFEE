@@ -11,6 +11,8 @@ public class HangHoa {
     private int giaTien;
     private int maLoai;
     private int trangThai;
+    public static final int STATUS_STILL = 1; // Còn hàng
+    public static final int STATUS_OVER = 0; // hết hàng
 
     public HangHoa() {
     }

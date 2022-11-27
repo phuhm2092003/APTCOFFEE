@@ -18,13 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.interfaces.ItemHangHoaOnClick;
 import fpt.edu.aptcoffee.model.HangHoa;
 
 public class ThucUongAdapter extends RecyclerView.Adapter<ThucUongAdapter.ThucUongViewHolder> {
     ArrayList<HangHoa> list;
+    ItemHangHoaOnClick itemHangHoaOnClick;
 
-    public ThucUongAdapter(ArrayList<HangHoa> list) {
+    public ThucUongAdapter(ArrayList<HangHoa> list, ItemHangHoaOnClick itemHangHoaOnClick) {
         this.list = list;
+        this.itemHangHoaOnClick = itemHangHoaOnClick;
     }
 
     @NonNull
@@ -54,6 +57,12 @@ public class ThucUongAdapter extends RecyclerView.Adapter<ThucUongAdapter.ThucUo
             holder.tvTrangThai.setText("Còn hàng");
             holder.tvTrangThai.setTextColor(Color.BLUE);
         }
+        holder.ivMenuMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemHangHoaOnClick.itemOclick(view, hangHoa);
+            }
+        });
     }
 
     @Override

@@ -39,6 +39,7 @@
               android:text="Admin"
               tools:ignore="HardcodedText" />
           <RadioButton
+              android:layout_marginStart="16dp"
               android:id="@+id/rbNhanVien"
               android:buttonTint="@color/BrowPrimary"
               android:layout_width="wrap_content"

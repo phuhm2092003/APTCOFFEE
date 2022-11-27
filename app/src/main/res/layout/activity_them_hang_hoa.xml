@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SuaLoaiActivity"
-    android:background="@color/WhitePrimary"
-    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+    android:theme="@style/Theme.MaterialComponents.DayNight"
+    tools:context=".ui.ThemHangHoaActivity"
+    android:background="@color/WhitePrimary">
+
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/inter_bold"
-        android:text="CẬP NHẬT LOẠI THỨC UỐNG"
+        android:text="THÊM THỨC UỐNG"
         android:textColor="@color/BlackPrimary"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,35 +60,21 @@
         app:layout_constraintTop_toTopOf="@+id/ivHinhAnh"
         tools:ignore="ContentDescription" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilMaLoaiHang"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/spLoaiHang"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        app:boxStrokeColor="@color/BrowPrimary"
-        app:hintTextColor="@color/BrowPrimary"
+        android:background="@drawable/bgr_spinner_stroke_black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivHinhAnh">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_qr_code_fill"
-            android:focusable="false"
-            android:drawablePadding="10dp"
-            android:fontFamily="@font/inter_regular"
-            android:hint="Mã loại hàng"
-            android:textColor="@color/Gray1Primary"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ivHinhAnh" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilTenLoaiHang"
+        android:id="@+id/tilTenHangHoa"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +85,8 @@
         app:hintTextColor="@color/BrowPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilMaLoaiHang">
+        app:layout_constraintTop_toBottomOf="@id/spLoaiHang"
+        tools:layout_editor_absoluteY="366dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -106,14 +94,41 @@
             android:drawableStart="@drawable/ic_edit_line_brow"
             android:drawablePadding="10dp"
             android:fontFamily="@font/inter_regular"
-            android:hint="Tên loại thức uống"
+            android:hint="Tên thức uống"
+            android:textColor="@color/BlackPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilGiaTien"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="24dp"
+        app:boxStrokeColor="@color/BrowPrimary"
+        app:hintTextColor="@color/BrowPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilTenHangHoa"
+        tools:layout_editor_absoluteY="366dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_edit_line_brow"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Giá tiền"
+            android:inputType="number"
             android:textColor="@color/BlackPrimary"
             android:textSize="16sp"
             tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -122,12 +137,12 @@
         android:background="@drawable/bgr_btn_brow1_rd5"
         android:fontFamily="@font/inter_bold"
         android:padding="16dp"
-        android:text="CẬP NHẬT"
+        android:text="Thêm"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilTenLoaiHang"
+        app:layout_constraintTop_toBottomOf="@+id/tilGiaTien"
         tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

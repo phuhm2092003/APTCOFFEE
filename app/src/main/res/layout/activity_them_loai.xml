@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/WhitePrimary"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-    tools:context=".ui.ThemLoaiActivity">
+    tools:context=".ui.ThemLoaiActivity"
+    android:background="@color/WhitePrimary">
 
     <ImageView
         android:id="@+id/ivBack"

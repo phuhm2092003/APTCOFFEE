@@ -20,7 +20,7 @@ import android.widget.PopupMenu;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.adapter.LoaiHangAdapter;
 import fpt.edu.aptcoffee.dao.LoaiHangDAO;
-import fpt.edu.aptcoffee.interfaces.ItemOnClick;
+import fpt.edu.aptcoffee.interfaces.ItemLoaiHangOnClick;
 import fpt.edu.aptcoffee.model.LoaiHang;
 import fpt.edu.aptcoffee.utils.MyToast;
 
@@ -62,7 +62,7 @@ public class LoaiThucUongActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerViewLoai.setLayoutManager(linearLayoutManager);
 
-        LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(loaiHangDAO.getAll(), new ItemOnClick() {
+        LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(loaiHangDAO.getAll(), new ItemLoaiHangOnClick() {
             @Override
             public void itemOclick(View view, LoaiHang loaiHang) {
                 PopupMenu popup = new PopupMenu(LoaiThucUongActivity.this, view);
@@ -106,10 +106,10 @@ public class LoaiThucUongActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (loaiHangDAO.deleteLoaiHang(String.valueOf(loaiHang.getMaLoai()))) {
                     MyToast.successful(LoaiThucUongActivity.this, "Xoá thành công");
+                    loadData();
                 } else {
-                    MyToast.error(LoaiThucUongActivity.this, "Xoá không thành công");
+                    MyToast.error(LoaiThucUongActivity.this, "Có thức uống thuộc mã loại này");
                 }
-                loadData();
             }
         });
         builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {

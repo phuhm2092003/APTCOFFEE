@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.R;
-import fpt.edu.aptcoffee.interfaces.ItemOnClick;
+import fpt.edu.aptcoffee.interfaces.ItemLoaiHangOnClick;
 import fpt.edu.aptcoffee.model.LoaiHang;
 
 public class LoaiHangAdapter extends RecyclerView.Adapter<LoaiHangAdapter.LoaiHangViewHolder> {
 
     ArrayList<LoaiHang> list;
-    ItemOnClick itemOnClick;
+    ItemLoaiHangOnClick itemOnClick;
 
-    public LoaiHangAdapter(ArrayList<LoaiHang> list, ItemOnClick itemOnClick) {
+    public LoaiHangAdapter(ArrayList<LoaiHang> list, ItemLoaiHangOnClick itemOnClick) {
         this.list = list;
         this.itemOnClick = itemOnClick;
     }
