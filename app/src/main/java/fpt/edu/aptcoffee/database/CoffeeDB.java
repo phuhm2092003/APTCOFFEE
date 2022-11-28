@@ -79,10 +79,10 @@ public class CoffeeDB extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(insertBan, new Object[]{0});
         }
         String insertNguoiDung = "INSERT INTO NGUOIDUNG(maNguoiDung, hoVaTen, hinhAnh, ngaySinh, email, chucVu, gioiTinh, matKhau) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ADMIN", "ADMIN", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "admin@gmail.com", "Admin", "Nam", 1212});
-        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND1", "Nguyễn Viết Tín", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "tinthq@gmail.com", "NhanVien", "Nam", 1212});
-        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND2", "Trần Hồ Quốc An", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "anthq@gmail.com", "NhanVien", "Nam", 1212});
-        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND3", "Hồ Minh Phú", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "01-01-2000", "phuhm@gmail.com", "NhanVien", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ADMIN", "ADMIN", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "admin@gmail.com", "Admin", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND1", "Nguyễn Viết Tín", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "tinthq@gmail.com", "NhanVien", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND2", "Trần Hồ Quốc An", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "anthq@gmail.com", "NhanVien", "Nam", 1212});
+        sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND3", "Hồ Minh Phú", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "phuhm@gmail.com", "NhanVien", "Nam", 1212});
 
         String insertLoaiHang = "INSERT INTO LOAIHANG(hinhAnh, tenLoai) VALUES(?, ?)";
         sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_caphe), "Cà phê"});
@@ -114,7 +114,10 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertHoaDon, new Object[]{2, "27-11-2022 09:25:44", "25-11-2022 12:31:44", 1});
 
         String insertHoaDonChiTiet = "INSERT INTO HOADONCHITIET(maHoaDon, maHangHoa, soLuong , giaTien, ghiChu, ngayXuatHoaDon) VALUES(?, ?, ?, ?, ?, ?)";
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "27-11-2022"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-11-28"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-11-29"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-12-15"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-01-01"});
 
 
     }

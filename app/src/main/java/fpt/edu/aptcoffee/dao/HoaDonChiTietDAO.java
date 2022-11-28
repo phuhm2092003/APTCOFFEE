@@ -99,4 +99,44 @@ public class HoaDonChiTietDAO {
 
         return list.get(0);
     }
+
+    @SuppressLint("Range")
+    public int getDoanhThuNgay(String date) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getReadableDatabase();
+        String sql = "SELECT SUM(giaTien) as DoanhThu FROM HOADONCHITIET WHERE ngayXuatHoaDon=?";
+        ArrayList<Integer> list = new ArrayList<>();
+        @SuppressLint("Recycle")
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{date});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                try {
+                    list.add(cursor.getInt(cursor.getColumnIndex("DoanhThu")));
+                } catch (Exception e) {
+                    list.add(0);
+                }
+            } while (cursor.moveToNext());
+        }
+        return list.get(0);
+    }
+
+    @SuppressLint("Range")
+    public int getDTThangNam(String tuNgay, String denNgay) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getReadableDatabase();
+        String sql = "SELECT SUM(giaTien) as doanhThu FROM HOADONCHITIET WHERE ngayXuatHoaDon BETWEEN ? AND ?";
+        ArrayList<Integer> list = new ArrayList<>();
+        @SuppressLint("Recycle")
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{tuNgay, denNgay});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                try {
+                    list.add(cursor.getInt(cursor.getColumnIndex("doanhThu")));
+                } catch (Exception e) {
+                    list.add(0);
+                }
+            } while (cursor.moveToNext());
+        }
+        return list.get(0);
+    }
 }

@@ -59,6 +59,7 @@
             android:name=".ui.HoaDonActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/AppStatusBarWhite"
             android:name=".ui.DoanhThuActivity"
             android:exported="false" />
         <activity

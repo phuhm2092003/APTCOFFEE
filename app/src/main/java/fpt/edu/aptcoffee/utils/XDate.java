@@ -8,7 +8,7 @@ import java.util.Date;
 
 @SuppressLint("SimpleDateFormat")
 public class XDate {
-    static SimpleDateFormat spfDate = new SimpleDateFormat("dd-MM-yyyy");
+    static SimpleDateFormat spfDate = new SimpleDateFormat("yyyy-MM-dd");
     static SimpleDateFormat spfDateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     public static Date toDate(String date) throws ParseException {

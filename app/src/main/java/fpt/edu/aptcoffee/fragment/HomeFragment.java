@@ -147,8 +147,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardDoanhThu:
-                startActivity(new Intent(getContext(), DoanhThuActivity.class));
-                (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+                NguoiDung nguoiDung1 = getNguoiDung();
+                if(nguoiDung1.getChucVu().equals(NguoiDung.POSITION_ADMIN)){
+                    startActivity(new Intent(getContext(), DoanhThuActivity.class));
+                    (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+                }else {
+                    MyToast.error(getContext(), "Chức năng dành cho Admin");
+                }
                 break;
         }
     }
