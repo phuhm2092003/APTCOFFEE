@@ -92,4 +92,9 @@ public class HoaDonDAO {
 
         return list.get(0);
     }
+    public ArrayList<HoaDon> getByTrangThai(int status) {
+        String sql = "SELECT * FROM HOADON WHERE trangThai=?";
+
+        return  get(sql, String.valueOf(status));
+    }
 }

@@ -139,4 +139,24 @@ public class HoaDonChiTietDAO {
         }
         return list.get(0);
     }
+
+    @SuppressLint("Range")
+    public int getGiaTien(int maHoaDon) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getReadableDatabase();
+        String sql = "SELECT SUM(giaTien) as DoanhThu FROM HOADONCHITIET WHERE maHoaDon=?";
+        ArrayList<Integer> list = new ArrayList<>();
+        @SuppressLint("Recycle")
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(maHoaDon)});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                try {
+                    list.add(cursor.getInt(cursor.getColumnIndex("DoanhThu")));
+                } catch (Exception e) {
+                    list.add(0);
+                }
+            } while (cursor.moveToNext());
+        }
+        return list.get(0);
+    }
 }
