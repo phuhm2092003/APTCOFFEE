@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import fpt.edu.aptcoffee.interfaces.ItemHoaDonOnClick;
 import fpt.edu.aptcoffee.model.HoaDon;
 
 public class HoaDonActivity extends AppCompatActivity {
+    public static final String MA_HOA_DON = "maHoaDon";
     Toolbar toolbar;
     RecyclerView recyclerViewHoaDon;
     HoaDonDAO hoaDonDAO;
@@ -38,8 +40,10 @@ public class HoaDonActivity extends AppCompatActivity {
         HoaDonAdapter adapter = new HoaDonAdapter(HoaDonActivity.this, hoaDonDAO.getByTrangThai(HoaDon.DA_THANH_TOAN), new ItemHoaDonOnClick() {
             @Override
             public void itemOclick(View view, HoaDon hoaDon) {
-                // show popmenu chi tiết
-                // tạo menu chi tiết
+                Intent intent = new Intent(HoaDonActivity.this, ChiTietHoaDonActivity.class);
+                intent.putExtra(MA_HOA_DON, hoaDon.getMaHoaDon());
+                startActivity(intent);
+                overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
             }
         });
         recyclerViewHoaDon.setAdapter(adapter);

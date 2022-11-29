@@ -18,8 +18,12 @@
         tools:targetApi="31">
         <activity
             android:theme="@style/AppStatusBarWhite"
-            android:name=".ui.CapNhatHangHoaActivity"
+            android:name=".ui.ChiTietHoaDonActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.CapNhatHangHoaActivity"
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
         <activity
             android:name=".ui.ThemHangHoaActivity"
             android:exported="false"
@@ -59,9 +63,9 @@
             android:name=".ui.HoaDonActivity"
             android:exported="false" />
         <activity
-            android:theme="@style/AppStatusBarWhite"
             android:name=".ui.DoanhThuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppStatusBarWhite" />
         <activity
             android:name=".ui.NhanVienActivity"
             android:exported="false" />
