@@ -116,16 +116,16 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertHoaDon, new Object[]{3, "27-11-2022 09:25:44", "27-11-2022 12:31:44", 1});
 
         String insertHoaDonChiTiet = "INSERT INTO HOADONCHITIET(maHoaDon, maHangHoa, soLuong , giaTien, ghiChu, ngayXuatHoaDon) VALUES(?, ?, ?, ?, ?, ?)";
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-11-28"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 2, 2, 27000, "", "2022-11-29"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 5, 2, 27000, "", "2022-12-15"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 6, 2, 27000, "", "2022-01-01"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 30000, "", "2022-11-28"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 2, 1, 12000, "", "2022-11-29"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 5, 2, 54000, "", "2022-12-15"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 6, 2, 50000, "", "2022-01-01"});
 
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 2, 27000, "", "2022-03-28"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 2, 27000, "", "2022-03-29"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 1, 15000, "", "2022-03-28"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 2, 30000, "", "2022-03-29"});
 
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 27000, "", "2022-02-28"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 27000, "", "2022-02-29"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 30000, "", "2022-02-28"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 30000, "", "2022-02-29"});
 
 
 

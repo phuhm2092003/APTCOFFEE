@@ -17,7 +17,7 @@
         android:theme="@style/Theme.APTCOFFEE"
         tools:targetApi="31">
         <activity
-            android:theme="@style/AppStatusBarWhite"
+            android:theme="@style/AppStatusBarGray"
             android:name=".ui.ChiTietHoaDonActivity"
             android:exported="false" />
         <activity

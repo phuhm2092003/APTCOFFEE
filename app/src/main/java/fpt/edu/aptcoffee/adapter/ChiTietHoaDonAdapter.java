@@ -24,10 +24,12 @@ import fpt.edu.aptcoffee.model.HoaDonChiTiet;
 public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdapter.ChiTietHoaDonViewHolder>{
     Context context;
     ArrayList<HangHoa> list;
+    ArrayList<HoaDonChiTiet> listHDCT;
 
-    public ChiTietHoaDonAdapter(Context context, ArrayList<HangHoa> list) {
+    public ChiTietHoaDonAdapter(Context context, ArrayList<HangHoa> list, ArrayList<HoaDonChiTiet> listHDCT) {
         this.context = context;
         this.list = list;
+        this.listHDCT = listHDCT;
     }
 
     @NonNull
@@ -41,6 +43,7 @@ public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdap
     @Override
     public void onBindViewHolder(@NonNull ChiTietHoaDonViewHolder holder, int position) {
         HangHoa hangHoa = list.get(position);
+        HoaDonChiTiet hoaDonChiTiet = listHDCT.get(position);
         if (hangHoa == null){
             return;
         }
@@ -49,7 +52,12 @@ public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdap
                 hangHoa.getHinhAnh().length);
         holder.ivHinhAnh.setImageBitmap(bitmap);
         holder.tvTenHangHoa.setText(hangHoa.getTenHangHoa());
-        holder.tvGiaTien.setText(hangHoa.getGiaTien()+"VND");
+        if(hoaDonChiTiet.getMaHangHoa() == hangHoa.getMaHangHoa()){
+            holder.tvSoluong.setText("x"+hoaDonChiTiet.getSoLuong());
+            holder.tvGiaTien.setText(hangHoa.getGiaTien() * hoaDonChiTiet.getSoLuong()+"VND");
+        }
+
+
     }
 
     @Override

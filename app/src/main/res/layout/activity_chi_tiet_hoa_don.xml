@@ -61,6 +61,20 @@
                     android:textAllCaps="false"
                     android:textColor="@color/BlackPrimary"
                     android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Đã thanh toán"
+                    android:textAllCaps="false"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:background="@drawable/bgr_tv_green"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,6 +101,7 @@
                     tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                 <TextView
+                    android:id="@+id/tvMaBan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
