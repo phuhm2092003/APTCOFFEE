@@ -10,20 +10,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.interfaces.ItemBanOnClick;
 import fpt.edu.aptcoffee.interfaces.ItemLoaiHangOnClick;
 import fpt.edu.aptcoffee.model.Ban;
 import fpt.edu.aptcoffee.model.LoaiHang;
 
 public class BanAdapter extends RecyclerView.Adapter<BanAdapter.BanViewHolder> {
     ArrayList<Ban> list;
+    ItemBanOnClick itemBanOnClick;
 
-    public BanAdapter(ArrayList<Ban> list) {
+    public BanAdapter(ArrayList<Ban> list, ItemBanOnClick itemBanOnClick) {
         this.list = list;
+        this.itemBanOnClick = itemBanOnClick;
     }
 
     @NonNull
@@ -46,6 +50,12 @@ public class BanAdapter extends RecyclerView.Adapter<BanAdapter.BanViewHolder> {
             holder.ivHinhAnh.setImageResource(R.drawable.ic_quan_ly_ban_24_brow);
         }
         holder.tvMaBan.setText("BO"+ban.getMaBan());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemBanOnClick.itemOclick(view, ban);
+            }
+        });
     }
 
     @Override
@@ -59,11 +69,13 @@ public class BanAdapter extends RecyclerView.Adapter<BanAdapter.BanViewHolder> {
     public static class BanViewHolder extends RecyclerView.ViewHolder {
         ImageView ivHinhAnh;
         TextView tvMaBan;
+        CardView cardView;
 
         public BanViewHolder(@NonNull View itemView) {
             super(itemView);
             ivHinhAnh = itemView.findViewById(R.id.ivHinhAnh);
             tvMaBan = itemView.findViewById(R.id.tvMaBan);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

@@ -81,7 +81,7 @@ public class HoaDonChiTietDAO {
         values.put("giaTien", hoaDonChiTiet.getGiaTien());
         values.put("ghiChu", hoaDonChiTiet.getGhiChu());
         values.put("ngayXuatHoaDon", spf.format(hoaDonChiTiet.getNgayXuatHoaDon()));
-        long check = sqLiteDatabase.update("HOADONCHITIET", values, "maHDCT", new String[]{String.valueOf(hoaDonChiTiet.getMaHDCT())});
+        long check = sqLiteDatabase.update("HOADONCHITIET", values, "maHDCT=?", new String[]{String.valueOf(hoaDonChiTiet.getMaHDCT())});
 
         return check > 0;
     }

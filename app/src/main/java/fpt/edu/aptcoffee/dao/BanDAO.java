@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.database.CoffeeDB;
 import fpt.edu.aptcoffee.model.Ban;
+import fpt.edu.aptcoffee.model.LoaiHang;
 
 public class BanDAO {
     CoffeeDB coffeeDB;
@@ -64,8 +65,14 @@ public class BanDAO {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("trangThai", ban.getTrangThai());
-        int check = sqLiteDatabase.update("BAN", values, "maBan=?", new String[]{String.valueOf(ban)});
-
+        int check = sqLiteDatabase.update("BAN", values, "maBan=?", new String[]{String.valueOf(ban.getMaBan())});
         return check > 0;
+    }
+
+    public Ban getByMaBan(String maBan) {
+        String sqlGetByMaLoai = "SELECT * FROM BAN WHERE maBan=?";
+        ArrayList<Ban> list = get(sqlGetByMaLoai, maBan);
+
+        return list.get(0);
     }
 }

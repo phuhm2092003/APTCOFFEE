@@ -70,7 +70,7 @@ public class HoaDonDAO {
     public boolean updateHoaDon(HoaDon hoaDon) {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("maBan", hoaDon.getMaHoaDon());
+        values.put("maBan", hoaDon.getMaBan());
         values.put("gioVao", XDate.toStringDateTime(hoaDon.getGioVao()));
         values.put("gioRa", XDate.toStringDateTime(hoaDon.getGioRa()));
         values.put("trangThai", hoaDon.getTrangThai());
@@ -92,9 +92,17 @@ public class HoaDonDAO {
 
         return list.get(0);
     }
+
+    public HoaDon getByMaHoaDonVaTrangThai(String maBan, int trangThai) {
+        String sql = "SELECT * FROM HOADON WHERE maBan=? AND trangThai=?";
+        ArrayList<HoaDon> list = get(sql, maBan, String.valueOf(trangThai));
+
+        return list.get(0);
+    }
+
     public ArrayList<HoaDon> getByTrangThai(int status) {
         String sql = "SELECT * FROM HOADON WHERE trangThai=?";
 
-        return  get(sql, String.valueOf(status));
+        return get(sql, String.valueOf(status));
     }
 }

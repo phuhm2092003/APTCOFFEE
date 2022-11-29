@@ -1,0 +1,170 @@
+package fpt.edu.aptcoffee.ui;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.adapter.HoaDonChiTietMainAdapter;
+import fpt.edu.aptcoffee.dao.BanDAO;
+import fpt.edu.aptcoffee.dao.HangHoaDAO;
+import fpt.edu.aptcoffee.dao.HoaDonChiTietDAO;
+import fpt.edu.aptcoffee.dao.HoaDonDAO;
+import fpt.edu.aptcoffee.interfaces.ItemTangGiamSoLuongOnClick;
+import fpt.edu.aptcoffee.model.Ban;
+import fpt.edu.aptcoffee.model.HangHoa;
+import fpt.edu.aptcoffee.model.HoaDon;
+import fpt.edu.aptcoffee.model.HoaDonChiTiet;
+import fpt.edu.aptcoffee.utils.MyToast;
+import fpt.edu.aptcoffee.utils.XDate;
+
+public class OderActivity extends AppCompatActivity {
+    public static final String MA_HOA_DON = "maHoaDon";
+    HoaDonChiTietDAO hoaDonChiTietDAO;
+    HangHoaDAO hangHoaDAO;
+    HoaDonDAO hoaDonDAO;
+    BanDAO banDAO;
+    TextView tvMaBan, tvGioVao, tvThemMon, tvTamTinh, tvHoaDonCuoi;
+    RecyclerView recyclerViewThucUong;
+    Button btnThanhToan;
+    Toolbar toolbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_oder);
+        initToolbar();
+        initview();
+
+        hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
+        hangHoaDAO = new HangHoaDAO(this);
+        hoaDonDAO = new HoaDonDAO(this);
+        banDAO = new BanDAO(this);
+
+        fillActivity();
+        loadData();
+        tvThemMon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openThemMonActivity();
+            }
+        });
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                thanhToanHoaDon();
+            }
+        });
+
+    }
+
+    private void initToolbar() {
+        toolbar = findViewById(R.id.toolbarOder);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void initview() {
+        tvMaBan = findViewById(R.id.tvMaBan);
+        tvGioVao = findViewById(R.id.tvGioVao);
+        recyclerViewThucUong = findViewById(R.id.recyclerViewThucUong);
+        tvThemMon = findViewById(R.id.tvThemMon);
+        btnThanhToan = findViewById(R.id.btnThanhToan);
+        tvTamTinh = findViewById(R.id.tvTamTinh);
+        tvHoaDonCuoi = findViewById(R.id.tvHoaDonCuoi);
+    }
+
+    private void openThemMonActivity() {
+        // Mở màng hình thêm món
+        HoaDon hoaDon = getHoaDon();
+        Intent intent = new Intent(OderActivity.this, ThemMonActivity.class);
+        intent.putExtra(MA_HOA_DON, String.valueOf(hoaDon.getMaHoaDon()));
+        startActivity(intent);
+    }
+
+    private void thanhToanHoaDon() {
+        // Thanh toán hoá đơn
+        HoaDon hoaDon = getHoaDon();
+        hoaDon.setTrangThai(HoaDon.DA_THANH_TOAN); // cập nhật lại trạng thái đã thanh toán
+        Calendar calendar = Calendar.getInstance();
+        hoaDon.setGioRa(calendar.getTime());// cập nhật lại giờ ra
+
+
+        Intent intent = getIntent();
+        String maBan = intent.getStringExtra(QuanLyBanActivity.MA_BAN);
+        Ban ban = banDAO.getByMaBan(maBan);
+        ban.setTrangThai(Ban.CON_TRONG); // cập nhật lại trạng thái còn trống
+
+        if (banDAO.updateBan(ban) && hoaDonDAO.updateHoaDon(hoaDon)) {
+            MyToast.successful(OderActivity.this, "Thanh Toán thành công");
+        }
+        onBackPressed();
+    }
+
+    private void loadData() {
+        HoaDon hoaDon = getHoaDon();
+        ArrayList<HoaDonChiTiet> listHDCT = hoaDonChiTietDAO.getByMaHoaDon(String.valueOf(hoaDon.getMaHoaDon())); // lấy All hoá đơn chi tiết theo mã hoá đơn
+        ArrayList<HangHoa> list = new ArrayList<>();
+        for (int i = 0; i < listHDCT.size(); i++) {
+            list.add(hangHoaDAO.getByMaHangHoa(String.valueOf(listHDCT.get(i).getMaHangHoa())));
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewThucUong.setLayoutManager(linearLayoutManager);
+        HoaDonChiTietMainAdapter adapter = new HoaDonChiTietMainAdapter(this, list, listHDCT, new ItemTangGiamSoLuongOnClick() {
+            @Override
+            public void itemOclick(View view, int indext, HoaDonChiTiet hoaDonChiTiet, HangHoa hangHoa) {
+                hoaDonChiTiet.setSoLuong(indext);
+                hoaDonChiTiet.setGiaTien(indext * hangHoa.getGiaTien());
+                hoaDonChiTietDAO.updateHoaDonChiTiet(hoaDonChiTiet);
+                fillActivity();
+            }
+        });
+        recyclerViewThucUong.setAdapter(adapter);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void fillActivity() {
+        HoaDon hoaDon = getHoaDon();
+        tvMaBan.setText("Bàn BO" + hoaDon.getMaBan());
+        tvGioVao.setText(XDate.toStringDateTime(hoaDon.getGioVao()));
+        tvTamTinh.setText(hoaDonChiTietDAO.getGiaTien(hoaDon.getMaHoaDon()) + "VND");
+        tvHoaDonCuoi.setText(hoaDonChiTietDAO.getGiaTien(hoaDon.getMaHoaDon()) + "VND");
+    }
+
+    private HoaDon getHoaDon() {
+        Intent intent = getIntent();
+        String maBan = intent.getStringExtra(QuanLyBanActivity.MA_BAN);
+        return hoaDonDAO.getByMaHoaDonVaTrangThai(maBan, HoaDon.CHUA_THANH_TOAN);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+        fillActivity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
+    }
+}

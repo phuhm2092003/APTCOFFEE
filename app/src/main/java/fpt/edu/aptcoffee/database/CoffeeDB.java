@@ -78,7 +78,6 @@ public class CoffeeDB extends SQLiteOpenHelper {
         for (int i = 0; i < 12 ; i++){
             sqLiteDatabase.execSQL(insertBan, new Object[]{0});
         }
-        sqLiteDatabase.execSQL(insertBan, new Object[]{1});
         String insertNguoiDung = "INSERT INTO NGUOIDUNG(maNguoiDung, hoVaTen, hinhAnh, ngaySinh, email, chucVu, gioiTinh, matKhau) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ADMIN", "ADMIN", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "admin@gmail.com", "Admin", "Nam", 1212});
         sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND1", "Nguyễn Viết Tín", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "tinthq@gmail.com", "NhanVien", "Nam", 1212});
