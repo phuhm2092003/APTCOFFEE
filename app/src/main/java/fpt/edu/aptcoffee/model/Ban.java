@@ -5,6 +5,9 @@ import androidx.annotation.NonNull;
 public class Ban {
     private int maBan;
     private int trangThai;
+    public static final int CO_KHACH = 1;
+    public static final int CON_TRONG = 0;
+
 
     public Ban() {
     }
