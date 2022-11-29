@@ -99,6 +99,11 @@ public class HoaDonChiTietDAO {
 
         return list.get(0);
     }
+    public ArrayList<HoaDonChiTiet> getByMaHoaDon(String maHoaDon) {
+        String sql = "SELECT * FROM HOADONCHITIET WHERE maHoaDon=?";
+
+        return get(sql, maHoaDon);
+    }
 
     @SuppressLint("Range")
     public int getDoanhThuNgay(String date) {
