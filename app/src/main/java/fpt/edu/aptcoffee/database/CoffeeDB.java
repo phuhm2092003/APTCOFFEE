@@ -117,9 +117,9 @@ public class CoffeeDB extends SQLiteOpenHelper {
 
         String insertHoaDonChiTiet = "INSERT INTO HOADONCHITIET(maHoaDon, maHangHoa, soLuong , giaTien, ghiChu, ngayXuatHoaDon) VALUES(?, ?, ?, ?, ?, ?)";
         sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-11-28"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-11-29"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-12-15"});
-        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 1, 2, 27000, "", "2022-01-01"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 2, 2, 27000, "", "2022-11-29"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 5, 2, 27000, "", "2022-12-15"});
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{1, 6, 2, 27000, "", "2022-01-01"});
 
         sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 2, 27000, "", "2022-03-28"});
         sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{2, 1, 2, 27000, "", "2022-03-29"});

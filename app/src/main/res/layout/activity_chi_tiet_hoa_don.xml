@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.ChiTietHoaDonActivity"
-    android:background="@color/WhitePrimary">
+    android:background="@color/GrayPrimary">
 
     <ScrollView
         android:id="@+id/scrollView9"
@@ -172,7 +172,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/recyclerViewThucUong"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"

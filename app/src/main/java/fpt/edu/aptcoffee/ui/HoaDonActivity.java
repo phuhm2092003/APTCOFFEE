@@ -41,7 +41,7 @@ public class HoaDonActivity extends AppCompatActivity {
             @Override
             public void itemOclick(View view, HoaDon hoaDon) {
                 Intent intent = new Intent(HoaDonActivity.this, ChiTietHoaDonActivity.class);
-                intent.putExtra(MA_HOA_DON, hoaDon.getMaHoaDon());
+                intent.putExtra(MA_HOA_DON, String.valueOf(hoaDon.getMaHoaDon()));
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
             }
