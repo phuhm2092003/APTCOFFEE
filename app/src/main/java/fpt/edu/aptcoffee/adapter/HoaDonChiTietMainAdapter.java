@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import fpt.edu.aptcoffee.dao.HoaDonChiTietDAO;
 import fpt.edu.aptcoffee.interfaces.ItemTangGiamSoLuongOnClick;
 import fpt.edu.aptcoffee.model.HangHoa;
 import fpt.edu.aptcoffee.model.HoaDonChiTiet;
+import fpt.edu.aptcoffee.utils.MyToast;
 
 public class HoaDonChiTietMainAdapter extends RecyclerView.Adapter<HoaDonChiTietMainAdapter.HoaDonChiTietMainViewHolder>{
     Context context;
@@ -85,6 +87,14 @@ public class HoaDonChiTietMainAdapter extends RecyclerView.Adapter<HoaDonChiTiet
             holder.tvSoluong.setText(String.valueOf(hoaDonChiTiet.getSoLuong()));
             holder.tvGiaTien.setText(hangHoa.getGiaTien() * hoaDonChiTiet.getSoLuong()+"VND");
         }
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                itemTangGiamSoLuongOnClick.itemOclickDeleteHDCT(view, hoaDonChiTiet);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -96,6 +106,7 @@ public class HoaDonChiTietMainAdapter extends RecyclerView.Adapter<HoaDonChiTiet
     }
 
     public static class HoaDonChiTietMainViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         ImageView ivHinhAnh, ivGiam, ivTang;
         TextView tvTenHangHoa, tvSoluong, tvGiaTien, tvGiaTienBanDau;
         public HoaDonChiTietMainViewHolder(@NonNull View itemView) {
@@ -107,6 +118,7 @@ public class HoaDonChiTietMainAdapter extends RecyclerView.Adapter<HoaDonChiTiet
             tvGiaTienBanDau = itemView.findViewById(R.id.tvGiaTienBanDau);
             ivGiam = itemView.findViewById(R.id.ivGiamSoLuong);
             ivTang = itemView.findViewById(R.id.ivTangSoLuong);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

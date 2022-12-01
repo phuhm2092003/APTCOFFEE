@@ -47,7 +47,7 @@ public class ThemMonActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerViewThucUongOder.setLayoutManager(linearLayoutManager);
 
-        ThucUongOderThemAdapter thucUongAdapter = new ThucUongOderThemAdapter(hangHoaDAO.getAll(), new ItemOderOnClick() {
+        ThucUongOderThemAdapter thucUongAdapter = new ThucUongOderThemAdapter(hangHoaDAO.getByTrangThai(String.valueOf(HangHoa.STATUS_STILL)), new ItemOderOnClick() {
             @Override
             public void itemOclick(View view, HangHoa hangHoa) {
                 Intent intent = getIntent();
@@ -60,7 +60,7 @@ public class ThemMonActivity extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 hoaDonChiTiet.setNgayXuatHoaDon(calendar.getTime());
                 if(hoaDonChiTietDAO.insertHoaDonChiTiet(hoaDonChiTiet)){
-                    MyToast.successful(ThemMonActivity.this, "Thêm thành công");
+                    MyToast.successful(ThemMonActivity.this, "Thêm thành công "+hangHoa.getTenHangHoa());
                 }
             }
         });

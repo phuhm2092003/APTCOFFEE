@@ -92,4 +92,9 @@ public class HangHoaDAO {
 
         return get(sqlGetByMaHangHoa, maLoaiHang);
     }
+    public ArrayList<HangHoa> getByTrangThai(String trangThai) {
+        String sqlGetByMaHangHoa = "SELECT * FROM HANGHOA WHERE trangThai=?";
+
+        return get(sqlGetByMaHangHoa, trangThai);
+    }
 }

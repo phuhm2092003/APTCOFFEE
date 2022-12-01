@@ -1,11 +1,13 @@
 package fpt.edu.aptcoffee.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -135,6 +137,33 @@ public class OderActivity extends AppCompatActivity {
                 hoaDonChiTiet.setGiaTien(indext * hangHoa.getGiaTien());
                 hoaDonChiTietDAO.updateHoaDonChiTiet(hoaDonChiTiet);
                 fillActivity();
+            }
+
+            @Override
+            public void itemOclickDeleteHDCT(View view, HoaDonChiTiet hoaDonChiTiet) {
+                // Xoá oder
+                AlertDialog.Builder builder = new AlertDialog.Builder(OderActivity.this, R.style.AlertDialogTheme);
+                builder.setMessage("Xoá oder ?");
+                builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(hoaDonChiTietDAO.deleteHoaDonChiTiet(String.valueOf(hoaDonChiTiet.getMaHDCT()))){
+                            MyToast.successful(OderActivity.this, "Xoá oder thành công");
+                            loadData();
+                            fillActivity();
+                        }else {
+                            MyToast.error(OderActivity.this, "Xoá không thành công");
+                        }
+                    }
+                });
+                builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
         recyclerViewThucUong.setAdapter(adapter);

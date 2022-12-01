@@ -111,7 +111,7 @@ public class QuanLyBanActivity extends AppCompatActivity {
                 if (banDAO.updateBan(ban)) {
                     loadData();
                     // tạo ra hoá đơn
-                    Calendar c = Calendar.getInstance();
+                    Calendar c = Calendar.getInstance(); // lấy ngày thánh năm và giờ hiện tại
                     HoaDon hoaDon = new HoaDon();
                     hoaDon.setMaBan(ban.getMaBan());
                     hoaDon.setGioVao(c.getTime());
