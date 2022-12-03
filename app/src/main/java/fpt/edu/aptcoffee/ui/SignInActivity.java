@@ -17,6 +17,7 @@ import java.util.Objects;
 import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
+import fpt.edu.aptcoffee.notification.MyNotification;
 import fpt.edu.aptcoffee.utils.MyToast;
 
 public class SignInActivity extends AppCompatActivity {
@@ -116,6 +117,7 @@ public class SignInActivity extends AppCompatActivity {
             switch (signInStatus) {
                 case SIGN_IN_SUCCESSFUL:
                     MyToast.successful(SignInActivity.this, "Đăng nhập thành công");
+                    MyNotification.getNotification(SignInActivity.this, "Đăng nhập hệ thống thành công");
                     break;
                 case SIGN_IN_FAILE:
                     MyToast.error(SignInActivity.this, "Đăng nhập thất bại");

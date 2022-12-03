@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.adapter.PhotoAdapter;
+import fpt.edu.aptcoffee.adapter.ThucUongHomeFragmentAdapter;
+import fpt.edu.aptcoffee.dao.HangHoaDAO;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
 import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.model.Photo;
@@ -43,6 +47,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     CardView cvBan, cvLoai, cvThucUong, cvNhanVien, cvHoaDon, cvDoanhThu;
     MainActivity mainActivity;
     NguoiDungDAO nguoiDungDAO;
+    HangHoaDAO hangHoaDAO;
+    RecyclerView recyclerViewThucUong;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +60,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
-
+        hangHoaDAO = new HangHoaDAO(getContext());
         getInfoNguoiDung();
+        loadListThucUong();
         return view;
+    }
+
+    private void loadListThucUong() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        recyclerViewThucUong.setLayoutManager(linearLayoutManager);
+        ThucUongHomeFragmentAdapter adapter = new ThucUongHomeFragmentAdapter(hangHoaDAO.getAll());
+        recyclerViewThucUong.setAdapter(adapter);
     }
 
     private void iniView(View view) {
@@ -70,6 +84,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         cvDoanhThu = view.findViewById(R.id.cardDoanhThu);
         tvHi = view.findViewById(R.id.tvHi);
         civHinhAnh = view.findViewById(R.id.hinhAnh);
+        recyclerViewThucUong = view.findViewById(R.id.recyclerViewThucUong);
     }
 
     private void initOnClickCard() {
@@ -163,5 +178,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         // Cập nhật lại thông tin người dùng
         getInfoNguoiDung();
+        loadListThucUong();
     }
 }

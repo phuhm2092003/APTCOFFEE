@@ -29,6 +29,7 @@ import fpt.edu.aptcoffee.model.Ban;
 import fpt.edu.aptcoffee.model.HangHoa;
 import fpt.edu.aptcoffee.model.HoaDon;
 import fpt.edu.aptcoffee.model.HoaDonChiTiet;
+import fpt.edu.aptcoffee.notification.MyNotification;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 
@@ -116,6 +117,7 @@ public class OderActivity extends AppCompatActivity {
 
         if (banDAO.updateBan(ban) && hoaDonDAO.updateHoaDon(hoaDon)) {
             MyToast.successful(OderActivity.this, "Thanh Toán thành công");
+            MyNotification.getNotification(OderActivity.this, "Thanh toán thành công hoá đơn HD0775098507"+hoaDon.getMaHoaDon());
         }
         onBackPressed();
     }

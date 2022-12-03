@@ -31,6 +31,7 @@ import fpt.edu.aptcoffee.dao.HoaDonDAO;
 import fpt.edu.aptcoffee.interfaces.ItemBanOnClick;
 import fpt.edu.aptcoffee.model.Ban;
 import fpt.edu.aptcoffee.model.HoaDon;
+import fpt.edu.aptcoffee.notification.MyNotification;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 import pl.droidsonroids.gif.GifImageView;
@@ -87,7 +88,7 @@ public class QuanLyBanActivity extends AppCompatActivity {
         recyclerViewBan.setAdapter(banAdapter);
     }
 
-    private void createNewHoaDon(Ban ban) {
+    private void    createNewHoaDon(Ban ban) {
         // tạo hoá đơn mới
         View viewDialog = LayoutInflater.from(QuanLyBanActivity.this).inflate(R.layout.layout_dialog_oder, null);
         Button btnOder = viewDialog.findViewById(R.id.btnOder);
