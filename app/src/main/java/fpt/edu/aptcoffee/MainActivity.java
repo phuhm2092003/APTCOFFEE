@@ -37,18 +37,34 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_home:
                         // Open fragment Home
                         vp2Main.setCurrentItem(0, false);
+                        bnvMain.getMenu().findItem(R.id.menu_home).setIcon(R.drawable.ic_home_fill_24);
+                        bnvMain.getMenu().findItem(R.id.menu_setting).setIcon(R.drawable.ic_settings_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_notification).setIcon(R.drawable.ic_notification_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_search).setIcon(R.drawable.ic_search_24);
                         break;
                     case R.id.menu_search:
                         // Open fragment Search
                         vp2Main.setCurrentItem(1, false);
+                        bnvMain.getMenu().findItem(R.id.menu_home).setIcon(R.drawable.ic_home_5_line);
+                        bnvMain.getMenu().findItem(R.id.menu_setting).setIcon(R.drawable.ic_settings_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_notification).setIcon(R.drawable.ic_notification_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_search).setIcon(R.drawable.ic_search_24);
                         break;
                     case R.id.menu_notification:
                         // Open fragment Messenger
                         vp2Main.setCurrentItem(2, false);
+                        bnvMain.getMenu().findItem(R.id.menu_home).setIcon(R.drawable.ic_home_5_line);
+                        bnvMain.getMenu().findItem(R.id.menu_setting).setIcon(R.drawable.ic_settings_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_notification).setIcon(R.drawable.ic_notification);
+                        bnvMain.getMenu().findItem(R.id.menu_search).setIcon(R.drawable.ic_search_24);
                         break;
                     case R.id.menu_setting:
                         // Open fragment Setting
                         vp2Main.setCurrentItem(3, false);
+                        bnvMain.getMenu().findItem(R.id.menu_home).setIcon(R.drawable.ic_home_5_line);
+                        bnvMain.getMenu().findItem(R.id.menu_setting).setIcon(R.drawable.ic_setting_fill_24);
+                        bnvMain.getMenu().findItem(R.id.menu_notification).setIcon(R.drawable.ic_notification_3_line);
+                        bnvMain.getMenu().findItem(R.id.menu_search).setIcon(R.drawable.ic_search_24);
                         break;
                 }
                 return true;
