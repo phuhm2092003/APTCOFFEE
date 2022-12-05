@@ -14,13 +14,16 @@ import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
+import fpt.edu.aptcoffee.dao.ThongBaoDAO;
 import fpt.edu.aptcoffee.fragment.SettingFragment;
 import fpt.edu.aptcoffee.model.NguoiDung;
+import fpt.edu.aptcoffee.model.ThongBao;
 import fpt.edu.aptcoffee.utils.MyToast;
 
 public class DoiMatKhauActivity extends AppCompatActivity {
@@ -104,6 +107,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
                 if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
                     // Cập nhật mật khẩu
                     MyToast.successful(DoiMatKhauActivity.this, "Đổi mật khẩu thành công");
+                    ThemThongBaoMoi();
                     clearText();
                     // Khai báo buider
                     AlertDialog.Builder builder = new AlertDialog.Builder(DoiMatKhauActivity.this, R.style.AlertDialogTheme);
@@ -134,6 +138,17 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         } else {
             MyToast.error(DoiMatKhauActivity.this, "Vui lòng điền đầy đủ thông tin");
         }
+    }
+
+    private void ThemThongBaoMoi() {
+        // Tạo thông báo cập nhật mật khẩu
+        ThongBao thongBao = new ThongBao();
+        thongBao.setNoiDung("Cập nhật mật khẩu thành công");
+        thongBao.setTrangThai(ThongBao.STATUS_CHUA_XEM);
+        Calendar calendar = Calendar.getInstance();
+        thongBao.setNgayThongBao(calendar.getTime());
+        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(DoiMatKhauActivity.this);
+        thongBaoDAO.insertThongBao(thongBao);
     }
 
     @Override

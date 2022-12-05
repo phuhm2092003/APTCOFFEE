@@ -24,11 +24,13 @@ import fpt.edu.aptcoffee.dao.BanDAO;
 import fpt.edu.aptcoffee.dao.HangHoaDAO;
 import fpt.edu.aptcoffee.dao.HoaDonChiTietDAO;
 import fpt.edu.aptcoffee.dao.HoaDonDAO;
+import fpt.edu.aptcoffee.dao.ThongBaoDAO;
 import fpt.edu.aptcoffee.interfaces.ItemTangGiamSoLuongOnClick;
 import fpt.edu.aptcoffee.model.Ban;
 import fpt.edu.aptcoffee.model.HangHoa;
 import fpt.edu.aptcoffee.model.HoaDon;
 import fpt.edu.aptcoffee.model.HoaDonChiTiet;
+import fpt.edu.aptcoffee.model.ThongBao;
 import fpt.edu.aptcoffee.notification.MyNotification;
 import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
@@ -118,8 +120,19 @@ public class OderActivity extends AppCompatActivity {
         if (banDAO.updateBan(ban) && hoaDonDAO.updateHoaDon(hoaDon)) {
             MyToast.successful(OderActivity.this, "Thanh Toán thành công");
             MyNotification.getNotification(OderActivity.this, "Thanh toán thành công hoá đơn HD0775098507"+hoaDon.getMaHoaDon());
+            themThonBaoMoi(hoaDon, calendar);
         }
         onBackPressed();
+    }
+
+    private void themThonBaoMoi(HoaDon hoaDon, Calendar calendar) {
+        // Tạo thông báo thanh toán hoá đơn
+        ThongBao thongBao = new ThongBao();
+        thongBao.setNoiDung("Thanh toán thành công hoá đơn HD0775098507"+ hoaDon.getMaHoaDon());
+        thongBao.setTrangThai(ThongBao.STATUS_CHUA_XEM);
+        thongBao.setNgayThongBao(calendar.getTime());
+        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(OderActivity.this);
+        thongBaoDAO.insertThongBao(thongBao);
     }
 
     private void loadData() {

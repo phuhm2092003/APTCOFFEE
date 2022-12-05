@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.model.ThongBao;
 import fpt.edu.aptcoffee.utils.ImageToByte;
 import fpt.edu.aptcoffee.utils.XDate;
 
@@ -35,7 +36,7 @@ public class CoffeeDB extends SQLiteOpenHelper {
             "maHoaDon INTEGER PRIMARY KEY AUTOINCREMENT," +
             "maBan INTEGER REFERENCES BAN(maBan)," +
             "gioVao DATE NOT NULL," +
-            "gioRa DATE NOT NULL,"+
+            "gioRa DATE NOT NULL," +
             "trangThai INTEGER NOT NULL)";
 
     public static final String TABLE_HANGHOA = "CREATE TABLE HANGHOA(" +
@@ -53,6 +54,12 @@ public class CoffeeDB extends SQLiteOpenHelper {
             "soLuong INTEGER NOT NULL," +
             "giaTien INTEGER NOT NULL, ghiChu TEXT," +
             "ngayXuatHoaDon DATE NOT NULL)";
+
+    public static final String TABLE_THONGBAO = "CREATE TABLE THONGBAO(" +
+            "maThongBao INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "trangThai INTEGER NOT NULL," +
+            "noiDung TEXT NOT NULL," +
+            "ngayThongBao DATE NOT NULL)";
 
     public CoffeeDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -73,9 +80,11 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLE_HANGHOA);
         // TẠO TABLE HÓA ĐƠN CHI TIẾT
         sqLiteDatabase.execSQL(TABLE_HOADONCHITIET);
+        // TẠO TABLE HÓA ĐƠN THÔNG BÁO
+        sqLiteDatabase.execSQL(TABLE_THONGBAO);
 
         String insertBan = "INSERT INTO BAN(trangThai) VALUES(?)";
-        for (int i = 0; i < 12 ; i++){
+        for (int i = 0; i < 12; i++) {
             sqLiteDatabase.execSQL(insertBan, new Object[]{0});
         }
         String insertNguoiDung = "INSERT INTO NGUOIDUNG(maNguoiDung, hoVaTen, hinhAnh, ngaySinh, email, chucVu, gioiTinh, matKhau) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -85,12 +94,12 @@ public class CoffeeDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertNguoiDung, new Object[]{"ND3", "Hồ Minh Phú", ImageToByte.drawableToByte(context, R.drawable.avatar_user_md), "2003-01-01", "phuhm@gmail.com", "NhanVien", "Nam", 1212});
 
         String insertLoaiHang = "INSERT INTO LOAIHANG(hinhAnh, tenLoai) VALUES(?, ?)";
-        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_caphe), "Cà phê"});
-        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_nuocep), "Nước ép"});
-        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_soda), "Soda"});
-        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context,R.drawable.sample_data_loai_hang_trasua), "Trà sữa"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_caphe), "Cà phê"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_nuocep), "Nước ép"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_soda), "Soda"});
+        sqLiteDatabase.execSQL(insertLoaiHang, new Object[]{ImageToByte.drawableToByte(context, R.drawable.sample_data_loai_hang_trasua), "Trà sữa"});
 
-        String insertHangHoa ="INSERT INTO HANGHOA(tenHangHoa, hinhAnh, giaTien, maLoai, trangThai) VALUES(?, ?, ?, ?, ?)";
+        String insertHangHoa = "INSERT INTO HANGHOA(tenHangHoa, hinhAnh, giaTien, maLoai, trangThai) VALUES(?, ?, ?, ?, ?)";
         sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê máy", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfmay), 15000, 1, 1});
         sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê phin", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfphin), 12000, 1, 1});
         sqLiteDatabase.execSQL(insertHangHoa, new Object[]{"Cà phê sài gòn", ImageToByte.drawableToByte(context, R.drawable.sample_data_hanghoa_cfsaigon), 20000, 1, 1});
@@ -125,8 +134,7 @@ public class CoffeeDB extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 30000, "", "2022-02-28"});
         sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 30000, "", "2022-02-29"});
-
-
+        sqLiteDatabase.execSQL(insertHoaDonChiTiet, new Object[]{3, 1, 2, 30000, "", "2023-02-29"});
 
     }
 

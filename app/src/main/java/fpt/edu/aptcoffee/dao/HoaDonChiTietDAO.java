@@ -13,12 +13,10 @@ import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.database.CoffeeDB;
 import fpt.edu.aptcoffee.model.HoaDonChiTiet;
+import fpt.edu.aptcoffee.utils.XDate;
 
 public class HoaDonChiTietDAO {
     CoffeeDB coffeeDB;
-    @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat spf = new SimpleDateFormat("dd-MM-yyy");
-
     public HoaDonChiTietDAO(Context context) {
         this.coffeeDB = new CoffeeDB(context);
     }
@@ -39,7 +37,7 @@ public class HoaDonChiTietDAO {
                 hoaDonChiTiet.setGiaTien(cursor.getInt(cursor.getColumnIndex("giaTien")));
                 hoaDonChiTiet.setGhiChu(cursor.getString(cursor.getColumnIndex("ghiChu")));
                 try {
-                    hoaDonChiTiet.setNgayXuatHoaDon(spf.parse(cursor.getString(cursor.getColumnIndex("ngayXuatHoaDon"))));
+                    hoaDonChiTiet.setNgayXuatHoaDon(XDate.toDate(cursor.getString(cursor.getColumnIndex("ngayXuatHoaDon"))));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -66,7 +64,7 @@ public class HoaDonChiTietDAO {
         values.put("soLuong", hoaDonChiTiet.getSoLuong());
         values.put("giaTien", hoaDonChiTiet.getGiaTien());
         values.put("ghiChu", hoaDonChiTiet.getGhiChu());
-        values.put("ngayXuatHoaDon", spf.format(hoaDonChiTiet.getNgayXuatHoaDon()));
+        values.put("ngayXuatHoaDon", XDate.toStringDate(hoaDonChiTiet.getNgayXuatHoaDon()));
         long check = sqLiteDatabase.insert("HOADONCHITIET", null, values);
 
         return check != -1;
@@ -80,7 +78,7 @@ public class HoaDonChiTietDAO {
         values.put("soLuong", hoaDonChiTiet.getSoLuong());
         values.put("giaTien", hoaDonChiTiet.getGiaTien());
         values.put("ghiChu", hoaDonChiTiet.getGhiChu());
-        values.put("ngayXuatHoaDon", spf.format(hoaDonChiTiet.getNgayXuatHoaDon()));
+        values.put("ngayXuatHoaDon", XDate.toStringDate(hoaDonChiTiet.getNgayXuatHoaDon()));
         long check = sqLiteDatabase.update("HOADONCHITIET", values, "maHDCT=?", new String[]{String.valueOf(hoaDonChiTiet.getMaHDCT())});
 
         return check > 0;
