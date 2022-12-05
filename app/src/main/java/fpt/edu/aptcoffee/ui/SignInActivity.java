@@ -127,13 +127,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(myBroadcastReceiver, intentFilter); // Đăng ký Broastcast
+        registerReceiver(myBroadcastReceiver, intentFilter);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(myBroadcastReceiver); // Huỷ đăng ký Broastcast
+        unregisterReceiver(myBroadcastReceiver);
     }
 
     @Override
