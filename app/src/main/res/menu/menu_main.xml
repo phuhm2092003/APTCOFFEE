@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_home"
         android:title="Trang chủ"
-        android:icon="@drawable/ic_home_fill_24"
+        android:icon="@drawable/ic_home_5_line"
         tools:ignore="HardcodedText" />
     <item android:id="@+id/menu_search"
         android:title="Tìm kiếm"
