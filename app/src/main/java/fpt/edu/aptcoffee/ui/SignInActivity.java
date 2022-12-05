@@ -3,6 +3,7 @@ package fpt.edu.aptcoffee.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,20 +14,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.Objects;
+
 import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
 import fpt.edu.aptcoffee.notification.MyNotification;
 import fpt.edu.aptcoffee.utils.MyToast;
 
-public class SignInActivity extends AppCompatActivity {
-    public static final int SIGN_IN_SUCCESSFUL = 0;
-    public static final int SIGN_IN_FAILE = 1;
-    public static final int SIGN_IN_ERORR = -1;
-    public static final String SIGN_IN_STATUS = "SIGN_IN_STATUS";
-    public static final String ACTION_SIGN_IN = "ACTION_SIGN_IN";
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String SUCCESSFUL = "login successful";
+    public static final String FAILE = "login faile";
+    public static final String ERORR = "login error";
+    public static final String STATUS_LOGIN = "status login";
+    public static final String ACTION_LOGIN = "action login";
     public static final String KEY_USER = "maNguoiDung";
+
     TextInputLayout tilUserName, tilPassword;
     Button btnSignIn;
     TextView tvSignUp;
@@ -42,19 +46,8 @@ public class SignInActivity extends AppCompatActivity {
 
         nguoiDungDAO = new NguoiDungDAO(SignInActivity.this);
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInSystem();
-            }
-        });
-
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openSignUpActivity();
-            }
-        });
+        btnSignIn.setOnClickListener(this);
+        tvSignUp.setOnClickListener(this);
     }
 
     private void initView() {
@@ -66,7 +59,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private void initIntentFilter() {
         intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION_SIGN_IN);
+        intentFilter.addAction(ACTION_LOGIN);
     }
 
     @NonNull
@@ -74,27 +67,29 @@ public class SignInActivity extends AppCompatActivity {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
 
-    private void signInSystem() {
+    private void loginSystem() {
         String username = getText(tilUserName);
         String password = getText(tilPassword);
-        int signInStatus = SIGN_IN_ERORR;
+        String statusLogin = ERORR;
         if (!username.isEmpty() && !password.isEmpty()) {
             if (nguoiDungDAO.checkLogin(username, password)) {
-                signInStatus = SIGN_IN_SUCCESSFUL;
+                statusLogin = SUCCESSFUL;
                 openMainActivity(username);
             } else {
-                signInStatus = SIGN_IN_FAILE;
+                statusLogin = FAILE;
             }
         }
-        // Send BroadcastReceiver
-        sendMyBroadcast(signInStatus);
 
+        sendMyBroadcast(statusLogin);
     }
 
-    private void sendMyBroadcast(int signInStatus) {
+    // Gửi trạng thái đăng nhập đến myBroadcast
+    private void sendMyBroadcast(String statusLogin) {
         Intent intent = new Intent();
-        intent.setAction(ACTION_SIGN_IN);
-        intent.putExtra(SIGN_IN_STATUS, signInStatus);
+
+        intent.setAction(ACTION_LOGIN);
+        intent.putExtra(STATUS_LOGIN, statusLogin);
+
         sendBroadcast(intent);
     }
 
@@ -113,16 +108,16 @@ public class SignInActivity extends AppCompatActivity {
     private final BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int signInStatus = intent.getIntExtra(SIGN_IN_STATUS, SIGN_IN_ERORR);
-            switch (signInStatus) {
-                case SIGN_IN_SUCCESSFUL:
+            String statusLogin = intent.getStringExtra(STATUS_LOGIN);
+            switch (statusLogin) {
+                case SUCCESSFUL:
                     MyToast.successful(SignInActivity.this, "Đăng nhập thành công");
                     MyNotification.getNotification(SignInActivity.this, "Đăng nhập hệ thống thành công");
                     break;
-                case SIGN_IN_FAILE:
+                case FAILE:
                     MyToast.error(SignInActivity.this, "Đăng nhập thất bại");
                     break;
-                case SIGN_IN_ERORR:
+                case ERORR:
                     MyToast.error(SignInActivity.this, "Không để trống mật khẩu hoặc tên đăng nhập");
                     break;
             }
@@ -132,17 +127,30 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(myBroadcastReceiver, intentFilter);
+        registerReceiver(myBroadcastReceiver, intentFilter); // Đăng ký Broastcast
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(myBroadcastReceiver);
+        unregisterReceiver(myBroadcastReceiver); // Huỷ đăng ký Broastcast
     }
 
     @Override
     public void onBackPressed() {
 
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnSignIn:
+                loginSystem();
+                break;
+            case R.id.tvSignUp:
+                openSignUpActivity();
+                break;
+        }
     }
 }

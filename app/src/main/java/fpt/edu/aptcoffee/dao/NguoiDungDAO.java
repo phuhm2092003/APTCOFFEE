@@ -16,7 +16,6 @@ import fpt.edu.aptcoffee.model.NguoiDung;
 
 public class NguoiDungDAO {
     CoffeeDB coffeeDB;
-    XDate xDate;
 
     public NguoiDungDAO(Context context) {
         this.coffeeDB = new CoffeeDB(context);
