@@ -14,8 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 import fpt.edu.aptcoffee.adapter.ViewPagerMainAdapter;
 import fpt.edu.aptcoffee.dao.ThongBaoDAO;
+import fpt.edu.aptcoffee.model.ThongBao;
 import fpt.edu.aptcoffee.ui.SignInActivity;
 
 
@@ -23,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private String keyUser = "";
     ViewPager2 vp2Main;
     BottomNavigationView bnvMain;
-    View viewThongBao;
-
+    View iconNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,40 +59,45 @@ public class MainActivity extends AppCompatActivity {
                         vp2Main.setCurrentItem(3, false);
                         break;
                 }
-                checkSatusThongBao();
+                checkStatusNotification();
                 return true;
             }
         });
 
     }
 
-    private void showIconThongBao() {
-        BottomNavigationItemView itemView = bnvMain.findViewById(R.id.menu_notification);
-        viewThongBao = getLayoutInflater().inflate(R.layout.layout_ic_thongbao, bnvMain, false);
-        checkSatusThongBao();
-        itemView.addView(viewThongBao);
-    }
-
-    private void checkSatusThongBao(){
-        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(this);
-        if(thongBaoDAO.getByTrangThaiChuaXem().size() == 0){
-            viewThongBao.setVisibility(View.GONE); // Ẩn thông báo
-        }else {
-            viewThongBao.setVisibility(View.VISIBLE); // Hiện thông báo
-        }
-    }
-
     private void initView() {
         bnvMain = findViewById(R.id.bnvMain);
+        vp2Main = findViewById(R.id.viewPager2Main);
     }
 
     private void initViewPager2Main() {
         ViewPagerMainAdapter adapter = new ViewPagerMainAdapter(this);
-        vp2Main = findViewById(R.id.viewPager2Main);
+
         vp2Main.setUserInputEnabled(false);
         vp2Main.setOffscreenPageLimit(3);
         vp2Main.setAdapter(adapter);
     }
+
+    private void showIconThongBao() {
+        BottomNavigationItemView itemView = bnvMain.findViewById(R.id.menu_notification);
+        iconNotification = getLayoutInflater().inflate(R.layout.layout_ic_thongbao, bnvMain, false);
+        checkStatusNotification();
+
+        itemView.addView(iconNotification);
+    }
+
+    private void checkStatusNotification() {
+        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(this);
+        ArrayList<ThongBao> listNotification = thongBaoDAO.getByTrangThaiChuaXem();
+
+        if (listNotification.size() == 0) {
+            iconNotification.setVisibility(View.GONE); // Ẩn thông báo
+        } else {
+            iconNotification.setVisibility(View.VISIBLE); // Hiện thông báo
+        }
+    }
+
 
     private void setKeyUser() {
         Intent intent = this.getIntent();
@@ -111,6 +118,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkSatusThongBao();
+        checkStatusNotification();
     }
 }
