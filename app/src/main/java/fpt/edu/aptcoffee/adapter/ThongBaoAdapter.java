@@ -16,16 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fpt.edu.aptcoffee.R;
+import fpt.edu.aptcoffee.interfaces.ItemThongBaoOnClick;
 import fpt.edu.aptcoffee.model.ThongBao;
 import fpt.edu.aptcoffee.utils.XDate;
 
 public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ThongBaoViewHolder> {
     Context context;
     ArrayList<ThongBao> list;
+    ItemThongBaoOnClick itemThongBaoOnClick;
 
-    public ThongBaoAdapter(Context context, ArrayList<ThongBao> list) {
+    public ThongBaoAdapter(Context context, ArrayList<ThongBao> list, ItemThongBaoOnClick itemThongBaoOnClick) {
         this.context = context;
         this.list = list;
+        this.itemThongBaoOnClick = itemThongBaoOnClick;
     }
 
     @NonNull
@@ -51,6 +54,13 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ThongB
         }else {
             holder.ivHinhAnh.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_thong_bao_da_xem));
         }
+
+        holder.ivMenuMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemThongBaoOnClick.itemOclick(view, thongBao);
+            }
+        });
     }
 
     @Override
@@ -64,13 +74,14 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ThongB
     public static class ThongBaoViewHolder extends RecyclerView.ViewHolder {
         TextView tvNoiDung, tvNgayThongBao;
         RelativeLayout relativeLayout;
-        ImageView ivHinhAnh;
+        ImageView ivHinhAnh, ivMenuMore;
         public ThongBaoViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNoiDung = itemView.findViewById(R.id.tvNoiDung);
             tvNgayThongBao = itemView.findViewById(R.id.tvNgayThongBao);
             relativeLayout = itemView.findViewById(R.id.layoutThongBao);
             ivHinhAnh = itemView.findViewById(R.id.ivHinhAnh);
+            ivMenuMore = itemView.findViewById(R.id.ivMenuMore);
         }
     }
 }

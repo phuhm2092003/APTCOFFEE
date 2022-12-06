@@ -52,19 +52,13 @@ public class ThongBaoDAO {
 
         return get(sqlGetAll);
     }
+
     public ArrayList<ThongBao> getByTrangThaiChuaXem() {
         String sqlGetAll = "SELECT * FROM THONGBAO WHERE trangThai=?";
 
         return get(sqlGetAll, String.valueOf(ThongBao.STATUS_CHUA_XEM));
     }
 
-    public boolean updateThongBao(ThongBao thongBao) {
-        SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("trangThai", thongBao.getTrangThai());
-        int check = sqLiteDatabase.update("THONGBAO", values, "maThongBao=?", new String[]{String.valueOf(thongBao.getMaThongBao())});
-        return check > 0;
-    }
     public boolean insertThongBao(ThongBao thongBao) {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -75,6 +69,20 @@ public class ThongBaoDAO {
         return check != -1;
     }
 
+    public boolean updateThongBao(ThongBao thongBao) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("trangThai", thongBao.getTrangThai());
+        int check = sqLiteDatabase.update("THONGBAO", values, "maThongBao=?", new String[]{String.valueOf(thongBao.getMaThongBao())});
+        return check > 0;
+    }
+
+
+    public boolean deleteThongBao(String maThongBao) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
+        int check = sqLiteDatabase.delete("THONGBAO", "maThongBao=?", new String[]{maThongBao});
+        return check > 0;
+    }
 
 
 }
