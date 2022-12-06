@@ -49,6 +49,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     public static final int PICK_IMAGE = 1;
     public static final String MA_NGUOIDUNG = "MA_NGUOIDUNG";
+
     TextView tvDanhGia, tvLienHe, tvThietLapTaiKhoan, tvDoiMatKhuau, tvDangXuat, tvTenNguoiDung, tvChucVu, tvEmail;
     MainActivity mainActivity;
     NguoiDungDAO nguoiDungDAO;
@@ -60,39 +61,45 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         initView(view);
-        initOnClick();
 
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
 
-        getInfoNguoiDung();
+        getInfoUser();
 
-        ivDoiHinhAnh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                        PackageManager.PERMISSION_GRANTED) {
-                    // cấp quyền cho ứng dụng
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            1);
-                } else {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-                }
-            }
-        });
-        return view;
-    }
-
-    private void initOnClick() {
         tvDanhGia.setOnClickListener(this);
         tvLienHe.setOnClickListener(this);
         tvThietLapTaiKhoan.setOnClickListener(this);
         tvDoiMatKhuau.setOnClickListener(this);
         tvDangXuat.setOnClickListener(this);
+        ivDoiHinhAnh.setOnClickListener(this);
+
+        return view;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ivDoiHinhAnh:
+                requestPermissionPickImage();
+                break;
+            case R.id.tvDanhGia:
+                showRatingDialog();
+                break;
+            case R.id.tvLienHe:
+                openLienHeActivity();
+                break;
+            case R.id.tvThietLapTaiKhoan:
+                openTLTKActivity();
+                break;
+            case R.id.tvDoiMatKhau:
+                openDoiMatKhauAcitvity();
+                break;
+            case R.id.tvDangXuat:
+                logout();
+                break;
+        }
     }
 
     private void initView(View view) {
@@ -108,22 +115,37 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         ivDoiHinhAnh = view.findViewById(R.id.ivDoiHinhAnh);
     }
 
-    private void getInfoNguoiDung() {
+    private void getInfoUser() {
         NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
+        civHinhAnh.setImageBitmap(bitmap);
 
         tvTenNguoiDung.setText(nguoiDung.getHoVaTen());
         tvChucVu.setText(nguoiDung.getChucVu());
         tvEmail.setText(nguoiDung.getEmail());
-        civHinhAnh.setImageBitmap(bitmap);
+
     }
 
     private NguoiDung getNguoiDung() {
-        //Lấy objcet người dùng
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
         return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
+    }
+
+    private void requestPermissionPickImage() {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            // cấp quyền cho ứng dụng nếu chưa được cấp quyền
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        } else {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        }
     }
 
     private void openLienHeActivity() {
@@ -133,16 +155,14 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     private void openTLTKActivity() {
         Intent intent = new Intent(getContext(), ThietLapTaiKhoanActivity.class);
-        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        intent.putExtra(MA_NGUOIDUNG, maNguoiDung);
+        intent.putExtra(MA_NGUOIDUNG, getNguoiDung().getMaNguoiDung());
         startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
 
     private void openDoiMatKhauAcitvity() {
         Intent intent = new Intent(getContext(), DoiMatKhauActivity.class);
-        String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
-        intent.putExtra(MA_NGUOIDUNG, maNguoiDung);
+        intent.putExtra(MA_NGUOIDUNG, getNguoiDung().getMaNguoiDung());
         startActivity(intent);
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
     }
@@ -152,99 +172,70 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 
-    private void updateImage() {
-        // Cập nhật ảnh đại diện
+    private void updateAvatar() {
         NguoiDung nguoiDung = getNguoiDung();
         nguoiDung.setHinhAnh(ImageToByte.circleImageViewToByte(getContext(), civHinhAnh));
+
         if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
-            MyToast.successful(getContext(), "Lưu thành công");
-            getInfoNguoiDung();
+            MyToast.successful(getContext(), "Cập nhật ảnh đại diện thành công");
+            getInfoUser();
         } else {
             MyToast.error(getContext(), "Lỗi");
         }
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvDanhGia:
-                showDialogDanhGia();
-                break;
-            case R.id.tvLienHe:
-                openLienHeActivity();
-                break;
-            case R.id.tvThietLapTaiKhoan:
-                openTLTKActivity();
-                break;
-            case R.id.tvDoiMatKhau:
-                openDoiMatKhauAcitvity();
-                break;
-            case R.id.tvDangXuat:
-                logOutSytem();
-                break;
-        }
-    }
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme)
+                .setMessage("Bạn có muốn đăng xuất?")
+                .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        openSignInActivity();
+                    }
+                })
+                .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-    private void logOutSytem() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme);
-        builder.setMessage("Bạn có muốn đăng xuất?");
-        builder.setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                openSignInActivity();
-            }
-        });
-        builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
 
-            }
-        });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    private void showDialogDanhGia() {
-        // Tạo view mới từ package layout
-        View viewDialog = LayoutInflater.from(getContext()).inflate(R.layout.layout_danh_gia, null);
-        // Ánh xạ View từ viewDialog
-        RatingBar ratingBar = viewDialog.findViewById(R.id.rtbDanhGia);
-        Button btnDanhGia = viewDialog.findViewById(R.id.btnDanhGia);
-        TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        GifImageView gifImageView = viewDialog.findViewById(R.id.imgGif);
-        // Tạo mới dialog
+    private void showRatingDialog() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_danh_gia, null);
+        RatingBar ratingBar = view.findViewById(R.id.rtbDanhGia);
+        Button btnDanhGia = view.findViewById(R.id.btnDanhGia);
+        TextView tvBoQua = view.findViewById(R.id.tvBoQua);
+        GifImageView gif = view.findViewById(R.id.imgGif);
+
         Dialog dialog = new Dialog(getContext());
-        // Gán Backgound trong suốt cho dialog
+        dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
-        dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
+
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Sự kiện thay đổi số lượng sao đánh giá
+
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 if (ratingBar.getRating() <= 3) {
-                    // số lượng sao nhỏ hơn hoặc bằng 3
-                    gifImageView.setImageResource(R.drawable.git_sad);
+                    gif.setImageResource(R.drawable.git_sad);
                 } else {
-                    // số lượng sao lớn hơn 3
-                    gifImageView.setImageResource(R.drawable.gif_danh_gia);
+                    gif.setImageResource(R.drawable.gif_danh_gia);
                 }
             }
         });
-        // Sự kiện đánh giá
+
         btnDanhGia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,6 +243,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
             }
         });
+
         dialog.show();
     }
 
@@ -264,7 +256,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 InputStream stream = requireContext().getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 civHinhAnh.setImageBitmap(bitmap);
-                updateImage();
+                updateAvatar();
             } catch (Exception e) {
                 e.getMessage();
             }
@@ -274,6 +266,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        getInfoNguoiDung();
+        getInfoUser();
     }
 }
