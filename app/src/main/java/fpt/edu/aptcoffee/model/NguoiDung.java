@@ -107,6 +107,14 @@ public class NguoiDung {
         this.matKhau = matKhau;
     }
 
+    public boolean isAdmin(){
+        return this.chucVu.equals(POSITION_ADMIN);
+    }
+
+    public boolean isStaff(){
+        return this.chucVu.equals(POSITION_STAFF);
+    }
+
     @NonNull
     @Override
     public String toString() {

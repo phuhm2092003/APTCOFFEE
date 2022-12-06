@@ -61,7 +61,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
         hangHoaDAO = new HangHoaDAO(getContext());
-        getInfoNguoiDung();
+
+        getInfoUser();
         loadListThucUong();
         return view;
     }
@@ -116,7 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    private void getInfoNguoiDung() {
+    private void getInfoUser() {
         NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
@@ -148,25 +149,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardNhanVien:
-                NguoiDung nguoiDung = getNguoiDung();
-                if(nguoiDung.getChucVu().equals(NguoiDung.POSITION_ADMIN)){
+                if (getNguoiDung().isAdmin()) {
                     startActivity(new Intent(getContext(), NhanVienActivity.class));
                     (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
-                }else {
+                } else {
                     MyToast.error(getContext(), "Chức năng dành cho Admin");
                 }
-
                 break;
             case R.id.cardHoaDon:
                 startActivity(new Intent(getContext(), HoaDonActivity.class));
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardDoanhThu:
-                NguoiDung nguoiDung1 = getNguoiDung();
-                if(nguoiDung1.getChucVu().equals(NguoiDung.POSITION_ADMIN)){
+                if (getNguoiDung().isAdmin()) {
                     startActivity(new Intent(getContext(), DoanhThuActivity.class));
                     (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
-                }else {
+                } else {
                     MyToast.error(getContext(), "Chức năng dành cho Admin");
                 }
                 break;
@@ -177,7 +175,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         // Cập nhật lại thông tin người dùng
-        getInfoNguoiDung();
+        getInfoUser();
         loadListThucUong();
     }
 }
