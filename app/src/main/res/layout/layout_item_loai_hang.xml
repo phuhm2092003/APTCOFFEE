@@ -18,7 +18,7 @@
             android:layout_height="200dp"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"
-            android:src="@drawable/image_slide_show1"
+            android:src="@drawable/slide_image1"
             tools:ignore="ContentDescription" />
 
         <TextView

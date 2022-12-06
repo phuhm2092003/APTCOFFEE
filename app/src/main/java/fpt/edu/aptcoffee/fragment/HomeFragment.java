@@ -107,11 +107,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @NonNull
     private ArrayList<Photo> getListImage() {
         ArrayList<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.image_slide_show1));
-        list.add(new Photo(R.drawable.image_slide_show2));
-        list.add(new Photo(R.drawable.image_slide_show3));
-        list.add(new Photo(R.drawable.image_slide_show4));
-        list.add(new Photo(R.drawable.image_slide_show5));
+        list.add(new Photo(R.drawable.slide_image1));
+        list.add(new Photo(R.drawable.slide_image2));
+        list.add(new Photo(R.drawable.slide_image3));
+        list.add(new Photo(R.drawable.silde_image4));
+        list.add(new Photo(R.drawable.slide_image5));
 
         return list;
     }
