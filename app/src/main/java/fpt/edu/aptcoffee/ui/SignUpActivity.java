@@ -29,7 +29,6 @@ import fpt.edu.aptcoffee.utils.MyToast;
 import fpt.edu.aptcoffee.utils.XDate;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String MATCHES_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     ImageView ivBack;
     TextInputLayout tilMaNguoiDung, tilHoVaTen, tilNgaySinh, tilEmail, tilMatKhau;
     TextInputEditText tieNgaySinh;
@@ -43,7 +42,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         initView();
+
         nguoiDungDAO = new NguoiDungDAO(this);
+
         ivBack.setOnClickListener(this);
         tvSignIn.setOnClickListener(this);
         tieNgaySinh.setOnClickListener(this);
@@ -69,17 +70,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int date = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(SignUpActivity.this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
                 calendar.set(y, m, d);
-                Objects.requireNonNull(tilNgaySinh.getEditText()).setText(XDate.toStringDate(calendar.getTime()));
+                tieNgaySinh.setText(XDate.toStringDate(calendar.getTime()));
             }
         }, year, month, date);
         datePickerDialog.show();
     }
 
-    private void signUpAccount() {
+    private void registerAccount() {
         String maNguoiDung = getText(tilMaNguoiDung);
         String hoTen = getText(tilHoVaTen);
         String ngaySinhh = getText(tilNgaySinh);
@@ -89,56 +91,59 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (maNguoiDung.isEmpty() || hoTen.isEmpty() || ngaySinhh.isEmpty() || email.isEmpty() || matKhau.isEmpty()) {
             MyToast.error(SignUpActivity.this, "Vui lòng nhập đẩy đủ thông tin");
         } else {
-            try {
-                Date date = XDate.toDate(ngaySinhh);
-                if (!email.matches(MATCHES_EMAIL)) {
-                    MyToast.error(SignUpActivity.this, "Nhập email sai định dạng");
-                } else {
-                    registerAccount();
+            if(isNgaySinh(ngaySinhh) && isEmail(email)){
+                // Create object NguoiDung
+                NguoiDung nguoiDung = new NguoiDung();
+                nguoiDung.setMaNguoiDung(maNguoiDung);
+                nguoiDung.setHoVaTen(hoTen);
+                nguoiDung.setHinhAnh(ImageToByte.drawableToByte(SignUpActivity.this, R.drawable.avatar_user_md));
+                try {
+                    nguoiDung.setNgaySinh(XDate.toDate(ngaySinhh));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-                MyToast.error(SignUpActivity.this, "Nhập ngày sinh sai định dạng");
+                nguoiDung.setEmail(email);
+                nguoiDung.setChucVu(getPosition());
+                nguoiDung.setGioiTinh(getGender());
+                nguoiDung.setMatKhau(matKhau);
+                // Add NguoiDung
+                if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
+                    MyToast.successful(SignUpActivity.this, "Đăng ký thành công");
+                    clearText();
+                } else {
+                    MyToast.error(SignUpActivity.this, "Tên đăng nhập tồn tại");
+                }
             }
-
         }
     }
 
-    private void registerAccount() throws ParseException {
-        String maNguoiDung = getText(tilMaNguoiDung);
-        String hoVaTen = getText(tilHoVaTen);
-        String ngaySinh = getText(tilNgaySinh);
-        String email = getText(tilEmail);
-        String matKhau = getText(tilMatKhau);
-        // Tạo người dùng mới
-        NguoiDung nguoiDung = new NguoiDung();
-        nguoiDung.setMaNguoiDung(maNguoiDung);
-        nguoiDung.setHoVaTen(hoVaTen);
-        nguoiDung.setHinhAnh(ImageToByte.drawableToByte(SignUpActivity.this, R.drawable.avatar_user_md));
-        nguoiDung.setNgaySinh(XDate.toDate(ngaySinh));
-        nguoiDung.setEmail(email);
-        nguoiDung.setChucVu(getPostion());
-        nguoiDung.setGioiTinh(getGender());
-        nguoiDung.setMatKhau(matKhau);
+    private boolean isEmail(String email) {
+        if (!email.matches(NguoiDung.MATCHES_EMAIL)) {
+            MyToast.error(SignUpActivity.this, "Nhập email sai định dạng");
+            return false;
+        }
+        return true;
+    }
 
-        if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
-            MyToast.successful(SignUpActivity.this, "Đăng ký thành công");
-            clearText();
-        } else {
-            MyToast.error(SignUpActivity.this, "Tên đăng nhập tồn tại");
+    private boolean isNgaySinh(String ngaySinhh) {
+        try {
+            Date date = XDate.toDate(ngaySinhh);
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            MyToast.error(SignUpActivity.this, "Nhập ngày sinh sai định dạng");
+            return false;
         }
     }
 
     private String getGender() {
-        // Giới tính
         if (rdgGender.getCheckedRadioButtonId() == R.id.rdNam) {
             return NguoiDung.GENDER_MALE;
         }
         return NguoiDung.GENDER_FEMALE;
     }
 
-    private String getPostion() {
-        // Chức vụ
+    private String getPosition() {
         if (rdgPosition.getCheckedRadioButtonId() == R.id.rdAdmin) {
             return NguoiDung.POSITION_ADMIN;
         }
@@ -170,7 +175,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 showDateDialog();
                 break;
             case R.id.btnSignUp:
-                signUpAccount();
+                registerAccount();
                 break;
         }
     }

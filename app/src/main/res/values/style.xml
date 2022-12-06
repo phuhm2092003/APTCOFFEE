@@ -29,6 +29,7 @@
         <item name="stIconStart">@drawable/ic_checkbox_circle_line</item>
         <item name="stRadius">30dp</item>
     </style>
+
     <style name="errorToast">
         <item name="stTextColor">#fff</item>
         <item name="stFont">@font/inter_regular</item>
@@ -37,26 +38,31 @@
         <item name="stIconStart">@drawable/ic_error_warning_line</item>
         <item name="stRadius">30dp</item>
     </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/Gray1Primary</item>
         <item name="colorControlActivated">@color/YellowPrimary</item>
     </style>
-    <style name="fontToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <!-- Font style family toolbar   -->
+    <style name="fontToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="android:colorAccent">@color/Brow1Primary</item>
 
         <!-- No need to override 'datePickerStyle' -->
         <!-- <item name="android:datePickerStyle">@style/MyDatePickerStyle</item> -->
     </style>
+
     <style name="AlertDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/BluePrimary</item>
         <item name="fontFamily">@font/inter_regular</item>
         <item name="textAllCaps">false</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="TranslucentStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
