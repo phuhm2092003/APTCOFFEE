@@ -57,6 +57,7 @@ public class MeseegerFragment extends Fragment {
                 showPopupMenuDelete(view, thongBao);
             }
         });
+
         recyclerViewThongBao.setAdapter(adapterNofitication);
     }
 
@@ -83,7 +84,7 @@ public class MeseegerFragment extends Fragment {
                 .setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // Delete Thong Bao
+                        // Xoá thông báo
                         if (thongBaoDAO.deleteThongBao(String.valueOf(thongBao.getMaThongBao()))) {
                             MyToast.successful(getContext(), "Xoá thành công");
                             loadListNotification();

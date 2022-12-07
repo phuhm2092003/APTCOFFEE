@@ -56,12 +56,14 @@ public class SearchFragment extends Fragment {
         hangHoaDAO = new HangHoaDAO(getContext());
         hoaDonDAO = new HoaDonDAO(getContext());
         nguoiDungDAO = new NguoiDungDAO(getContext());
-        tvNone.setVisibility(View.VISIBLE);
+
         loadSpinnerFillter();
+        initLayouListSearch();
+
         spFill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                listSearch.setVisibility(View.GONE);
+                listSearch.setVisibility(View.GONE); // Ẩn
                 tvNone.setVisibility(View.VISIBLE);
             }
 
@@ -70,8 +72,6 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        listSearch.setLayoutManager(linearLayoutManager);
 
         ivFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,71 +87,13 @@ public class SearchFragment extends Fragment {
                             tvNone.setVisibility(View.VISIBLE);
                             break;
                         case "Hoá đơn":
-                            ArrayList<HoaDon> listHoaDon = new ArrayList<>();
-                            for (HoaDon hoaDon : hoaDonDAO.getByTrangThai(HoaDon.DA_THANH_TOAN)) {
-                                if (String.valueOf(hoaDon.getMaHoaDon()).contains(getTextSearch())) {
-                                    listHoaDon.add(hoaDon);
-                                }
-                            }
-
-                            HoaDonAdapter hoaDonAdapter = new HoaDonAdapter(getContext(), listHoaDon, new ItemHoaDonOnClick() {
-                                @Override
-                                public void itemOclick(View view, HoaDon hoaDon) {
-
-                                }
-                            });
-                            listSearch.setAdapter(hoaDonAdapter);
-                            if (listHoaDon.size() == 0) {
-                                listSearch.setVisibility(View.GONE);
-                                tvNone.setVisibility(View.VISIBLE);
-                            } else {
-                                listSearch.setVisibility(View.VISIBLE);
-                                tvNone.setVisibility(View.GONE);
-                            }
+                            searchHoaDon();
                             break;
                         case "Thức uống":
-                            ArrayList<HangHoa> listHangHoa = new ArrayList<>();
-                            for (HangHoa hangHoa : hangHoaDAO.getAll()) {
-                                if (String.valueOf(hangHoa.getTenHangHoa()).contains(getTextSearch())) {
-                                    listHangHoa.add(hangHoa);
-                                }
-                            }
-                            ThucUongAdapter thucUongAdapter = new ThucUongAdapter(listHangHoa, new ItemHangHoaOnClick() {
-                                @Override
-                                public void itemOclick(View view, HangHoa hangHoa) {
-
-                                }
-                            });
-                            if (listHangHoa.size() == 0) {
-                                listSearch.setVisibility(View.GONE);
-                                tvNone.setVisibility(View.VISIBLE);
-                            } else {
-                                listSearch.setVisibility(View.VISIBLE);
-                                tvNone.setVisibility(View.GONE);
-                            }
-                            listSearch.setAdapter(thucUongAdapter);
+                            searchHangHoa();
                             break;
                         default:
-                            ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
-                            for (NguoiDung nguoiDung : nguoiDungDAO.getAllPositionNhanVien()) {
-                                if (String.valueOf(nguoiDung.getHoVaTen()).contains(getTextSearch())) {
-                                    listNguoiDung.add(nguoiDung);
-                                }
-                            }
-                            NguoiDungAdapter nguoiDungAdapter = new NguoiDungAdapter(listNguoiDung, new ItemNguoiDungOnClick() {
-                                @Override
-                                public void itemOclick(View view, NguoiDung nguoiDung) {
-
-                                }
-                            });
-                            if (listNguoiDung.size() == 0) {
-                                listSearch.setVisibility(View.GONE);
-                                tvNone.setVisibility(View.VISIBLE);
-                            } else {
-                                listSearch.setVisibility(View.VISIBLE);
-                                tvNone.setVisibility(View.GONE);
-                            }
-                            listSearch.setAdapter(nguoiDungAdapter);
+                            searchNguoiDung();
                             break;
                     }
                 }
@@ -160,17 +102,23 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    @NonNull
-    private String getTextSearch() {
-        return edtSearch.getText().toString().trim();
-    }
-
     private void initView(View view) {
         edtSearch = view.findViewById(R.id.editSearch);
         spFill = view.findViewById(R.id.spFill);
         listSearch = view.findViewById(R.id.listSearch);
         ivFilter = view.findViewById(R.id.ivFilter);
         tvNone = view.findViewById(R.id.tvNone);
+        tvNone.setVisibility(View.VISIBLE);
+    }
+
+    private void initLayouListSearch() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        listSearch.setLayoutManager(linearLayoutManager);
+    }
+
+    @NonNull
+    private String getTextSearch() {
+        return edtSearch.getText().toString().trim();
     }
 
     private void loadSpinnerFillter() {
@@ -185,7 +133,78 @@ public class SearchFragment extends Fragment {
         list.add("Hoá đơn");
         list.add("Thức uống");
         list.add("Nhân viên");
+
         return list;
+    }
+
+    private void searchNguoiDung() {
+        ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
+        for (NguoiDung nguoiDung : nguoiDungDAO.getAllPositionNhanVien()) {
+            if (String.valueOf(nguoiDung.getHoVaTen()).contains(getTextSearch())) {
+                listNguoiDung.add(nguoiDung);
+            }
+        }
+        NguoiDungAdapter nguoiDungAdapter = new NguoiDungAdapter(listNguoiDung, new ItemNguoiDungOnClick() {
+            @Override
+            public void itemOclick(View view, NguoiDung nguoiDung) {
+
+            }
+        });
+        if (listNguoiDung.size() == 0) {
+            listSearch.setVisibility(View.GONE);
+            tvNone.setVisibility(View.VISIBLE);
+        } else {
+            listSearch.setVisibility(View.VISIBLE);
+            tvNone.setVisibility(View.GONE);
+        }
+        listSearch.setAdapter(nguoiDungAdapter);
+    }
+
+    private void searchHangHoa() {
+        ArrayList<HangHoa> listHangHoa = new ArrayList<>();
+        for (HangHoa hangHoa : hangHoaDAO.getAll()) {
+            if (String.valueOf(hangHoa.getTenHangHoa()).contains(getTextSearch())) {
+                listHangHoa.add(hangHoa);
+            }
+        }
+        ThucUongAdapter thucUongAdapter = new ThucUongAdapter(listHangHoa, new ItemHangHoaOnClick() {
+            @Override
+            public void itemOclick(View view, HangHoa hangHoa) {
+
+            }
+        });
+        if (listHangHoa.size() == 0) {
+            listSearch.setVisibility(View.GONE);
+            tvNone.setVisibility(View.VISIBLE);
+        } else {
+            listSearch.setVisibility(View.VISIBLE);
+            tvNone.setVisibility(View.GONE);
+        }
+        listSearch.setAdapter(thucUongAdapter);
+    }
+
+    private void searchHoaDon() {
+        ArrayList<HoaDon> listHoaDon = new ArrayList<>();
+        for (HoaDon hoaDon : hoaDonDAO.getByTrangThai(HoaDon.DA_THANH_TOAN)) {
+            if (String.valueOf(hoaDon.getMaHoaDon()).contains(getTextSearch())) {
+                listHoaDon.add(hoaDon);
+            }
+        }
+
+        HoaDonAdapter hoaDonAdapter = new HoaDonAdapter(getContext(), listHoaDon, new ItemHoaDonOnClick() {
+            @Override
+            public void itemOclick(View view, HoaDon hoaDon) {
+
+            }
+        });
+        listSearch.setAdapter(hoaDonAdapter);
+        if (listHoaDon.size() == 0) {
+            listSearch.setVisibility(View.GONE);
+            tvNone.setVisibility(View.VISIBLE);
+        } else {
+            listSearch.setVisibility(View.VISIBLE);
+            tvNone.setVisibility(View.GONE);
+        }
     }
 
     @Override
