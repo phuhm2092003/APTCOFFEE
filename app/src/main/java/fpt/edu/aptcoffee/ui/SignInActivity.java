@@ -21,6 +21,7 @@ import fpt.edu.aptcoffee.MainActivity;
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
 import fpt.edu.aptcoffee.notification.MyNotification;
+import fpt.edu.aptcoffee.utils.Loading;
 import fpt.edu.aptcoffee.utils.MyToast;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,7 +31,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     public static final String STATUS_LOGIN = "status login";
     public static final String ACTION_LOGIN = "action login";
     public static final String KEY_USER = "maNguoiDung";
-
+    Loading loading;
     TextInputLayout tilUserName, tilPassword;
     Button btnSignIn;
     TextView tvSignUp;
@@ -48,6 +49,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         btnSignIn.setOnClickListener(this);
         tvSignUp.setOnClickListener(this);
+
+        loading = new Loading(SignInActivity.this);
     }
 
     private void initView() {
@@ -68,6 +71,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void loginSystem() {
+        loading.startLoading();
         String username = getText(tilUserName);
         String password = getText(tilPassword);
         String statusLogin = ERORR;
