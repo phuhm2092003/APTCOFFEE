@@ -65,7 +65,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         mainActivity = ((MainActivity) getActivity());
         nguoiDungDAO = new NguoiDungDAO(getContext());
 
-        getInfoUser();
+        fillActivity();
 
         tvDanhGia.setOnClickListener(this);
         tvLienHe.setOnClickListener(this);
@@ -115,7 +115,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         ivDoiHinhAnh = view.findViewById(R.id.ivDoiHinhAnh);
     }
 
-    private void getInfoUser() {
+    private void fillActivity() {
         NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
@@ -172,13 +172,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         ((Activity) requireContext()).overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
 
-    private void updateAvatar() {
+    private void updateAvatarUser(){
         NguoiDung nguoiDung = getNguoiDung();
         nguoiDung.setHinhAnh(ImageToByte.circleImageViewToByte(getContext(), civHinhAnh));
 
         if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
             MyToast.successful(getContext(), "Cập nhật ảnh đại diện thành công");
-            getInfoUser();
+            fillActivity();
         } else {
             MyToast.error(getContext(), "Lỗi");
         }
@@ -204,6 +204,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         dialog.show();
     }
 
+    @SuppressLint("InflateParams")
     private void showRatingDialog() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_danh_gia, null);
         RatingBar ratingBar = view.findViewById(R.id.rtbDanhGia);
@@ -256,7 +257,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 InputStream stream = requireContext().getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 civHinhAnh.setImageBitmap(bitmap);
-                updateAvatar();
+                updateAvatarUser();
             } catch (Exception e) {
                 e.getMessage();
             }
@@ -266,6 +267,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        getInfoUser();
+        fillActivity();
     }
 }
