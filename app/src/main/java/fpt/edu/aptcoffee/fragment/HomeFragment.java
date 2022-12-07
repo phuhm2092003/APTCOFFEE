@@ -29,6 +29,7 @@ import fpt.edu.aptcoffee.adapter.PhotoAdapter;
 import fpt.edu.aptcoffee.adapter.ThucUongHomeFragmentAdapter;
 import fpt.edu.aptcoffee.dao.HangHoaDAO;
 import fpt.edu.aptcoffee.dao.NguoiDungDAO;
+import fpt.edu.aptcoffee.model.HangHoa;
 import fpt.edu.aptcoffee.model.NguoiDung;
 import fpt.edu.aptcoffee.model.Photo;
 import fpt.edu.aptcoffee.ui.DoanhThuActivity;
@@ -56,7 +57,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        iniView(view);
+        initView(view);
         initOnClickCard();
         loadSlideImage();
 
@@ -64,13 +65,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         nguoiDungDAO = new NguoiDungDAO(getContext());
         hangHoaDAO = new HangHoaDAO(getContext());
 
-        getInfoUser();
+        welcomeUser();
         loadListThucUong();
-        autoRunSildeShow();
+        autoRunSildeImage();
         return view;
     }
 
-    private void autoRunSildeShow() {
+    private void autoRunSildeImage() {
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -84,6 +85,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         };
         handler.postDelayed(runnable, 2000);
 
+        // Sự kiện Slide Image chuyển ảnh
         vpSlideImage.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -96,11 +98,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void loadListThucUong() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerViewThucUong.setLayoutManager(linearLayoutManager);
-        ThucUongHomeFragmentAdapter adapter = new ThucUongHomeFragmentAdapter(hangHoaDAO.getAll());
+
+        ArrayList<HangHoa> listHangHoa = hangHoaDAO.getAll();
+        ThucUongHomeFragmentAdapter adapter = new ThucUongHomeFragmentAdapter(listHangHoa);
         recyclerViewThucUong.setAdapter(adapter);
     }
 
-    private void iniView(View view) {
+    private void initView(View view) {
         vpSlideImage = view.findViewById(R.id.vpSlideImage);
         indicator3 = view.findViewById(R.id.circleIndicator3);
         cvBan = view.findViewById(R.id.cardBan);
@@ -125,6 +129,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void loadSlideImage() {
         PhotoAdapter adapter = new PhotoAdapter(getListImage());
+
         vpSlideImage.setAdapter(adapter);
         vpSlideImage.setOffscreenPageLimit(2);
         indicator3.setViewPager(vpSlideImage);
@@ -143,7 +148,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    private void getInfoUser() {
+    private void welcomeUser() {
         NguoiDung nguoiDung = getNguoiDung();
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
@@ -200,8 +205,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        // Cập nhật lại thông tin người dùng
-        getInfoUser();
+        welcomeUser();
         loadListThucUong();
     }
 }
