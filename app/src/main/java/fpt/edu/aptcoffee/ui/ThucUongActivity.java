@@ -151,7 +151,7 @@ public class ThucUongActivity extends AppCompatActivity {
                     loadData();
                     fillSpinner();
                 } else {
-                    MyToast.error(ThucUongActivity.this, "Xoá không thành công");
+                    MyToast.error(ThucUongActivity.this, "Xoá không thành công, Có hoá đơn tồn tại mã thức uống này");
                 }
 
             }

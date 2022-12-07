@@ -76,6 +76,12 @@ public class HangHoaDAO {
 
     public boolean deleteHangHoa(String maHangHoa) {
         SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
+
+        @SuppressLint("Recycle")
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM HOADONCHITIET WHERE maHangHoa=?", new String[]{maHangHoa});
+        if (cursor.getCount() != 0) {
+            return false;
+        }
         int check = sqLiteDatabase.delete("HangHoa", "maHangHoa=?", new String[]{maHangHoa});
 
         return check > 0;
@@ -87,11 +93,13 @@ public class HangHoaDAO {
 
         return list.get(0);
     }
+
     public ArrayList<HangHoa> getByMaLoai(String maLoaiHang) {
         String sqlGetByMaHangHoa = "SELECT * FROM HANGHOA WHERE maloai=?";
 
         return get(sqlGetByMaHangHoa, maLoaiHang);
     }
+
     public ArrayList<HangHoa> getByTrangThai(String trangThai) {
         String sqlGetByMaHangHoa = "SELECT * FROM HANGHOA WHERE trangThai=?";
 
