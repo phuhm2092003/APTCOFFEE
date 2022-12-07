@@ -23,7 +23,7 @@ import fpt.edu.aptcoffee.ui.SignInActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String keyUser = "";
+    private String keyUser = ""; // Mã người dùng
     ViewPager2 vp2Main;
     BottomNavigationView bnvMain;
     View iconNotification;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initViewPager2Main();
         setKeyUser();
-        showIconThongBao();
+        showIconNotification();
 
         bnvMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
@@ -79,22 +79,28 @@ public class MainActivity extends AppCompatActivity {
         vp2Main.setAdapter(adapter);
     }
 
-    private void showIconThongBao() {
+    @SuppressLint("InflateParams")
+    private void showIconNotification() {
+        // Show icon khi có thông báo có trạng thái chưa xem
         BottomNavigationItemView itemView = bnvMain.findViewById(R.id.menu_notification);
-        iconNotification = getLayoutInflater().inflate(R.layout.layout_ic_thongbao, bnvMain, false);
+        iconNotification = getLayoutInflater().inflate(R.layout.layout_ic_thongbao, null);
         checkStatusNotification();
 
+        // Thêm icon vào item Thông báo
         itemView.addView(iconNotification);
     }
 
     private void checkStatusNotification() {
         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(this);
+        // Lấy tất cả Thông Báo có trạng thái chưa xem
         ArrayList<ThongBao> listNotification = thongBaoDAO.getByTrangThaiChuaXem();
 
         if (listNotification.size() == 0) {
-            iconNotification.setVisibility(View.GONE); // Ẩn thông báo
+            // Ẩn thông báo
+            iconNotification.setVisibility(View.GONE);
         } else {
-            iconNotification.setVisibility(View.VISIBLE); // Hiện thông báo
+            // Hiện thông báo
+            iconNotification.setVisibility(View.VISIBLE);
         }
     }
 
