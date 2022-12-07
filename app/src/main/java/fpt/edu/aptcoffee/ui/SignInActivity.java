@@ -80,11 +80,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
 
-        sendMyBroadcast(statusLogin);
+        sendSatusLoginGiveMyBroadcast(statusLogin);
     }
 
-    // Gửi trạng thái đăng nhập đến myBroadcast
-    private void sendMyBroadcast(String statusLogin) {
+    private void sendSatusLoginGiveMyBroadcast(String statusLogin) {
         Intent intent = new Intent();
 
         intent.setAction(ACTION_LOGIN);

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     NguoiDungDAO nguoiDungDAO;
     HangHoaDAO hangHoaDAO;
     RecyclerView recyclerViewThucUong;
-
+    Handler handler;
+    Runnable runnable;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,7 +66,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         getInfoUser();
         loadListThucUong();
+        autoRunSildeShow();
         return view;
+    }
+
+    private void autoRunSildeShow() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(vpSlideImage.getCurrentItem() == getListImage().size() -1){
+                    vpSlideImage.setCurrentItem(0, false);
+                }else {
+                    vpSlideImage.setCurrentItem(vpSlideImage.getCurrentItem() + 1);
+                }
+            }
+        };
+        handler.postDelayed(runnable, 2000);
+
+        vpSlideImage.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                handler.removeCallbacks(runnable);
+                handler.postDelayed(runnable, 2000);            }
+        });
     }
 
     private void loadListThucUong() {
