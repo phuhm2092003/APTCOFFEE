@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void showDateDialog() {
         Calendar calendar = Calendar.getInstance();
+        // Lấy ngày, tháng, năm hiện tại
         int date = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
@@ -78,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 tieNgaySinh.setText(XDate.toStringDate(calendar.getTime()));
             }
         }, year, month, date);
+
         datePickerDialog.show();
     }
 
@@ -92,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             MyToast.error(SignUpActivity.this, "Vui lòng nhập đẩy đủ thông tin");
         } else {
             if(isNgaySinh(ngaySinhh) && isEmail(email)){
-                // Create object NguoiDung
+                // Tạo Người Dùng mới
                 NguoiDung nguoiDung = new NguoiDung();
                 nguoiDung.setMaNguoiDung(maNguoiDung);
                 nguoiDung.setHoVaTen(hoTen);
@@ -106,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 nguoiDung.setChucVu(getPosition());
                 nguoiDung.setGioiTinh(getGender());
                 nguoiDung.setMatKhau(matKhau);
-                // Add NguoiDung
+                // Thêm Người Dùng
                 if (nguoiDungDAO.insertNguoiDung(nguoiDung)) {
                     MyToast.successful(SignUpActivity.this, "Đăng ký thành công");
                     clearText();
@@ -118,6 +120,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean isEmail(String email) {
+        // Kiểm tra định dạng Email
         if (!email.matches(NguoiDung.MATCHES_EMAIL)) {
             MyToast.error(SignUpActivity.this, "Nhập email sai định dạng");
             return false;
@@ -126,6 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean isNgaySinh(String ngaySinhh) {
+        // Kiểm tra định dạng Ngày Sinh
         try {
             Date date = XDate.toDate(ngaySinhh);
             return true;
