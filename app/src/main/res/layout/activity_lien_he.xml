@@ -46,7 +46,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,20 +55,20 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#4CFFFFFF"
-                    android:padding="10dp">
+                    android:padding="16dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civHinhAnh"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/avatar_user_md" />
+                        android:src="@drawable/av_phu" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/civHinhAnh"
                         android:orientation="vertical"
                         android:padding="10dp">
@@ -77,29 +77,38 @@
                             android:id="@+id/tvTenNguoiDung"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
                             android:text="Hồ Minh Phú"
                             android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_mail_send_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
                             android:text="phuhm@gmail.com"
-                            android:textColor="@color/RedPrimary"
-                            android:textSize="16sp" />
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                         <TextView
                             android:id="@+id/tvSDT"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_phone_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
                             android:text="0775098507"
-                            android:textColor="#333"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                     </LinearLayout>
 
@@ -107,11 +116,13 @@
                         android:id="@+id/tvLienHePhu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/civHinhAnh"
+                        android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/inter_regular"
                         android:text="Liên hệ"
-                        android:textColor="#03A9F4"
-                        android:textSize="16sp" />
+                        android:textColor="@color/BluePrimary"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
 
@@ -125,7 +136,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -134,19 +145,20 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="16dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civHinhAnh1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/avatar_user_md" />
+                        android:src="@drawable/av_an" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/civHinhAnh1"
                         android:orientation="vertical"
                         android:padding="10dp">
@@ -155,29 +167,38 @@
                             android:id="@+id/tvTenNguoiDung1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
                             android:text="Trần Hồ Quốc An"
                             android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvEmail1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_mail_send_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
                             android:text="anthq@gmail.com"
-                            android:textColor="@color/RedPrimary"
-                            android:textSize="16sp" />
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                         <TextView
                             android:id="@+id/tvSDT1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_phone_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
                             android:text="0359115805"
-                            android:textColor="#333"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                     </LinearLayout>
 
@@ -185,11 +206,13 @@
                         android:id="@+id/tvLienHeAn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/civHinhAnh1"
                         android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/inter_regular"
                         android:text="Liên hệ"
-                        android:textColor="#03A9F4"
-                        android:textSize="16sp" />
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/BluePrimary"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
 
@@ -204,7 +227,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -214,19 +237,20 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="16dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civHinhAnh2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/avatar_user_md" />
+                        android:src="@drawable/av_tin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/civHinhAnh2"
                         android:orientation="vertical"
                         android:padding="10dp">
@@ -235,29 +259,38 @@
                             android:id="@+id/tvTenNguoiDung2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
                             android:text="Nguyễn Viết Tín"
                             android:textColor="@color/BlackPrimary"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvEmail2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_mail_send_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
                             android:text="tinnv@gmail.com"
-                            android:textColor="@color/RedPrimary"
-                            android:textSize="16sp" />
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                         <TextView
                             android:id="@+id/tvSDT2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="0364474090"
-                            android:textColor="#333"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_phone_line"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="092115823"
+                            android:textColor="@color/BlackPrimary"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
                     </LinearLayout>
 
@@ -265,11 +298,13 @@
                         android:id="@+id/tvLienHeTin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/civHinhAnh2"
                         android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/inter_regular"
                         android:text="Liên hệ"
-                        android:textColor="#03A9F4"
-                        android:textSize="16sp" />
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/BluePrimary"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
 

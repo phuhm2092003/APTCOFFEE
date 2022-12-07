@@ -53,7 +53,7 @@ public class LienHeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(LienHeActivity.this, tvLienHePhu);
+                PopupMenu popup = new PopupMenu(LienHeActivity.this, tvLienHe);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.menu_setting_lienhe, popup.getMenu());
