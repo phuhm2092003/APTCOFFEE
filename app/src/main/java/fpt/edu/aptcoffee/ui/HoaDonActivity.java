@@ -69,4 +69,10 @@ public class HoaDonActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_right);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
 }

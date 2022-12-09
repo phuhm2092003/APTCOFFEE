@@ -90,6 +90,12 @@ public class HoaDonChiTietDAO {
 
         return check > 0;
     }
+    public boolean deleteHoaDonChiTietByMaHoaDon(String maHoaDon) {
+        SQLiteDatabase sqLiteDatabase = coffeeDB.getWritableDatabase();
+        int check = sqLiteDatabase.delete("HOADONCHITIET", "maHoaDon=?", new String[]{maHoaDon});
+
+        return check > 0;
+    }
 
     public HoaDonChiTiet getByMaHDCT(String maHDCT) {
         String sql = "SELECT * FROM HOADONCHITIET WHERE maHDCT=?";

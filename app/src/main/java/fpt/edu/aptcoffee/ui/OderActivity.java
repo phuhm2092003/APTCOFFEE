@@ -7,10 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -104,25 +109,61 @@ public class OderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressLint("SetTextI18n")
     private void thanhToanHoaDon() {
-        // Thanh toán hoá đơn
-        HoaDon hoaDon = getHoaDon();
-        hoaDon.setTrangThai(HoaDon.DA_THANH_TOAN); // cập nhật lại trạng thái đã thanh toán
-        Calendar calendar = Calendar.getInstance();
-        hoaDon.setGioRa(calendar.getTime());// cập nhật lại giờ ra
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.layout_dialog_thanhtoan);
+
+        TextView tvMahoaDon = dialog.findViewById(R.id.tvMaHoaDon);
+        TextView tvMaBan = dialog.findViewById(R.id.tvMaBan);
+        TextView tvGioVaoTT = dialog.findViewById(R.id.tvGioVao);
+        TextView tvHoaDonCuoi = dialog.findViewById(R.id.tvHoaDonCUoi);
+        TextView tvTongTien = dialog.findViewById(R.id.tvTongTien);
+        TextView tvCancle= dialog.findViewById(R.id.tvCancle);
+        Button btnPay = dialog.findViewById(R.id.btnPay);
+
+        tvMahoaDon.setText("HD0775098507"+getHoaDon().getMaHoaDon());
+        tvMaBan.setText("B0"+getHoaDon().getMaBan());
+        tvGioVaoTT.setText(XDate.toStringDateTime(getHoaDon().getGioVao()));
+        tvTongTien.setText(hoaDonChiTietDAO.getGiaTien(getHoaDon().getMaHoaDon()) + "VND");
+        tvHoaDonCuoi.setText(hoaDonChiTietDAO.getGiaTien(getHoaDon().getMaHoaDon()) + "VND");
+
+        tvCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Thanh toán hoá đơn
+                HoaDon hoaDon = getHoaDon();
+                hoaDon.setTrangThai(HoaDon.DA_THANH_TOAN); // cập nhật lại trạng thái đã thanh toán
+                Calendar calendar = Calendar.getInstance();
+                hoaDon.setGioRa(calendar.getTime());// cập nhật lại giờ ra
 
 
-        Intent intent = getIntent();
-        String maBan = intent.getStringExtra(QuanLyBanActivity.MA_BAN);
-        Ban ban = banDAO.getByMaBan(maBan);
-        ban.setTrangThai(Ban.CON_TRONG); // cập nhật lại trạng thái còn trống
+                Intent intent = getIntent();
+                String maBan = intent.getStringExtra(QuanLyBanActivity.MA_BAN);
+                Ban ban = banDAO.getByMaBan(maBan);
+                ban.setTrangThai(Ban.CON_TRONG); // cập nhật lại trạng thái còn trống
 
-        if (banDAO.updateBan(ban) && hoaDonDAO.updateHoaDon(hoaDon)) {
-            MyToast.successful(OderActivity.this, "Thanh Toán thành công");
-            MyNotification.getNotification(OderActivity.this, "Thanh toán thành công hoá đơn HD0775098507"+hoaDon.getMaHoaDon());
-            themThonBaoMoi(hoaDon, calendar);
-        }
-        onBackPressed();
+                if (banDAO.updateBan(ban) && hoaDonDAO.updateHoaDon(hoaDon)) {
+                    MyToast.successful(OderActivity.this, "Thanh Toán thành công");
+                    MyNotification.getNotification(OderActivity.this, "Thanh toán thành công hoá đơn HD0775098507" + hoaDon.getMaHoaDon());
+                    themThonBaoMoi(hoaDon, calendar);
+                }
+                onBackPressed();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     private void themThonBaoMoi(HoaDon hoaDon, Calendar calendar) {

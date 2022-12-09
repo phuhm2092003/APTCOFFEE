@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -88,23 +89,22 @@ public class QuanLyBanActivity extends AppCompatActivity {
         recyclerViewBan.setAdapter(banAdapter);
     }
 
-    private void    createNewHoaDon(Ban ban) {
+    private void createNewHoaDon(Ban ban) {
         // tạo hoá đơn mới
         View viewDialog = LayoutInflater.from(QuanLyBanActivity.this).inflate(R.layout.layout_dialog_oder, null);
         Button btnOder = viewDialog.findViewById(R.id.btnOder);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
+
         Dialog dialog = new Dialog(QuanLyBanActivity.this);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(viewDialog);
-        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
-        int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setLayout(width, height);
+
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
+
         btnOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,6 +124,10 @@ public class QuanLyBanActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     @Override
