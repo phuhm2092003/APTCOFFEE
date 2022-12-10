@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import java.util.ArrayList;
+
 import fpt.edu.aptcoffee.R;
 import fpt.edu.aptcoffee.adapter.LoaiHangAdapter;
 import fpt.edu.aptcoffee.dao.LoaiHangDAO;
@@ -37,14 +39,8 @@ public class LoaiThucUongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loai_thuc_uong);
         initToolBar();
         initView();
-        loaiHangDAO = new LoaiHangDAO(this);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        loaiHangDAO = new LoaiHangDAO(this);
 
         loadData();
     }
@@ -56,13 +52,19 @@ public class LoaiThucUongActivity extends AppCompatActivity {
     private void initToolBar() {
         toolbar = findViewById(R.id.toolbar_loai);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void loadData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerViewLoai.setLayoutManager(linearLayoutManager);
-
-        LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(loaiHangDAO.getAll(), new ItemLoaiHangOnClick() {
+        ArrayList<LoaiHang> listLoaiHang = loaiHangDAO.getAll();
+        LoaiHangAdapter loaiHangAdapter = new LoaiHangAdapter(listLoaiHang, new ItemLoaiHangOnClick() {
             @Override
             public void itemOclick(View view, LoaiHang loaiHang) {
                 PopupMenu popup = new PopupMenu(LoaiThucUongActivity.this, view);
@@ -101,6 +103,7 @@ public class LoaiThucUongActivity extends AppCompatActivity {
         // Xoá loại hàng
         AlertDialog.Builder builder = new AlertDialog.Builder(LoaiThucUongActivity.this, R.style.AlertDialogTheme);
         builder.setMessage("Bạn có muốn xoá loại " + loaiHang.getTenLoai()+"?");
+
         builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -112,12 +115,14 @@ public class LoaiThucUongActivity extends AppCompatActivity {
                 }
             }
         });
+
         builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }

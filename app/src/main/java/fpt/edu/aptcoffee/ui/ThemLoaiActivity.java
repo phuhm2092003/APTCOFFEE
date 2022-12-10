@@ -30,10 +30,11 @@ import fpt.edu.aptcoffee.utils.MyToast;
 
 public class ThemLoaiActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int PICK_IMAGE = 1;
+    boolean pickImageSatus = false;
+
     ImageView ivBack, ivHinhAnh, ivPickImage;
     TextInputLayout tilTenLoai;
     Button btnAdd;
-    boolean pickImageSatus = false;
     LoaiHangDAO loaiHangDAO;
 
     @Override
@@ -41,7 +42,9 @@ public class ThemLoaiActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_loai);
         initView();
+
         loaiHangDAO = new LoaiHangDAO(this);
+
         ivBack.setOnClickListener(this);
         ivPickImage.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
@@ -70,6 +73,7 @@ public class ThemLoaiActivity extends AppCompatActivity implements View.OnClickL
                 loaiHang.setHinhAnh(ImageToByte.imageViewToByte(getApplicationContext(), ivHinhAnh));
                 if (loaiHangDAO.insertLoaiHang(loaiHang)) {
                     MyToast.successful(ThemLoaiActivity.this, "Thêm thành công");
+
                     tilTenLoai.getEditText().setText("");
                     ivHinhAnh.setImageResource(R.drawable.pick_image1);
                     pickImageSatus = false;
@@ -96,7 +100,6 @@ public class ThemLoaiActivity extends AppCompatActivity implements View.OnClickL
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
         }
     }
-
 
     @Override
     public void onBackPressed() {
