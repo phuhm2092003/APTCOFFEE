@@ -128,34 +128,24 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditTen() {
-        // Cập nhật tên người dùng
         NguoiDung nguoiDung = getObjectNguoiDung();
-        // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_ten_nd, null);
-        // Ánh xạ View từ viewDialog
         TextInputLayout tilNgaySinh = viewDialog.findViewById(R.id.til);
         Objects.requireNonNull(tilNgaySinh.getEditText()).setText(nguoiDung.getHoVaTen());
         Button btnUpdate = viewDialog.findViewById(R.id.btnUpdate);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        // Tạo mới dialog
         Dialog dialog = new Dialog(this);
-        // Gán Backgound trong suốt cho dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
         dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Cập nhật họ và tên
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,6 +153,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
                 if (hoVaTen.isEmpty()) {
                     MyToast.error(ThietLapTaiKhoanActivity.this, "Vui lòng không để trống");
                 } else {
+                    // Cập nhật lại họ và tên
                     nguoiDung.setHoVaTen(hoVaTen);
                     if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
                         MyToast.successful(ThietLapTaiKhoanActivity.this, "Cập nhật thành công");
@@ -176,34 +167,24 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditEmail() {
-        // Cập nhật Email
         NguoiDung nguoiDung = getObjectNguoiDung();
-        // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_email_nd, null);
-        // Ánh xạ View từ viewDialog
         TextInputLayout tilEmail = viewDialog.findViewById(R.id.til);
         Objects.requireNonNull(tilEmail.getEditText()).setText(nguoiDung.getEmail());
         Button btnUpdate = viewDialog.findViewById(R.id.btnUpdate);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        // Tạo mới dialog
         Dialog dialog = new Dialog(this);
-        // Gán Backgound trong suốt cho dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
         dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Cập nhật họ và tên
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,6 +192,7 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
                 if (email.isEmpty()) {
                     MyToast.error(ThietLapTaiKhoanActivity.this, "Vui lòng không để trống");
                 } else {
+                    // Cập nhật Email
                     nguoiDung.setEmail(email);
                     if (nguoiDungDAO.updateNguoiDung(nguoiDung)) {
                         MyToast.successful(ThietLapTaiKhoanActivity.this, "Cập nhật thành công");
@@ -224,35 +206,24 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditNgaySinh() {
-        // Cập nhật ngày sinh người dùng
         NguoiDung nguoiDung = getObjectNguoiDung();
-        // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_ngay_sinh, null);
-        // Ánh xạ View từ viewDialog
         TextInputLayout tilNgaySinh = viewDialog.findViewById(R.id.til);
         Objects.requireNonNull(tilNgaySinh.getEditText()).setText(XDate.toStringDate(nguoiDung.getNgaySinh()));
-
         Button btnUpdate = viewDialog.findViewById(R.id.btnUpdate);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        // Tạo mới dialog
         Dialog dialog = new Dialog(this);
-        // Gán Backgound trong suốt cho dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
         dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Cập nhật ngày sinh
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,7 +246,8 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
                 getInfoNguoiDung();
             }
         });
-        // sự kiện onclick TextInput layout
+
+        // Hiển thị Dialog chọn ngày
         tilNgaySinh.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -298,11 +270,8 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditGioiTinh() {
-        // Cập nhật giới người dùng
         NguoiDung nguoiDung = getObjectNguoiDung();
-        // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_gioi_tinh_nd, null);
-        // Ánh xạ View từ viewDialog
         RadioGroup radioGroup = viewDialog.findViewById(R.id.grGender);
         RadioButton rdNam = viewDialog.findViewById(R.id.rbNam);
         RadioButton rdNu = viewDialog.findViewById(R.id.rbNu);
@@ -313,25 +282,18 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         }
         Button btnUpdate = viewDialog.findViewById(R.id.btnUpdate);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        // Tạo mới dialog
         Dialog dialog = new Dialog(this);
-        // Gán Backgound trong suốt cho dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
         dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Cập nhật họ và tên
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -352,11 +314,8 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
     }
 
     private void showDialogEditChucVu() {
-        // Cập nhật chức vụ
         NguoiDung nguoiDung = getObjectNguoiDung();
-        // Tạo view mới từ package layout
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.layout_edit_chuc_vu, null);
-        // Ánh xạ View từ viewDialog
         RadioGroup radioGroup = viewDialog.findViewById(R.id.grChucVu);
         RadioButton rdAdmin = viewDialog.findViewById(R.id.rbAdmin);
         RadioButton rdNhanVien = viewDialog.findViewById(R.id.rbNhanVien);
@@ -367,25 +326,18 @@ public class ThietLapTaiKhoanActivity extends AppCompatActivity implements View.
         }
         Button btnUpdate = viewDialog.findViewById(R.id.btnUpdate);
         TextView tvBoQua = viewDialog.findViewById(R.id.tvBoQua);
-        // Tạo mới dialog
         Dialog dialog = new Dialog(this);
-        // Gán Backgound trong suốt cho dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        // Gán view cho dialog
         dialog.setContentView(viewDialog);
-        // Khởi tạo chiều rộng và chiều cao cho dialog
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // Gán Size cho dialog
         dialog.getWindow().setLayout(width, height);
-        // Sự kiện bỏ qua
         tvBoQua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        // Cập nhật chức vụ
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
