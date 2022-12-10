@@ -119,9 +119,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case FAILE:
                     MyToast.error(SignInActivity.this, "Đăng nhập thất bại");
+                    loading.stopLoading();
                     break;
                 case ERORR:
                     MyToast.error(SignInActivity.this, "Không để trống mật khẩu hoặc tên đăng nhập");
+                    loading.stopLoading();
                     break;
             }
         }

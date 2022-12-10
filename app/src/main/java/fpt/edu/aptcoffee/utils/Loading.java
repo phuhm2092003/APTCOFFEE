@@ -17,7 +17,7 @@ public class Loading {
         this.activity = activity;
     }
 
-    public void startLoading(){
+    public void startLoading() {
         LayoutInflater layoutInflater = activity.getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.layout_loading, null);
 
@@ -25,5 +25,9 @@ public class Loading {
         dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
+    }
+
+    public void stopLoading(){
+        dialog.dismiss();
     }
 }
