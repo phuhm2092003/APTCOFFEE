@@ -75,11 +75,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String username = getText(tilUserName);
         String password = getText(tilPassword);
         String statusLogin = ERORR;
+        // Xử lý đăng nhập
         if (!username.isEmpty() && !password.isEmpty()) {
             if (nguoiDungDAO.checkLogin(username, password)) {
+                // Đăng nhập thành công
                 statusLogin = SUCCESSFUL;
                 openMainActivity(username);
             } else {
+                // Đăng nhập thất bại
                 statusLogin = FAILE;
             }
         }
@@ -113,15 +116,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         public void onReceive(Context context, Intent intent) {
             String statusLogin = intent.getStringExtra(STATUS_LOGIN);
             switch (statusLogin) {
-                case SUCCESSFUL:
+                case SUCCESSFUL: // Đăng nhập thành công
                     MyToast.successful(SignInActivity.this, "Đăng nhập thành công");
                     MyNotification.getNotification(SignInActivity.this, "Đăng nhập hệ thống thành công");
                     break;
-                case FAILE:
+                case FAILE: // Đăng nhập thất bại
                     MyToast.error(SignInActivity.this, "Đăng nhập thất bại");
                     loading.stopLoading();
                     break;
-                case ERORR:
+                case ERORR: // Đăng nhập lỗi
                     MyToast.error(SignInActivity.this, "Không để trống mật khẩu hoặc tên đăng nhập");
                     loading.stopLoading();
                     break;

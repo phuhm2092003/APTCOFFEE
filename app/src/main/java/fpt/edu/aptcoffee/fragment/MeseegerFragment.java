@@ -50,7 +50,9 @@ public class MeseegerFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewThongBao.setLayoutManager(layoutManager);
 
+        // Lấy danh sách thôn báo
         ArrayList<ThongBao> listNotification = thongBaoDAO.getAll();
+        // Hiển thị dữ liệu lên danh sách
         ThongBaoAdapter adapterNofitication = new ThongBaoAdapter(getContext(), listNotification, new ItemThongBaoOnClick() {
             @Override
             public void itemOclick(View view, ThongBao thongBao) {
@@ -102,12 +104,11 @@ public class MeseegerFragment extends Fragment {
     }
 
     private void updateStatusNotification() {
-        // Cập nhật lại thông báo về trạng thái đã xem
         ArrayList<ThongBao> listNotifiation = thongBaoDAO.getAll();
 
         for (ThongBao thongBao : listNotifiation) {
+            // Cập nhật lại thông báo về trạng thái đã xem
             thongBao.setTrangThai(ThongBao.STATUS_DA_XEM);
-
             if (thongBaoDAO.updateThongBao(thongBao)) {
                 Log.i("TAG", "TAG: Cập nhật thông báo thành công");
             }

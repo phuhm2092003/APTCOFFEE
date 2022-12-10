@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void autoRunSildeImage() {
+        // Tự động chuyển ảnh trong SlideImage
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -99,6 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerViewThucUong.setLayoutManager(linearLayoutManager);
 
+        // Lấy danh sách thức uống hiển thị trên recyclerView
         ArrayList<HangHoa> listHangHoa = hangHoaDAO.getAll();
         ThucUongHomeFragmentAdapter adapter = new ThucUongHomeFragmentAdapter(listHangHoa);
         recyclerViewThucUong.setAdapter(adapter);
@@ -128,6 +130,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadSlideImage() {
+        // Hiển thị Slide image
         PhotoAdapter adapter = new PhotoAdapter(getListImage());
 
         vpSlideImage.setAdapter(adapter);
@@ -154,12 +157,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 0,
                 nguoiDung.getHinhAnh().length);
 
+        // Gán dữ liệu cho view
         tvHi.setText("Hello, " + nguoiDung.getHoVaTen());
         civHinhAnh.setImageBitmap(bitmap);
     }
 
     private NguoiDung getNguoiDung() {
+        // Lấy mã người dùng từ MainActivity thông qua hàm getKeyUser
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
+        // Lây đối tượng người dùng theo mã
         return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
     }
 
@@ -168,34 +174,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cardBan:
+                // Mở màng hình quản lý bàn
                 startActivity(new Intent(getContext(), QuanLyBanActivity.class));
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardLoaiThucUong:
+                // Mở màng hình quản lý loại hàng
                 startActivity(new Intent(getContext(), LoaiThucUongActivity.class));
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardThucUong:
+                // Mở màng hình quản lý thức uống
                 startActivity(new Intent(getContext(), ThucUongActivity.class));
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardNhanVien:
                 if (getNguoiDung().isAdmin()) {
+                    // Người dùng có chức vụ ="Admin" -> Mở màng hình quản lý nhân viên
                     startActivity(new Intent(getContext(), NhanVienActivity.class));
                     (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 } else {
+                    // Người dung có chức vụ = "NhanVien"
                     MyToast.error(getContext(), "Chức năng dành cho Admin");
                 }
                 break;
             case R.id.cardHoaDon:
+                // Mở màng hình quản lý hoá đơn
                 startActivity(new Intent(getContext(), HoaDonActivity.class));
                 (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 break;
             case R.id.cardDoanhThu:
                 if (getNguoiDung().isAdmin()) {
+                    // Người dùng có chức vụ ="Admin" -> Mở màng hình quản lý doanh thu
                     startActivity(new Intent(getContext(), DoanhThuActivity.class));
                     (requireActivity()).overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
                 } else {
+                    // Người dùng có chức vụ = "NhanVien"
                     MyToast.error(getContext(), "Chức năng dành cho Admin");
                 }
                 break;

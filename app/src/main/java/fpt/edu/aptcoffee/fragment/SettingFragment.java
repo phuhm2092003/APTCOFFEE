@@ -120,8 +120,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         Bitmap bitmap = BitmapFactory.decodeByteArray(nguoiDung.getHinhAnh(),
                 0,
                 nguoiDung.getHinhAnh().length);
+        // Gán dữ liệu cho View
         civHinhAnh.setImageBitmap(bitmap);
-
         tvTenNguoiDung.setText(nguoiDung.getHoVaTen());
         tvChucVu.setText(nguoiDung.getChucVu());
         tvEmail.setText(nguoiDung.getEmail());
@@ -129,6 +129,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private NguoiDung getNguoiDung() {
+        // Lấy mã người dùng từ MainActivity theo fun(getKeyUser)
         String maNguoiDung = Objects.requireNonNull(mainActivity).getKeyUser();
         return nguoiDungDAO.getByMaNguoiDung(maNguoiDung);
     }
@@ -190,6 +191,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        // Đăng xuất hệ thống
                         openSignInActivity();
                     }
                 })
@@ -206,14 +208,14 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("InflateParams")
     private void showRatingDialog() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_danh_gia, null);
-        RatingBar ratingBar = view.findViewById(R.id.rtbDanhGia);
-        Button btnDanhGia = view.findViewById(R.id.btnDanhGia);
-        TextView tvBoQua = view.findViewById(R.id.tvBoQua);
-        GifImageView gif = view.findViewById(R.id.imgGif);
-
         Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(view);
+        dialog.setContentView(R.layout.layout_danh_gia);
+
+        RatingBar ratingBar = dialog.findViewById(R.id.rtbDanhGia);
+        Button btnDanhGia = dialog.findViewById(R.id.btnDanhGia);
+        TextView tvBoQua = dialog.findViewById(R.id.tvBoQua);
+        GifImageView gif = dialog.findViewById(R.id.imgGif);
+
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -229,6 +231,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                // Chọn sao đánh giá
                 if (ratingBar.getRating() <= 3) {
                     gif.setImageResource(R.drawable.git_sad);
                 } else {
@@ -240,6 +243,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         btnDanhGia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Đánh giá sao cho hệ thống
                 MyToast.successful(getContext(), "Đã đánh giá " + ratingBar.getRating() + " sao");
                 dialog.dismiss();
             }

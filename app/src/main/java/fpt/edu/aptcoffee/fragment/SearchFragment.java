@@ -60,11 +60,13 @@ public class SearchFragment extends Fragment {
         loadSpinnerFillter();
         initLayouListSearch();
 
+
+        // Spinner lọc loại hàng chọn Item
         spFill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 listSearch.setVisibility(View.GONE); // Ẩn
-                tvNone.setVisibility(View.VISIBLE);
+                tvNone.setVisibility(View.VISIBLE); // Hiển thị
             }
 
             @Override
@@ -76,9 +78,11 @@ public class SearchFragment extends Fragment {
         ivFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Thực hiện tìm kiếm
                 if (getTextSearch().isEmpty()) {
                     MyToast.error(getContext(), "Vui lòng nhập nội dung tìm kiếm");
                 } else {
+                    // Dữ liệu tìm kiếm
                     String dataSpinerFill = (String) spFill.getSelectedItem();
                     switch (dataSpinerFill) {
                         case "Chọn nội dung tìm kiếm....":
@@ -128,6 +132,7 @@ public class SearchFragment extends Fragment {
 
     @NonNull
     private ArrayList<String> getListSpinerFillter() {
+        // Danh sách danh mục tìm kiếm
         ArrayList<String> list = new ArrayList<>();
         list.add("Chọn nội dung tìm kiếm....");
         list.add("Hoá đơn");
@@ -138,18 +143,27 @@ public class SearchFragment extends Fragment {
     }
 
     private void searchNguoiDung() {
+        // Lấy danh sách theo nội dùng tìm kiếm
         ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
         for (NguoiDung nguoiDung : nguoiDungDAO.getAllPositionNhanVien()) {
             if (String.valueOf(nguoiDung.getHoVaTen()).contains(getTextSearch())) {
                 listNguoiDung.add(nguoiDung);
             }
         }
+
+        // Load dữ liệu cho danh sách người dùng
         NguoiDungAdapter nguoiDungAdapter = new NguoiDungAdapter(listNguoiDung, new ItemNguoiDungOnClick() {
             @Override
             public void itemOclick(View view, NguoiDung nguoiDung) {
 
             }
         });
+        listSearch.setAdapter(nguoiDungAdapter);
+        /*
+        * Kiểm tra số lượng danh sách người dùng
+        * Nếu số lượng danh sách = 0: Hiện thị tvNone ẩn danh sách
+        * Ngược lại số lượng danh sách > 0: Hiển thị danh sách, ẩn tvNone
+        * */
         if (listNguoiDung.size() == 0) {
             listSearch.setVisibility(View.GONE);
             tvNone.setVisibility(View.VISIBLE);
@@ -157,22 +171,28 @@ public class SearchFragment extends Fragment {
             listSearch.setVisibility(View.VISIBLE);
             tvNone.setVisibility(View.GONE);
         }
-        listSearch.setAdapter(nguoiDungAdapter);
     }
 
     private void searchHangHoa() {
+        // Lấy danh sách theo nội dùng tìm kiếm
         ArrayList<HangHoa> listHangHoa = new ArrayList<>();
         for (HangHoa hangHoa : hangHoaDAO.getAll()) {
             if (String.valueOf(hangHoa.getTenHangHoa()).contains(getTextSearch())) {
                 listHangHoa.add(hangHoa);
             }
         }
+        // Load danh sách thức uống
         ThucUongAdapter thucUongAdapter = new ThucUongAdapter(listHangHoa, new ItemHangHoaOnClick() {
             @Override
             public void itemOclick(View view, HangHoa hangHoa) {
 
             }
         });
+        /*
+         * Kiểm tra số lượng danh sách hàng hoá
+         * Nếu số lượng danh sách = 0: Hiện thị tvNone ẩn danh sách
+         * Ngược lại số lượng danh sách > 0: Hiển thị danh sách, ẩn tvNone
+         * */
         if (listHangHoa.size() == 0) {
             listSearch.setVisibility(View.GONE);
             tvNone.setVisibility(View.VISIBLE);
@@ -184,13 +204,14 @@ public class SearchFragment extends Fragment {
     }
 
     private void searchHoaDon() {
+        // Lấy danh sách theo nội dùng tìm kiếm
         ArrayList<HoaDon> listHoaDon = new ArrayList<>();
         for (HoaDon hoaDon : hoaDonDAO.getByTrangThai(HoaDon.DA_THANH_TOAN)) {
             if (String.valueOf(hoaDon.getMaHoaDon()).contains(getTextSearch())) {
                 listHoaDon.add(hoaDon);
             }
         }
-
+        // Load dữ liệu cho danh sách hoá đơn
         HoaDonAdapter hoaDonAdapter = new HoaDonAdapter(getContext(), listHoaDon, new ItemHoaDonOnClick() {
             @Override
             public void itemOclick(View view, HoaDon hoaDon) {
@@ -198,6 +219,11 @@ public class SearchFragment extends Fragment {
             }
         });
         listSearch.setAdapter(hoaDonAdapter);
+        /*
+         * Kiểm tra số lượng danh sách hoá đơn
+         * Nếu số lượng danh sách = 0: Hiện thị tvNone ẩn danh sách
+         * Ngược lại số lượng danh sách > 0: Hiển thị danh sách, ẩn tvNone
+         * */
         if (listHoaDon.size() == 0) {
             listSearch.setVisibility(View.GONE);
             tvNone.setVisibility(View.VISIBLE);
@@ -210,6 +236,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        // Reset form
         edtSearch.setText("");
         listSearch.setVisibility(View.GONE);
         tvNone.setVisibility(View.VISIBLE);

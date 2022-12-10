@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int date = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
-
+        // Hiển thị Dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(SignUpActivity.this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
@@ -90,6 +90,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String email = getText(tilEmail);
         String matKhau = getText(tilMatKhau);
 
+        // Xử lý đăng ký
         if (maNguoiDung.isEmpty() || hoTen.isEmpty() || ngaySinhh.isEmpty() || email.isEmpty() || matKhau.isEmpty()) {
             MyToast.error(SignUpActivity.this, "Vui lòng nhập đẩy đủ thông tin");
         } else {
@@ -141,6 +142,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private String getGender() {
+        // Lấy giới tính chọn từ radio button
         if (rdgGender.getCheckedRadioButtonId() == R.id.rdNam) {
             return NguoiDung.GENDER_MALE;
         }
@@ -148,6 +150,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private String getPosition() {
+        // Lấy chức vụ chọn từ radio button
         if (rdgPosition.getCheckedRadioButtonId() == R.id.rdAdmin) {
             return NguoiDung.POSITION_ADMIN;
         }
