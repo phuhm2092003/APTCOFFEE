@@ -189,6 +189,7 @@ public class OderActivity extends AppCompatActivity {
         HoaDonChiTietMainAdapter adapter = new HoaDonChiTietMainAdapter(this, list, listHDCT, new ItemTangGiamSoLuongOnClick() {
             @Override
             public void itemOclick(View view, int indext, HoaDonChiTiet hoaDonChiTiet, HangHoa hangHoa) {
+                // cập nhận lại giá tiền và số lượng của hoá đơn chi tiết
                 hoaDonChiTiet.setSoLuong(indext);
                 hoaDonChiTiet.setGiaTien(indext * hangHoa.getGiaTien());
                 hoaDonChiTietDAO.updateHoaDonChiTiet(hoaDonChiTiet);
