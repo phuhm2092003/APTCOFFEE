@@ -140,13 +140,13 @@ public class ThucUongActivity extends AppCompatActivity {
     }
 
     private void deleteHangHoa(HangHoa hangHoa) {
-        // Xoá loại hàng
         AlertDialog.Builder builder = new AlertDialog.Builder(ThucUongActivity.this, R.style.AlertDialogTheme);
         builder.setMessage("Bạn có muốn xoá loại " + hangHoa.getTenHangHoa() + "?");
         builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (hangHoaDAO.deleteHangHoa(String.valueOf(hangHoa.getMaHangHoa()))) {
+                    // Xoá thức uống
                     MyToast.successful(ThucUongActivity.this, "Xoá thành công");
                     loadData();
                     fillSpinner();
